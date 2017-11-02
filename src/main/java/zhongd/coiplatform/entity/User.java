@@ -1,7 +1,7 @@
 package zhongd.coiplatform.entity;
 
 public class User {
-	private String name;
+	private String username;
 	private int age;
 	public int getAge() {
 		return age;
@@ -12,10 +12,10 @@ public class User {
 	}
 
 	public String getName() {
-		return name;
+		return username;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.username = name;
 	}
 }
