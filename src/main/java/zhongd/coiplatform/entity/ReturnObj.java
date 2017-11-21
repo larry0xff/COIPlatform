@@ -4,7 +4,7 @@ package zhongd.coiplatform.entity;
  * @author zhongd
  * 返回到前端的对象
  */
-public class ReturnObject {
+public class ReturnObj {
 	/**
 	 * 返回码
 	 */

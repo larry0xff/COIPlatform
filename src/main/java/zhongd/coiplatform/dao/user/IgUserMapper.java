@@ -11,4 +11,7 @@ import zhongd.coiplatform.entity.DO.IgUserDO;
 public interface IgUserMapper {
 	@Select("SELECT * FROM ig_user where username = #{username}")
 	public IgUserDO getObj(@Param(value = "username") String username);
+	
+	@Select(value = "SELECT * FROM ig_user where username = #{username} and password = #{password}")
+	public IgUserDO getUserByUsernameAndPassword(String username, String password);
 }
