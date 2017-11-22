@@ -13,6 +13,7 @@ public class ReturnCode {
 	 * 登录成功
 	 */
 	public static final Integer LOGIN_SUCCESS = 10000;
+	public static final Integer FAIL = 500;
 	public static int REQUEST_NOT_FOUND = 404;
 	public static int SUCCESS = 200;
 	public static int NO_AUTORITY = 401;

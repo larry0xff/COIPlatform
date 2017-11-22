@@ -4,14 +4,11 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import zhongd.coiplatform.dao.BaseMapper;
 import zhongd.coiplatform.entity.User;
-import zhongd.coiplatform.entity.DO.user.IgUserDO;
+import zhongd.coiplatform.entity.DO.user.IgUser;
 
 @Mapper
-public interface IgUserMapper {
-	@Select("SELECT * FROM ig_user where username = #{username}")
-	public IgUserDO getObj(@Param(value = "username") String username);
+public interface IgUserMapper extends BaseMapper<IgUser>{
 	
-	@Select(value = "SELECT * FROM ig_user where username = #{arg0} and password = #{arg1}")
-	public IgUserDO getUserByUsernameAndPassword(String username, String password);
 }

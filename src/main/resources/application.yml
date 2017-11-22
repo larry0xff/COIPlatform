@@ -1,0 +1,59 @@
+server:
+  port: 8800
+  context-path: /coi
+spring:
+  # 数据源配置
+  datasource:
+    # 名称
+    name: test
+    # 数据库链接
+    url: jdbc:mysql://120.24.190.226:3306/db59?useUnicode=true&characterEncoding=utf8
+    # 用户名
+    username: dong
+    # 密码
+    password: 99999
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    filters: stat, wall
+    max-active: 20
+    initial-size: 1
+    max-wait: 60000
+    min-idle: 1
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: select 'x'
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    pool-prepared-statements: true
+    max-open-prepared-statements: 20
+    
+mybatis:
+  config:
+    logImpl: STDOUT_LOGGING
+    # Mybatis model 路径
+    typeAliasesPackage: zhongd.coiplatform.entity.DO.user
+    reasonable: true
+    supportMethodsArguments: true
+    returnPageInfo: check
+    params: count=countSql
+    # Mybatis mapper xml 路径
+    mapperLocations: classpath:mapper/*/*.xml
+    # Mybatis mapper interface 路径
+    basePackage: zhongd.coiplatform.dao.user
+    # 通用 mapper 接口
+    mappers: tk.mybatis.mapper.common.Mapper
+    # 主键自增全局配置
+    identity: MYSQL
+logging:
+  file: coi
+  level:
+    ROOT: warn
+    org.springframework: info
+    org.springframework.web.servlet.view: info
+    org.springframework.web.servlet.mvc: info
+    io.undertow.request: info
+    zhongd.coiplatform: debug
+    com.einwin.framework.mybatis: debug
+    com.github.pagehelper: TRACE
+    com.zaxxer.hikari: TRACE

@@ -17,13 +17,13 @@ public class ShiroConfig {
 		factoryBean.setSecurityManager(securityManager);
 		
 		Map<String, String> filterChainMap = new HashMap<String, String>();
-		// anon表示可以匿名访问的url
-		filterChainMap.put("/page/**", "anon");
-		filterChainMap.put("/user/login", "anon");
+		filterChainMap.put("/user/test", "authc");
 		// 注销url
 		filterChainMap.put("/logout", "logout");
 		// 需要授权访问的链接
-		filterChainMap.put("/**", "authc");
+//		filterChainMap.put("/**", "authc");
+		// anon表示可以匿名访问的url
+		filterChainMap.put("/**", "anon");
 		
 		factoryBean.setSuccessUrl("http://baidu.com");
 		factoryBean.setLoginUrl("/user/unlogin");

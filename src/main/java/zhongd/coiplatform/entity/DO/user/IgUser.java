@@ -2,7 +2,7 @@ package zhongd.coiplatform.entity.DO.user;
 
 import zhongd.coiplatform.entity.DO.BaseDO;
 
-public class IgUserDO extends BaseDO{
+public class IgUser extends BaseDO{
 	private Integer igUserId;
 	private	String username;
 	private String password;

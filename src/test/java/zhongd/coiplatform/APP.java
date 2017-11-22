@@ -1,5 +1,8 @@
 package zhongd.coiplatform;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -19,4 +22,11 @@ public class APP {
                 ByteSource.Util.bytes("333"), hashIterations).toHex();
 		System.out.println(password);
     }
+	@Test
+	public void hhh() {
+		Calendar cal = Calendar.getInstance();
+		TimeZone timeZone = cal.getTimeZone();
+		System.out.println(timeZone.getID());
+		System.out.println(timeZone.getDisplayName());
+	}
 }
