@@ -2,7 +2,7 @@ package zhongd.coiplatform.entity.DTO;
 
 import java.util.Date;
 
-import zhongd.coiplatform.entity.DO.IgUserDO;
+import zhongd.coiplatform.entity.DO.user.IgUserDO;
 
 public class IgUserLoginDTO {
 	private IgUserDO igUserDO;

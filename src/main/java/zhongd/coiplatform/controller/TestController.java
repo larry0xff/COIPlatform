@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import zhongd.coiplatform.dao.UserMapper;
 import zhongd.coiplatform.dao.user.IgUserMapper;
 import zhongd.coiplatform.entity.User;
-import zhongd.coiplatform.entity.DO.IgUserDO;
+import zhongd.coiplatform.entity.DO.user.IgUserDO;
 
 @Controller
 public class TestController {

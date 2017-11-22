@@ -19,6 +19,7 @@ public class ShiroConfig {
 		Map<String, String> filterChainMap = new HashMap<String, String>();
 		// anon表示可以匿名访问的url
 		filterChainMap.put("/page/**", "anon");
+		filterChainMap.put("/user/login", "anon");
 		// 注销url
 		filterChainMap.put("/logout", "logout");
 		// 需要授权访问的链接

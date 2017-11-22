@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import zhongd.coiplatform.entity.ReturnObj;
-import zhongd.coiplatform.entity.DO.IgUserDO;
+import zhongd.coiplatform.entity.DO.user.IgUserDO;
 import zhongd.coiplatform.service.user.IgUserService;
 import zhongd.coiplatform.utils.ReturnCode;
 
@@ -31,6 +31,12 @@ public class IgUserController {
 		return igUserService.login(user);
 	}
 	
+	@RequestMapping(value = "/test", method = RequestMethod.POST)
+	@ResponseBody
+	public ReturnObj ttt() {
+		
+		return null;
+	}
 	public ReturnObj insertUser() {
 		ReturnObj returnObject = new ReturnObj();
 		
