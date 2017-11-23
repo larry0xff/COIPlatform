@@ -74,5 +74,14 @@
     	WHERE 1=1
     	LIMIT #{pageIndex}, #{pageSize}
     </select>
+    <insert id="setRole" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO ig_user_role(ig_user_id, ig_role_id, create_by, create_time, update_by, update_time)
+        VALUES (#{igUserId}, #{igRoleId}, #{createUserId}, #{createTime}, #{updateBy}, #{updateTime})
+    </insert>
 
+    <delete id="rmRole" parameterType="map" >
+      DELETE FROM ig_user_role
+      WHERE ig_user_id = #{igUserId}
+      AND ig_role_id = #{igRoleId}
+    </delete>
 </mapper>

@@ -52,6 +52,23 @@ public interface IgUserService {
 	 */
 	int update(IgUser user);
 
+	/**
+	 * 分页获取用户列表
+	 * @param pageSize
+	 * @param pageIndex
+	 * @param queryUser
+	 * @return
+	 */
 	List<IgUserDTO> list(int pageSize, int pageIndex, IgUserDTO queryUser);
 
+	/**
+	 * 为用户设定角色
+	 * @param igUserId
+	 * @param igRoleId
+	 * @param currentUserId
+	 * @return
+	 */
+	int setRole(Integer igUserId, Integer igRoleId, Integer currentUserId);
+
+	int rmRole(Integer igUserId, Integer igRoleId);
 }

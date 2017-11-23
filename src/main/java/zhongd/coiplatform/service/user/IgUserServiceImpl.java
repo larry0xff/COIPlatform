@@ -43,24 +43,24 @@ public class IgUserServiceImpl implements IgUserService {
 	@Override
 	public ReturnObj login(IgUser user) {
 		ReturnObj obj = new ReturnObj();
-		if(getIgUserByUsername(user.getUsername()) == null) {
+		IgUser check = getIgUserByUsername(user.getUsername());
+		if(check == null) {
 			obj.setMsg("用户不存在");
 			obj.setReturnCode(ReturnCode.LOGIN_ERROR_USER_NOT_EXIST);
 			return obj;
 		}
-		user.setPassword(PasswordHandler.encodePassword(user.getPassword(), user.getUsername(), Constant.MD5_STR));
-		IgUser user0 = (IgUser) igUserMapper.selectOne(user);
-		if(user0 == null) {
+		user.setPassword(PasswordHandler.encodePassword(user.getPassword(), check.getIgUserId(), Constant.MD5_STR));
+		if(!user.getPassword().equals(check.getPassword())) {
 			obj.setMsg("密码错误");			
 			obj.setReturnCode(ReturnCode.LOGIN_ERROR_PASSWORD_INCORRECT);
 			return obj;
 		}
-		UsernamePasswordToken token = new UsernamePasswordToken(user0.getUsername(), user0.getPassword());
+		UsernamePasswordToken token = new UsernamePasswordToken(check.getUsername(), check.getPassword());
 		Subject subject = SecurityUtils.getSubject();
 		subject.login(token);
 		// 将登录信息放进Session中
 		IgUserLoginDTO login = new IgUserLoginDTO();
-		login.setIgUser(user0);
+		login.setIgUser(check);
 		login.setLoginTime(new Date());
 		subject.getSession().setAttribute("currentUser", login);
 		
@@ -74,7 +74,7 @@ public class IgUserServiceImpl implements IgUserService {
 	}
 	@Override
 	public int insert(IgUser user) {
-		user.setPassword(PasswordHandler.encodePassword(user.getPassword(), user.getUsername(), Constant.MD5_STR));
+		user.setPassword(PasswordHandler.encodePassword(user.getPassword(), user.getIgUserId(), Constant.MD5_STR));
 		return igUserMapper.insertSelective(user);
 	}
 	@Override
@@ -93,5 +93,25 @@ public class IgUserServiceImpl implements IgUserService {
 		param.put("pageSize", pageSize);
 		param.put("condition", queryUser);
 		return joinMapper.getUserList(param);
+	}
+
+	@Override
+	public int setRole(Integer igUserId, Integer igRoleId, Integer currentUserId) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("igUserId", igUserId);
+		param.put("igRoleId", igRoleId);
+		param.put("updateBy", currentUserId);
+		param.put("createBy", currentUserId);
+		param.put("updateTime", new Date());
+		param.put("createTime", new Date());
+		return joinMapper.setRole(param);
+	}
+
+	@Override
+	public int rmRole(Integer igUserId, Integer igRoleId) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("igUserId", igUserId);
+		param.put("igRoleId", igRoleId);
+		return joinMapper.rmRole(param);
 	}
 }

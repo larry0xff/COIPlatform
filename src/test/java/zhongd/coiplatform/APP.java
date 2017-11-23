@@ -21,8 +21,8 @@ public class APP {
 		String algorithmName = Constant.MD5_STR;
 		int hashIterations = 1;
 		// 以用户名作为'盐'
-		String password = new SimpleHash(algorithmName, "pass",
-                ByteSource.Util.bytes("333"), hashIterations).toHex();
+		String password = new SimpleHash(algorithmName, "xxx123",
+                ByteSource.Util.bytes(1), hashIterations).toHex();
 		System.out.println(password);
     }
 	@Test

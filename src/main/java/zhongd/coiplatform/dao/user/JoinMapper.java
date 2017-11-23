@@ -14,4 +14,8 @@ public interface JoinMapper {
 	Set<IgRole> getRoleSet(Integer igUserId);
 
 	List<IgUserDTO> getUserList(Map<String, Object> param);
+
+    int setRole(Map<String, Object> param);
+
+    int rmRole(Map<String, Object> param);
 }

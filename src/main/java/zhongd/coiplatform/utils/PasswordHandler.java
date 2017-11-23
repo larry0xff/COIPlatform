@@ -4,6 +4,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 
 public class PasswordHandler {
+	static final int HASH_ITERATIONS = 2;
 	/**
 	 * 密码加密方法
 	 * @param password 要加密的密码
@@ -12,13 +13,18 @@ public class PasswordHandler {
 	 * @return
 	 */
 	public static String encodePassword(String password, String salt, String algorithmName ) {
-		int hashIterations = 2;
 		String newPassword = new SimpleHash(algorithmName, password,
-                ByteSource.Util.bytes(salt), hashIterations).toHex();
+                ByteSource.Util.bytes(salt), HASH_ITERATIONS).toHex();
+		return newPassword;
+	}
+
+	public static String encodePassword(String password, Integer salt, String algorithmName ) {
+		String newPassword = new SimpleHash(algorithmName, password,
+				ByteSource.Util.bytes(String.valueOf(salt)), HASH_ITERATIONS).toHex();
 		return newPassword;
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(encodePassword("xxx123", "tim", Constant.MD5_STR));
+		System.out.println(encodePassword("xxx123", 1, Constant.MD5_STR));
 	}
 }

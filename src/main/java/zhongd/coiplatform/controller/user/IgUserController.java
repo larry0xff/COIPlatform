@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +17,10 @@ import zhongd.coiplatform.entity.ReturnObj;
 import zhongd.coiplatform.entity.DO.user.IgUser;
 import zhongd.coiplatform.entity.DTO.user.IgUserDTO;
 import zhongd.coiplatform.service.user.IgUserService;
+import zhongd.coiplatform.utils.Constant;
 import zhongd.coiplatform.utils.PasswordHandler;
 import zhongd.coiplatform.utils.ReturnCode;
+import zhongd.coiplatform.utils.StringUtil;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -89,8 +92,12 @@ public class IgUserController extends BaseController{
 	public ReturnObj update(@Valid IgUser user) {
 		ReturnObj obj = new ReturnObj();
 		try {
-			user.setUpdateBy(getCurrentUser().getIgUserDO().getIgUserId());
+			IgUser currentUser = getCurrentUser().getIgUserDO();
+			user.setUpdateBy(currentUser.getIgUserId());
 			user.setUpdateTime(new Date());
+			if(!StringUtil.isEmpty(user.getPassword())){
+				user.setPassword(PasswordHandler.encodePassword(user.getPassword(),user.getIgUserId(), Constant.MD5_STR));
+			}
 			int result = igUserService.update(user);
 			if(result == 0) {
 				obj.setMsg("未更新成功，请尝试重新更新");
@@ -118,6 +125,62 @@ public class IgUserController extends BaseController{
 			obj.setReturnCode(ReturnCode.SUCCESS);
 		} catch (Exception e) {
 			logger.error(e);
+		}
+		return obj;
+	}
+
+	/**
+	 * 为用户设置角色
+	 * @param igUserId
+	 * @param igRoleId
+	 * @return
+	 */
+	@RequestMapping(value = "/setRole", method = RequestMethod.POST)
+	@ResponseBody
+	public ReturnObj setRole(Integer igUserId, Integer igRoleId){
+		ReturnObj obj = new ReturnObj();
+		try{
+			int result = igUserService.setRole(igUserId, igRoleId, getCurrentUser().getIgUserDO().getIgUserId());
+			obj.setData(result);
+			if(result == 0){
+				obj.setReturnCode(ReturnCode.FAIL);
+				obj.setMsg("设置角色失败，请尝试重新设置");
+			}else{
+				obj.setReturnCode(ReturnCode.SUCCESS);
+				obj.setMsg("设置角色成功");
+			}
+		}catch (Exception e){
+			logger.error(e);
+			obj.setMsg("设置角色失败！");
+			obj.setReturnCode(ReturnCode.FAIL);
+		}
+		return obj;
+	}
+
+	/**
+	 * 为用户取消角色
+	 * @param igUserId
+	 * @param igRoleId
+	 * @return
+	 */
+	@RequestMapping(value = "/rmRole", method = RequestMethod.POST)
+	@ResponseBody
+	public ReturnObj rmRole(Integer igUserId, Integer igRoleId){
+		ReturnObj obj = new ReturnObj();
+		try{
+			int result = igUserService.rmRole(igUserId, igRoleId);
+			obj.setData(result);
+			if(result == 0){
+				obj.setReturnCode(ReturnCode.FAIL);
+				obj.setMsg("移除角色失败，请尝试重新设置");
+			}else{
+				obj.setReturnCode(ReturnCode.SUCCESS);
+				obj.setMsg("移除角色成功");
+			}
+		}catch (Exception e){
+			logger.error(e);
+			obj.setMsg("移除角色失败！");
+			obj.setReturnCode(ReturnCode.FAIL);
 		}
 		return obj;
 	}
