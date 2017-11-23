@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zhongd.coiplatform.dao.user.JoinMapper">
+    <resultMap id="IgUserMap" type="zhongd.coiplatform.entity.DO.user.IgUser">
+        <id column="ig_user_id" jdbcType="INTEGER" property="igUserId" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="gender" jdbcType="VARCHAR" property="gender" />
+        <result column="tel" jdbcType="VARCHAR" property="tel" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="realname" jdbcType="VARCHAR" property="realname" />
+        <result column="ig_org_id" jdbcType="INTEGER" property="igOrgId" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_by" jdbcType="INTEGER" property="createBy" />
+        <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <resultMap id="IgRoleMap" type="zhongd.coiplatform.entity.DO.user.IgRole">
+        <id column="ig_role_id" jdbcType="INTEGER" property="igRoleId" />
+        <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+        <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_by" jdbcType="INTEGER" property="createBy" />
+        <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <sql id="IgUserTable">
+    	ig_user u
+    </sql>
+    <sql id="IgRoleTable">
+    	ig_role r
+    </sql>
+    <sql id="IgOrgTable">
+    	ig_org o
+    </sql>
+    <sql id="IgUserColumns">
+        u.ig_user_id,
+        u.username,
+        u.realname,
+        u.tel,
+        u.email,
+        u.gender,
+        u.ig_org_id,
+        u.create_time,
+        u.create_by,
+        u.update_by,
+        u.update_time,
+        u.password
+    </sql>
+    <sql id="IgRoleColumns">
+        r.ig_role_id,
+        r.role_name,
+        r.description,
+        r.role_code,
+        r.create_time,
+        r.create_by,
+        r.update_by,
+        r.update_time
+    </sql>
+
+    <select id="getRoleSet" resultMap="IgRoleMap" parameterType="Integer">
+        select <include refid="IgRoleColumns" />
+        from ig_user_role ur
+        left join <include refid="IgRoleTable" /> on ur.ig_role_id = r.ig_role_id
+        where ur.ig_user_id = #{igUserId}
+    </select>
+    
+    <select id="getUserList" parameterType="map" resultType="zhongd.coiplatform.entity.DTO.user.IgUserDTO">
+    	SELECT u.ig_user_id igUserId,u.username username,u.realname realname,u.tel tel,u.email email,u.gender gender,u.create_time createTime,o.name orgName,u2.username createByName
+    	FROM <include refid="IgUserTable" />
+    	LEFT JOIN <include refid="IgOrgTable" /> ON o.ig_org_id = u.ig_org_id
+    	LEFT JOIN ig_user u2 ON u.create_by = u2.ig_user_id
+    	WHERE 1=1
+    	LIMIT #{pageIndex}, #{pageSize}
+    </select>
+
+</mapper>

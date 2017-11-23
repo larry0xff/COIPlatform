@@ -1,4 +1,4 @@
-package zhongd.coiplatform.entity.DTO;
+package zhongd.coiplatform.entity.DTO.user;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

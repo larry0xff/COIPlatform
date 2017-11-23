@@ -14,7 +14,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import zhongd.coiplatform.entity.DO.user.IgRoleDO;
+import zhongd.coiplatform.entity.DO.user.IgRole;
 import zhongd.coiplatform.entity.DO.user.IgUser;
 import zhongd.coiplatform.service.user.IgUserService;
 
@@ -26,10 +26,10 @@ public class MyShiroRealm extends AuthorizingRealm{
 		String username = (String) principals.getPrimaryPrincipal();
 		IgUser currentUser = igUserService.getIgUserByUsername(username);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		Set<IgRoleDO> roleSet = igUserService.getUserRoleSet(currentUser.getIgUserId());
+		Set<IgRole> roleSet = igUserService.getUserRoleSet(currentUser.getIgUserId());
 		Set<String> roleNames = new HashSet<String>();
-		for(IgRoleDO role : roleSet) {
-			roleNames.add(role.getRoleName());
+		for(IgRole role : roleSet) {
+			roleNames.add(role.getRoleCode());
 		}
 		info.setRoles(roleNames);
 		

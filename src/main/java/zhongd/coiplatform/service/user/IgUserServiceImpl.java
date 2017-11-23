@@ -1,6 +1,9 @@
 package zhongd.coiplatform.service.user;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.shiro.SecurityUtils;
@@ -11,10 +14,12 @@ import org.springframework.stereotype.Service;
 
 import zhongd.coiplatform.dao.user.IgUserMapper;
 import zhongd.coiplatform.dao.user.IgUserRoleMapper;
+import zhongd.coiplatform.dao.user.JoinMapper;
 import zhongd.coiplatform.entity.ReturnObj;
-import zhongd.coiplatform.entity.DO.user.IgRoleDO;
+import zhongd.coiplatform.entity.DO.user.IgRole;
 import zhongd.coiplatform.entity.DO.user.IgUser;
-import zhongd.coiplatform.entity.DTO.IgUserLoginDTO;
+import zhongd.coiplatform.entity.DTO.user.IgUserDTO;
+import zhongd.coiplatform.entity.DTO.user.IgUserLoginDTO;
 import zhongd.coiplatform.utils.Constant;
 import zhongd.coiplatform.utils.PasswordHandler;
 import zhongd.coiplatform.utils.ReturnCode;
@@ -24,7 +29,7 @@ public class IgUserServiceImpl implements IgUserService {
 	@Autowired
 	IgUserMapper igUserMapper;
 	@Autowired
-	IgUserRoleMapper igUserRoleMapper;
+	JoinMapper joinMapper;
 	public IgUser getQueryUserDO() {
 		return new IgUser();
 	}
@@ -64,12 +69,29 @@ public class IgUserServiceImpl implements IgUserService {
 		return obj;
 	}
 	
-	public Set<IgRoleDO> getUserRoleSet(Integer igUserId){
-		return igUserRoleMapper.getUserRoleSet(igUserId);
+	public Set<IgRole> getUserRoleSet(Integer igUserId){
+		return joinMapper.getRoleSet(igUserId);
 	}
 	@Override
 	public int insert(IgUser user) {
 		user.setPassword(PasswordHandler.encodePassword(user.getPassword(), user.getUsername(), Constant.MD5_STR));
 		return igUserMapper.insertSelective(user);
+	}
+	@Override
+	public int deleteById(IgUser user) {
+		return igUserMapper.deleteByPrimaryKey(user.getIgUserId());
+	}
+	@Override
+	public int update(IgUser user) {
+		return igUserMapper.updateByPrimaryKeySelective(user);
+	}
+	@Override
+	public List<IgUserDTO> list(int pageSize, int pageIndex, IgUserDTO queryUser) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		pageIndex -= 1;
+		param.put("pageIndex", pageIndex);
+		param.put("pageSize", pageSize);
+		param.put("condition", queryUser);
+		return joinMapper.getUserList(param);
 	}
 }

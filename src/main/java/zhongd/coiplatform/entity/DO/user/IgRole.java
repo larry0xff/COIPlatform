@@ -1,8 +1,11 @@
 package zhongd.coiplatform.entity.DO.user;
 
+import javax.persistence.Id;
+
 import zhongd.coiplatform.entity.DO.BaseDO;
 
-public class IgRoleDO extends BaseDO{
+public class IgRole extends BaseDO{
+	@Id
 	private Integer igRoleId;
 	private String roleName;
 	private String roleCode;

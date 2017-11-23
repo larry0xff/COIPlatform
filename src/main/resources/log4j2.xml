@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- log4j2使用说明：
+使用方式如下：
+private static final Logger logger = LogManager.getLogger(实际类名.class.getName());
+
+2、日志说明：
+（1）请根据实际情况配置各项参数
+（2）需要注意日志文件备份数和日志文件大小，注意预留目录空间
+（3）实际部署的时候backupFilePatch变量需要修改成linux目录
+ -->
+<!-- status=debug 可以查看log4j的装配过程 monitorInterval是用来设置配置文件的动态加载时间的，单位是秒 在程序运行过程中，如果修改配置文件，程序会随之改变 -->
+<configuration status="off" monitorInterval="1800">
+    <Properties>
+        <Property name="fileName">lyy.log</Property>
+        <Property name="backupFilePatch">/</Property>
+    </Properties>
+    <!--先定义所有的appender-->
+    <appenders>
+        <!--这个输出控制台的配置-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" />
+            <!--这个都知道是输出日志的格式-->
+            <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" />
+        </Console>
+        <!-- 按天备份一个日志 -->
+        <!-- fileName为生成的文件名，filePattern为时间到达后产生新日志，旧日志的文件名 -->
+        <RollingFile name="RollingFile" fileName="${backupFilePatch}${fileName}"
+                     filePattern="${backupFilePatch}$${date:yyyy-MM}/lyy_%d{yyyy-MM-dd}.log" >
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" />
+            <!-- 输出格式 -->
+            <PatternLayout pattern="%d{yyyy.MM.dd 'at' HH:mm:ss.SSS z} %-5level %class{36} %L %M - %msg%xEx%n" />
+            <Policies>
+                <!-- 基于时间的触发策略。该策略主要是完成周期性的log文件封存工作。有两个参数：
+                interval，integer型，指定两次封存动作之间的时间间隔。单位:以日志的命名精度来确定单位，
+                    比如yyyy-MM-dd-HH 单位为小时，yyyy-MM-dd-HH-mm 单位为分钟
+                modulate，boolean型，说明是否对封存时间进行调制。若modulate=true，
+                    则封存时间将以0点为边界进行偏移计算。比如，modulate=true，interval=4hours，
+                    那么假设上次封存日志的时间为03:00，则下次封存日志的时间为04:00，
+                    之后的封存时间依次为08:00，12:00，16:00
+                -->
+                <TimeBasedTriggeringPolicy modulate="true"
+                                           interval="1" />
+            </Policies>
+        </RollingFile>
+    </appenders>
+
+    <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
+    <loggers>
+        <!--建立一个默认的root的logger-->
+        <Root level="info">
+            <AppenderRef ref="RollingFile" />
+        </Root>
+    </loggers>
+</configuration>

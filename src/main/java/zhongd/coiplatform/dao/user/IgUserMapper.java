@@ -1,5 +1,7 @@
 package zhongd.coiplatform.dao.user;
 
+import java.util.Set;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -10,5 +12,6 @@ import zhongd.coiplatform.entity.DO.user.IgUser;
 
 @Mapper
 public interface IgUserMapper extends BaseMapper<IgUser>{
+
 	
 }

@@ -6,8 +6,8 @@ spring:
   datasource:
     # 名称
     name: test
-    # 数据库链接
-    url: jdbc:mysql://120.24.190.226:3306/db59?useUnicode=true&characterEncoding=utf8
+    # 数据库链接 设置编码和时区
+    url: jdbc:mysql://120.24.190.226:3306/db59?useUnicode=true&characterEncoding=utf8&serverTimezone=Hongkong
     # 用户名
     username: dong
     # 密码
@@ -46,7 +46,6 @@ mybatis:
     # 主键自增全局配置
     identity: MYSQL
 logging:
-  file: coi
   level:
     ROOT: warn
     org.springframework: info
