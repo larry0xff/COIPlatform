@@ -26,7 +26,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 		String username = (String) principals.getPrimaryPrincipal();
 		IgUser currentUser = igUserService.getIgUserByUsername(username);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		Set<IgRole> roleSet = igUserService.getUserRoleSet(currentUser.getIgUserId());
+		Set<IgRole> roleSet = (Set<IgRole>)igUserService.getUserRoleSet(currentUser.getIgUserId()).get("set");
 		Set<String> roleNames = new HashSet<String>();
 		for(IgRole role : roleSet) {
 			roleNames.add(role.getRoleCode());

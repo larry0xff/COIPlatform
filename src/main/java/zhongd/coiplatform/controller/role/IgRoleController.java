@@ -13,6 +13,7 @@ import zhongd.coiplatform.service.role.IgRoleService;
 import zhongd.coiplatform.utils.ReturnCode;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author zdxie
@@ -56,6 +57,11 @@ public class IgRoleController extends BaseController {
         return obj;
     }
 
+    /**
+     * 删除角色
+     * @param igRoleId
+     * @return
+     */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public ReturnObj insertRole(Integer igRoleId){
         ReturnObj obj = new ReturnObj();
@@ -71,6 +77,21 @@ public class IgRoleController extends BaseController {
         }catch (Exception e){
             logger.error(e);
             obj.setMsg("删除角色失败！");
+            obj.setReturnCode(ReturnCode.FAIL);
+        }
+        return obj;
+    }
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ReturnObj list(){
+        ReturnObj obj = new ReturnObj();
+        try {
+            Map<String, Object> data = igRoleService.list();
+            obj.setReturnCode(ReturnCode.SUCCESS);
+            obj.setMsg("获取角色列表成功");
+            obj.setData(data);
+        }catch (Exception e){
+            logger.error(e);
+            obj.setMsg("获取角色列表失败");
             obj.setReturnCode(ReturnCode.FAIL);
         }
         return obj;

@@ -24,6 +24,7 @@ import zhongd.coiplatform.utils.StringUtil;
 
 @Controller
 @RequestMapping(value = "/user")
+@ResponseBody
 public class IgUserController extends BaseController{
 	@Autowired
 	IgUserService igUserService;
@@ -34,7 +35,6 @@ public class IgUserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	@ResponseBody
 	public ReturnObj insert(@Valid IgUser user) {
 		ReturnObj returnObj = new ReturnObj();
 		try {
@@ -61,7 +61,6 @@ public class IgUserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	@ResponseBody
 	public ReturnObj delete(@Valid IgUser user) {
 		ReturnObj returnObj = new ReturnObj();
 		try {
@@ -88,7 +87,6 @@ public class IgUserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
 	public ReturnObj update(@Valid IgUser user) {
 		ReturnObj obj = new ReturnObj();
 		try {
@@ -114,9 +112,15 @@ public class IgUserController extends BaseController{
 		}
 		return obj;
 	}
-	
+
+	/**
+	 * 分页获取用户列表
+	 * @param pageSize
+	 * @param pageIndex
+	 * @param user
+	 * @return
+	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	@ResponseBody
 	public ReturnObj list(int pageSize, int pageIndex, IgUserDTO user) {
 		ReturnObj obj = new ReturnObj();
 		try {
@@ -136,7 +140,6 @@ public class IgUserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/setRole", method = RequestMethod.POST)
-	@ResponseBody
 	public ReturnObj setRole(Integer igUserId, Integer igRoleId){
 		ReturnObj obj = new ReturnObj();
 		try{
@@ -164,7 +167,6 @@ public class IgUserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/rmRole", method = RequestMethod.POST)
-	@ResponseBody
 	public ReturnObj rmRole(Integer igUserId, Integer igRoleId){
 		ReturnObj obj = new ReturnObj();
 		try{
@@ -180,6 +182,26 @@ public class IgUserController extends BaseController{
 		}catch (Exception e){
 			logger.error(e);
 			obj.setMsg("移除角色失败！");
+			obj.setReturnCode(ReturnCode.FAIL);
+		}
+		return obj;
+	}
+
+	/**
+	 * 获取用户角色列表
+	 * @param igUserId
+	 * @return
+	 */
+	@RequestMapping(value = "/roles", method = RequestMethod.GET)
+	public ReturnObj roles(Integer igUserId){
+		ReturnObj obj = new ReturnObj();
+		try{
+			obj.setData(igUserService.getUserRoleSet(igUserId));
+			obj.setReturnCode(ReturnCode.SUCCESS);
+			obj.setMsg("获取用户角色成功");
+		}catch (Exception e){
+			logger.error(e);
+			obj.setMsg("获取用户角色失败");
 			obj.setReturnCode(ReturnCode.FAIL);
 		}
 		return obj;

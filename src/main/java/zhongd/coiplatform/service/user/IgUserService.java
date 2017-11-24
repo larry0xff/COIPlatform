@@ -1,6 +1,7 @@
 package zhongd.coiplatform.service.user;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import zhongd.coiplatform.entity.ReturnObj;
@@ -29,7 +30,7 @@ public interface IgUserService {
 	 * @param igUserId
 	 * @return
 	 */
-	Set<IgRole> getUserRoleSet(Integer igUserId);
+	Map<String, Object> getUserRoleSet(Integer igUserId);
 
 	/**
 	 * 插入一条用户记录

@@ -69,8 +69,12 @@ public class IgUserServiceImpl implements IgUserService {
 		return obj;
 	}
 	
-	public Set<IgRole> getUserRoleSet(Integer igUserId){
-		return joinMapper.getRoleSet(igUserId);
+	public Map<String, Object> getUserRoleSet(Integer igUserId){
+		Set<IgRole> set = joinMapper.getRoleSet(igUserId);
+		Map<String, Object> data = new HashMap<>();
+		data.put("set", set);
+		data.put("count", set.size());
+		return data;
 	}
 	@Override
 	public int insert(IgUser user) {
