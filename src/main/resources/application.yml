@@ -40,7 +40,7 @@ mybatis:
     # Mybatis mapper xml 路径
     mapperLocations: classpath:mapper/*/*.xml
     # Mybatis mapper interface 路径
-    basePackage: zhongd.coiplatform.dao.user
+    basePackage: zhongd.coiplatform.dao.*
     # 通用 mapper 接口
     mappers: tk.mybatis.mapper.common.Mapper
     # 主键自增全局配置

@@ -1,4 +1,4 @@
-package zhongd.coiplatform.dao.user;
+package zhongd.coiplatform.dao.role;
 
 import org.apache.ibatis.annotations.Mapper;
 import zhongd.coiplatform.dao.BaseMapper;

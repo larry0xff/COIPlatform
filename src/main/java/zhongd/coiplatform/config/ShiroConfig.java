@@ -17,7 +17,7 @@ public class ShiroConfig {
 		factoryBean.setSecurityManager(securityManager);
 		
 		Map<String, String> filterChainMap = new HashMap<String, String>();
-		filterChainMap.put("/user/test", "roles[role1]");
+		filterChainMap.put("/user/test", "perms[MAIL]");
 		// 注销url
 		filterChainMap.put("/logout", "logout");
 		// 需要授权访问的链接

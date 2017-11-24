@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zhongd.coiplatform.dao.role.RoleJoinMapper">
+    <resultMap id="IgPermissionMap" type="zhongd.coiplatform.entity.DO.user.IgPermission">
+        <id column="ig_permission_id" jdbcType="INTEGER" property="igPermissionId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="permission_code" jdbcType="VARCHAR" property="permissionCode" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_by" jdbcType="INTEGER" property="createBy" />
+        <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <resultMap id="IgRoleMap" type="zhongd.coiplatform.entity.DO.user.IgRole">
+        <id column="ig_role_id" jdbcType="INTEGER" property="igRoleId" />
+        <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+        <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_by" jdbcType="INTEGER" property="createBy" />
+        <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <sql id="IgPermissionTable">
+    	ig_permission p
+    </sql>
+    <sql id="IgRoleTable">
+    	ig_role r
+    </sql>
+    <sql id="IgPermissionColumns">
+        p.ig_permission_id,
+        p.name,
+        p.description,
+        p.permission_code,
+        p.create_time,
+        p.create_by,
+        p.update_by,
+        p.update_time
+    </sql>
+    <sql id="IgRoleColumns">
+        r.ig_role_id,
+        r.role_name,
+        r.description,
+        r.role_code,
+        r.create_time,
+        r.create_by,
+        r.update_by,
+        r.update_time
+    </sql>
+
+    <select id="getPermissionSet" resultMap="IgPermissionMap" parameterType="Integer">
+        select <include refid="IgPermissionColumns" />
+        from ig_role_permission rp
+        left join <include refid="IgPermissionTable" /> on rp.ig_permission_id = p.ig_permission_id
+        where rp.ig_role_id = #{igRoleId}
+    </select>
+    
+    <insert id="setPermission" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO ig_role_permission(ig_role_id, ig_permission_id, create_by, create_time, update_by, update_time)
+        VALUES (#{igRoleId}, #{igPermissionId}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime})
+    </insert>
+
+    <delete id="rmPermission" parameterType="map" >
+      DELETE FROM ig_role_permission
+      WHERE ig_role_id = #{igRoleId}
+      AND ig_permission_id = #{igPermissionId}
+    </delete>
+</mapper>

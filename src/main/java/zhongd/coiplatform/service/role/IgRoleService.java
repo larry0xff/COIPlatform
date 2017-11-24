@@ -15,4 +15,10 @@ public interface IgRoleService {
     int deleteRole(Integer igRoleId);
 
     Map<String,Object> list();
+
+    int setPermission(Integer igRoleId, Integer igPermissionId, Integer igUserId);
+
+    int rmPermission(Integer igRoleId, Integer igPermissionId);
+
+    Map<String, Object> getRolePermissionSet(Integer igRoleId);
 }

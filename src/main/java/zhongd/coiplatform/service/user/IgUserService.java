@@ -24,19 +24,21 @@ public interface IgUserService {
 	 * @return
 	 */
 	ReturnObj login(IgUser user);
-	
+
 	/**
 	 * 得到用户角色集合
 	 * @param igUserId
 	 * @return
 	 */
 	Map<String, Object> getUserRoleSet(Integer igUserId);
-
+	Map<String, Object> getUserUserPermissions(Integer igUserId);
 	/**
 	 * 插入一条用户记录
 	 * @param user
 	 * @return
 	 */
+
+
 	int insert(IgUser user);
 
 	/**

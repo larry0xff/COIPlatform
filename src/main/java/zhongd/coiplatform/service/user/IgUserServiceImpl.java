@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zhongd.coiplatform.dao.user.IgUserMapper;
-import zhongd.coiplatform.dao.user.IgUserRoleMapper;
-import zhongd.coiplatform.dao.user.JoinMapper;
+import zhongd.coiplatform.dao.user.UserJoinMapper;
+import zhongd.coiplatform.entity.DO.user.IgPermission;
 import zhongd.coiplatform.entity.ReturnObj;
 import zhongd.coiplatform.entity.DO.user.IgRole;
 import zhongd.coiplatform.entity.DO.user.IgUser;
@@ -29,7 +29,7 @@ public class IgUserServiceImpl implements IgUserService {
 	@Autowired
 	IgUserMapper igUserMapper;
 	@Autowired
-	JoinMapper joinMapper;
+	UserJoinMapper joinMapper;
 	public IgUser getQueryUserDO() {
 		return new IgUser();
 	}
@@ -71,6 +71,14 @@ public class IgUserServiceImpl implements IgUserService {
 	
 	public Map<String, Object> getUserRoleSet(Integer igUserId){
 		Set<IgRole> set = joinMapper.getRoleSet(igUserId);
+		Map<String, Object> data = new HashMap<>();
+		data.put("set", set);
+		data.put("count", set.size());
+		return data;
+	}
+
+	public Map<String, Object> getUserUserPermissions(Integer igUserId){
+		Set<IgPermission> set = joinMapper.getUserPermissionSet(igUserId);
 		Map<String, Object> data = new HashMap<>();
 		data.put("set", set);
 		data.put("count", set.size());

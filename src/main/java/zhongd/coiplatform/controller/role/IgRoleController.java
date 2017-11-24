@@ -81,6 +81,11 @@ public class IgRoleController extends BaseController {
         }
         return obj;
     }
+
+    /**
+     * 获取角色列表
+     * @return
+     */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ReturnObj list(){
         ReturnObj obj = new ReturnObj();
@@ -92,6 +97,80 @@ public class IgRoleController extends BaseController {
         }catch (Exception e){
             logger.error(e);
             obj.setMsg("获取角色列表失败");
+            obj.setReturnCode(ReturnCode.FAIL);
+        }
+        return obj;
+    }
+
+    /**
+     * 设置角色权限
+     * @param igRoleId
+     * @param igPermissionId
+     * @return
+     */
+    @RequestMapping(value = "/setPermission", method = RequestMethod.POST)
+    public ReturnObj setPermission(Integer igRoleId, Integer igPermissionId){
+        ReturnObj obj = new ReturnObj();
+        try{
+            int result = igRoleService.setPermission(igRoleId, igPermissionId, getCurrentUser().getIgUserDO().getIgUserId());
+            obj.setData(result);
+            if(result == 0){
+                obj.setReturnCode(ReturnCode.FAIL);
+                obj.setMsg("设置权限失败，请尝试重新设置");
+            }else{
+                obj.setReturnCode(ReturnCode.SUCCESS);
+                obj.setMsg("设置权限成功");
+            }
+        }catch (Exception e){
+            logger.error(e);
+            obj.setMsg("设置角色权限失败");
+            obj.setReturnCode(ReturnCode.FAIL);
+        }
+        return obj;
+    }
+
+    /**
+     * 取消角色权限
+     * @param igRoleId
+     * @param igPermissionId
+     * @return
+     */
+    @RequestMapping(value = "/rmPermission", method = RequestMethod.POST)
+    public ReturnObj rmPermission(Integer igRoleId, Integer igPermissionId){
+        ReturnObj obj = new ReturnObj();
+        try{
+            int result = igRoleService.rmPermission(igRoleId, igPermissionId);
+            obj.setData(result);
+            if(result == 0){
+                obj.setReturnCode(ReturnCode.FAIL);
+                obj.setMsg("删除权限失败，请尝试重新设置");
+            }else{
+                obj.setReturnCode(ReturnCode.SUCCESS);
+                obj.setMsg("删除权限成功");
+            }
+        }catch (Exception e){
+            logger.error(e);
+            obj.setMsg("删除角色权限失败");
+            obj.setReturnCode(ReturnCode.FAIL);
+        }
+        return obj;
+    }
+
+    /**
+     * 获取某个角色所有权限
+     * @param igRoleId
+     * @return
+     */
+    @RequestMapping(value = "/permissions", method = RequestMethod.GET)
+    public ReturnObj permissions(Integer igRoleId){
+        ReturnObj obj = new ReturnObj();
+        try{
+            obj.setData(igRoleService.getRolePermissionSet(igRoleId));
+            obj.setReturnCode(ReturnCode.SUCCESS);
+            obj.setMsg("获取角色权限成功");
+        }catch (Exception e){
+            logger.error(e);
+            obj.setMsg("获取角色权限失败");
             obj.setReturnCode(ReturnCode.FAIL);
         }
         return obj;
