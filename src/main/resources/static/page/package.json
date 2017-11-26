@@ -1,0 +1,17 @@
+{
+  "name": "page",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "^1.6.7",
+    "materialize-css": "^0.100.2",
+    "ng": "0.0.0-rc6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
