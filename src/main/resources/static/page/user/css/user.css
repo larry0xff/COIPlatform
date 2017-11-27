@@ -1,3 +1,6 @@
-[ng-cloak]{
-				display: none;
-			}
+[ng-cloak] {
+	display: none;
+}
+body{
+	font-size: 0.5em;
+}

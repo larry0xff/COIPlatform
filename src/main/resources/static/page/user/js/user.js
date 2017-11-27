@@ -11,15 +11,28 @@ userApp.controller('userCtrl', ['$scope','$http', function($scope,$http){
 			$scope.listData = response.data.data;
 		})
 	};
-	$scope.showModal = function(id){
+	$scope.showModal = function(id, user){
+		if(id == '#editModal'){
+			$('label').addClass('active');
+		}
+		$scope.temp = user;
 		$(id).openModal();
 	};
-	$scope.init =  function(){
-		$scope.getUserList();
+	$scope.hideModal = function(id){
+		delete $scope.temp;
+		$(id).closeModal();
 	};
-	
-	
-	
-	
+	$scope.insert = function(){
+		console.log($scope.insertForm);
+        $http.post(contextPath+"/user/insert",$scope.insertForm).then(function(response){
+        	alert(response.data.returnCode);
+        });
+	};
+	$scope.init =  function(){
+		//拿数据
+		$scope.getUserList();
+		//初始化select
+    $('select').material_select();
+	};
 	$scope.init();
 }]);
