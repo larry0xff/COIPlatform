@@ -6,13 +6,7 @@ $(function (){
     }
   );
 });
-function changeFrameHeight(){
-    var ifm= document.getElementById("contentIframe"); 
-    ifm.height=document.documentElement.clientHeight;
-}
-window.onresize=function(){  
-     changeFrameHeight();  
-}
+
 var index = angular.module('index', []);
 
 index.controller('indexCtrl',['$scope', function($scope){

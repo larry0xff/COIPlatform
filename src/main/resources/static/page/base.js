@@ -1,3 +1,3 @@
 var contextPath;
 
-contextPath = "http://localhost:8800/coi";
+contextPath = "http://1.1.1.96:8800/coi";

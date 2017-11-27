@@ -10,30 +10,43 @@
 	</head>
 
 	<body ng-app='index' ng-controller="indexCtrl">
-		<nav>
-			<ul class="left hide-on-med-and-down">
+		<div class="row">
+			<ul class="collapsible col s2" data-collapsible="accordion">
 				<li>
-					<a ng-click="showNav()">菜单</a>
+					<div class="collapsible-header"><i class="mdi-image-filter-drama"></i>人员管理</div>
+					<div class="collapsible-body">
+						<div class="collection">
+							<a ng-click="changeContent('../user/user.html')" class="collection-item">管理人员</a>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="collapsible-header"><i class="mdi-maps-place"></i>组织机构</div>
+					<div class="collapsible-body">
+						<p>Lorem ipsum dolor sit amet.</p>
+					</div>
+				</li>
+				<li>
+					<div class="collapsible-header"><i class="mdi-social-whatshot"></i>角色管理</div>
+					<div class="collapsible-body">
+						<p>Lorem ipsum dolor sit amet.</p>
+					</div>
 				</li>
 			</ul>
-			<ul id="slide-out" class="side-nav">
-				<div style="height:30px"></div>
-				<ul class="collapsible popout"  data-collapsible="accordion" class="col s12">
-					<li>
-						<div class="collapsible-header">人员管理</div>
-						<div class="collapsible-body">
-							<div class="collection">
-								<a class="collection-item" ng-click="changeContent('../user/user.html')"><font class="myitem">管理性人员</font></a>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</ul>
-			<a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-		</nav>
-		<div id="content" class="row">
-			<iframe src="http://baidu.com" frameborder="no" class="col s12" id="contentIframe"onload="changeFrameHeight()"></iframe>
+			<script type="text/javascript">
+				function changeFrameHeight() {
+					var ifm = document.getElementById("contentIframe");
+					ifm.height = document.documentElement.clientHeight - 50;
+				}
+				window.onresize = function() {
+					changeFrameHeight();
+				}
+			</script>
+			<div id="content" class="row col s10">
+				<iframe src="" frameborder="no" class="col s12" id="contentIframe" onload="changeFrameHeight()"></iframe>
+			</div>
 		</div>
+
 		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
 		<script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
 		<script src="../node_modules/angular/angular.js"></script>

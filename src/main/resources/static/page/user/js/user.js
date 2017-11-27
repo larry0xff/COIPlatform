@@ -1,7 +1,8 @@
+
+  
 var userApp = angular.module('user', []);
 
 userApp.controller('userCtrl', ['$scope','$http', function($scope,$http){
-	
 	var pageIndex = 1;
 	var pageSize = 20;
 	$scope.getUserList = function(){
@@ -9,7 +10,16 @@ userApp.controller('userCtrl', ['$scope','$http', function($scope,$http){
 		$http.post(contextPath+"/user/list?pageSize=" + pageSize + "&pageIndex=" + pageIndex).then(function(response){
 			$scope.listData = response.data.data;
 		})
-	}
+	};
+	$scope.showModal = function(id){
+		$(id).openModal();
+	};
+	$scope.init =  function(){
+		$scope.getUserList();
+	};
 	
-	$scope.getUserList();
+	
+	
+	
+	$scope.init();
 }]);
