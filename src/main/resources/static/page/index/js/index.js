@@ -9,11 +9,15 @@ $(function (){
 
 var index = angular.module('index', []);
 
-index.controller('indexCtrl',['$scope', function($scope){
+index.controller('indexCtrl',['$scope','$http', function($scope, $http){
 	$scope.changeContent = function(url){
 		$('#contentIframe').attr('src', url);
 	};
 	$scope.showNav = function(){
 		$('.button-collapse').sideNav("show");
+	};
+	$scope.logout = function(){
+		window.location = contextPath + '/logout';
 	}
+	
 }]);

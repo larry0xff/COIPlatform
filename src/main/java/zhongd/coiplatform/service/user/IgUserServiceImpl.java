@@ -43,29 +43,34 @@ public class IgUserServiceImpl implements IgUserService {
 	@Override
 	public ReturnObj login(IgUser user) {
 		ReturnObj obj = new ReturnObj();
-		IgUser check = getIgUserByUsername(user.getUsername());
-		if(check == null) {
-			obj.setMsg("用户不存在");
-			obj.setReturnCode(ReturnCode.LOGIN_ERROR_USER_NOT_EXIST);
-			return obj;
+		try {
+			IgUser check = getIgUserByUsername(user.getUsername());
+			if (check == null) {
+				obj.setMsg("用户不存在");
+				obj.setReturnCode(ReturnCode.LOGIN_ERROR_USER_NOT_EXIST);
+				return obj;
+			}
+			user.setPassword(PasswordHandler.encodePassword(user.getPassword(), check.getUsername(), Constant.MD5_STR));
+			if (!user.getPassword().equals(check.getPassword())) {
+				obj.setMsg("密码错误");
+				obj.setReturnCode(ReturnCode.LOGIN_ERROR_PASSWORD_INCORRECT);
+				return obj;
+			}
+			UsernamePasswordToken token = new UsernamePasswordToken(check.getUsername(), check.getPassword());
+			Subject subject = SecurityUtils.getSubject();
+			subject.login(token);
+			// 将登录信息放进Session中
+			IgUserLoginDTO login = new IgUserLoginDTO();
+			login.setIgUser(check);
+			login.setLoginTime(new Date());
+			subject.getSession().setAttribute("currentUser", login);
+
+			obj.setMsg("登录成功");
+			obj.setReturnCode(ReturnCode.LOGIN_SUCCESS);
+		}catch (Exception e){
+			obj.setMsg("登录失败，请重新登录");
+			obj.setReturnCode(ReturnCode.FAIL);
 		}
-		user.setPassword(PasswordHandler.encodePassword(user.getPassword(), check.getIgUserId(), Constant.MD5_STR));
-		if(!user.getPassword().equals(check.getPassword())) {
-			obj.setMsg("密码错误");			
-			obj.setReturnCode(ReturnCode.LOGIN_ERROR_PASSWORD_INCORRECT);
-			return obj;
-		}
-		UsernamePasswordToken token = new UsernamePasswordToken(check.getUsername(), check.getPassword());
-		Subject subject = SecurityUtils.getSubject();
-		subject.login(token);
-		// 将登录信息放进Session中
-		IgUserLoginDTO login = new IgUserLoginDTO();
-		login.setIgUser(check);
-		login.setLoginTime(new Date());
-		subject.getSession().setAttribute("currentUser", login);
-		
-		obj.setMsg("登录成功");
-		obj.setReturnCode(ReturnCode.LOGIN_SUCCESS);
 		return obj;
 	}
 	
@@ -86,7 +91,7 @@ public class IgUserServiceImpl implements IgUserService {
 	}
 	@Override
 	public int insert(IgUser user) {
-		user.setPassword(PasswordHandler.encodePassword(user.getPassword(), user.getIgUserId(), Constant.MD5_STR));
+		user.setPassword(PasswordHandler.encodePassword(user.getPassword(), user.getUsername(), Constant.MD5_STR));
 		return igUserMapper.insertSelective(user);
 	}
 	@Override

@@ -25,6 +25,6 @@ public class PasswordHandler {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(encodePassword("xxx123", 1, Constant.MD5_STR));
+		System.out.println(encodePassword("admin", "admin", Constant.MD5_STR));
 	}
 }

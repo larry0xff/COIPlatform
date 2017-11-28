@@ -18,22 +18,18 @@
 						<div class="card light-green darken-1">
 							<div class="card-content white-text row">
 								<img class="responsive-img circle col s3" src="http://materializecss.com/images/yuna.jpg">
-								<span class="card-title col s9">{{x.username}}</span>
-								<hr />
-								<table class="">
-									<tr>
-										<td>真实姓名:{{x.realname}}</td>
-										<td>组织：{{x.orgName}}</td>
-									</tr>
-									<tr>
-										<td>联系电话：{{x.tel}}</td>
-										<td>e-mail:{{x.email}}</td>
-									</tr>
-								</table>
+								<div class=" col s9">
+								<span class="card-title">{{x.username}}</span>
+								<p>真实姓名:{{x.realname}}</p>
+								<p>组织：{{x.orgName}}</p>
+								<p>联系电话：{{x.tel}}</p>
+								<p>e-mail:{{x.email}}</p>
+								</div>
 							</div>
+							<hr />
 							<div class="card-action">
 								<a class="btn btn-floating black waves-effect waves-light" ng-click="showModal('#editModal',x)"><i class="material-icons">create</i></a>
-								<a class="btn-floating grey waves-effect waves-light" ng-click="showModal('#delModal')"><i class="material-icons">close</i></a>
+								<a class="btn-floating grey waves-effect waves-light" ng-click="showModal('#delModal',x)"><i class="material-icons">close</i></a>
 							</div>
 						</div>
 					</div>
@@ -111,11 +107,11 @@
 		<!-- 删除模态框 -->
 		<div id="delModal" class="modal modal-fixed-footer">
 			<div class="modal-content">
-				<h4>删除</h4>
-				<p>A bunch of text</p>
+				<h4>确认删除？？？</h4>
 			</div>
 			<div class="modal-footer">
-				<a href="" class="modal-action modal-close waves-effect waves-green btn-flat ">同意</a>
+				<a href="" class="modal-action waves-effect waves-green btn-flat " ng-click="del()">确认</a>
+				<a href="" class="modal-action modal-close waves-effect waves-green btn-flat ">取消</a>
 			</div>
 		</div>
 		<!-- 新增模态框 -->
@@ -127,9 +123,9 @@
 						<div class="row">
 							<div class="col s12">
 								<label>Gender:</label>
-								<input class="with-gap" name="group1" type="radio" id="male" ng-model="insertForm.gender"/>
+								<input class="with-gap" name="group1" type="radio" id="male" ng-model="insertForm.gender" value="M"/>
 								<label for="male">Male</label>
-								<input class="with-gap" name="group1" type="radio" id="female"/>
+								<input class="with-gap" name="group1" type="radio" id="female" ng-model="insertForm.gender" value="F"/>
 								<label for="female">Female</label>
 							</div>
 							<div class="input-field col s6">
@@ -149,13 +145,12 @@
 								<label for="icon_telephone">E-mail</label>
 							</div>
 							<div class="input-field col s12">
-								<select ng-model="insertForm.igOrgId">
-									<option value="" disabled selected>Choose your option</option>
-									<option value="1">宣传部门</option>
-									<option value="2">搞事部门</option>
-									<option value="3">其他部门 </option>
+								<select ng-model="insertForm.igOrgId" id="org">
+									<option value="1">宣传部门
+									<option value="2">搞事部门
+									<option value="3">其他部门 
 								</select>
-								<label>Organization</label>
+								<label for="org">Organization</label>
 							</div>
 						</div>
 					</form>
@@ -169,7 +164,7 @@
 		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
 		<script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
 		<script src="../node_modules/angular/angular.js"></script>
-		<script src="../base.js"></script>
+		<script src="../app.js"></script>
 		<script src="js/user.js"></script>
 	</body>
 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+
+		<link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="css/login.css" />
+	</head>
+
+	<body ng-app="loginApp" ng-controller="loginCtrl" ng-cloak>
+		<div style="height:100px"></div>
+		<div class="row">
+			<div class="col m7"></div>
+			<div class="card col s11 m4">
+				<div class="card-content black-text row center">
+					<img class="circle" height="80" width="80" src="http://materializecss.com/images/yuna.jpg">
+					<div class=" col s12">
+						<div class="input-field col s12">
+							<input id="first_name" type="text" class="" ng-model="ctx.username">
+							<label for="first_name" class="grey-text">用户名</label>
+						</div>
+						<div class="input-field col s12">
+							<input id="first_name" type="password" class="" ng-model="ctx.password">
+							<label for="first_name" class="grey-text">密码</label>
+						</div>
+
+					</div>
+				</div>
+				<div class="card-action row">
+					<div class="col s6 center">
+						<a class="waves-effect waves-light btn black" ng-click="login()">登&nbsp;&nbsp;录</a>
+					</div>
+					<div class="col s6 center">
+						<a class="waves-effect waves-light btn grey">忘记密码</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+		</div>
+		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+		<script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+		<script src="../node_modules/angular/angular.js"></script>
+		<script src="../app.js"></script>
+		<script src="js/login.js"></script>
+	</body>
+
+</html>

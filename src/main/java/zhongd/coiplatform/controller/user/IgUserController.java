@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,7 +36,7 @@ public class IgUserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public ReturnObj insert(@Valid IgUser user) {
+	public ReturnObj insert(@RequestBody IgUser user) {
 		ReturnObj returnObj = new ReturnObj();
 		try {
 			IgUser currentUser = getCurrentUser().getIgUserDO();
@@ -43,6 +44,7 @@ public class IgUserController extends BaseController{
 			user.setUpdateBy(currentUser.getIgUserId());
 			user.setCreateTime(new Date());
 			user.setUpdateTime(new Date());
+			user.setPassword("123456");
 			returnObj.setData(igUserService.insert(user));
 			returnObj.setReturnCode(ReturnCode.SUCCESS);
 			returnObj.setMsg("新增用户成功");
@@ -94,7 +96,7 @@ public class IgUserController extends BaseController{
 			user.setUpdateBy(currentUser.getIgUserId());
 			user.setUpdateTime(new Date());
 			if(!StringUtil.isEmpty(user.getPassword())){
-				user.setPassword(PasswordHandler.encodePassword(user.getPassword(),user.getIgUserId(), Constant.MD5_STR));
+				user.setPassword(PasswordHandler.encodePassword(user.getPassword(),user.getUsername(), Constant.MD5_STR));
 			}
 			int result = igUserService.update(user);
 			if(result == 0) {

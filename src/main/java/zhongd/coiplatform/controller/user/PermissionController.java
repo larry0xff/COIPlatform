@@ -2,6 +2,7 @@ package zhongd.coiplatform.controller.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,18 +18,14 @@ public class PermissionController extends BaseController{
 	@Autowired
 	IgUserService igUserService;
 	
-	@RequestMapping("/unlogin")
-	@ResponseBody
-	public ReturnObj unlogin() {
-		ReturnObj rtobj= new ReturnObj();
-		rtobj.setReturnCode(ReturnCode.NO_AUTORITY);
-		rtobj.setMsg("未登录");
-		return rtobj;
+	@RequestMapping(value = {"/logout", "/"})
+	public String unlogin() {
+		return "redirect:/page/login/login.html";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public ReturnObj login(IgUser user) {
+	public ReturnObj login(@RequestBody IgUser user) {
 		return igUserService.login(user);
 	}
 	

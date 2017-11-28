@@ -11,7 +11,22 @@
 
 	<body ng-app='index' ng-controller="indexCtrl">
 		<div class="row">
-
+			<nav class="col s12">
+				<div class="nav-wrapper">
+					<a href="#" class="brand-logo">Logo</a>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li>
+							<a href="sass.html">Sass</a>
+						</li>
+						<li>
+							<a href="badges.html">Components</a>
+						</li>
+						<li>
+							<a ng-click="logout()">登出</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
 		</div>
 		<div class="row">
 			<ul class="collapsible col s2" data-collapsible="accordion">
@@ -53,6 +68,7 @@
 		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
 		<script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
 		<script src="../node_modules/angular/angular.js"></script>
+		<script src="../app.js"></script>
 		<script src="js/index.js"></script>
 	</body>
 
