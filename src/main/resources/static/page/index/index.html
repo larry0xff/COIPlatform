@@ -10,6 +10,19 @@
 	</head>
 
 	<body ng-app='index' ng-controller="indexCtrl">
+        <script type="text/javascript">
+            function changeFrameHeight(id) {
+                var ifm = document.getElementById(id);
+                console.log(ifm);
+                console.log(ifm.style.height);
+                ifm.style.height = ( document.documentElement.clientHeight - 80) +'px';
+                console.log(ifm.style.height);
+            }
+            window.onresize = function() {
+                changeFrameHeight('contentIframe');
+                changeFrameHeight('navBar');
+            }
+        </script>
 		<div class="row">
 			<nav class="col s12">
 				<div class="nav-wrapper">
@@ -29,9 +42,10 @@
 			</nav>
 		</div>
 		<div class="row">
-			<ul class="collapsible col s2" data-collapsible="accordion">
+			<div style="width: 20px" class="col hide-on-small-only"></div>
+			<ul class="collapsible col m2 s12" data-collapsible="accordion" id="navBar" onload="changeFrameHeight('navBar')">
 				<li>
-					<div class="collapsible-header"><i class="mdi-image-filter-drama"></i>人员管理</div>
+					<div class="collapsible-header center">人员管理</div>
 					<div class="collapsible-body">
 						<div class="collection">
 							<a ng-click="changeContent('../user/user.html')" class="collection-item">管理人员</a>
@@ -39,29 +53,21 @@
 					</div>
 				</li>
 				<li>
-					<div class="collapsible-header"><i class="mdi-maps-place"></i>组织机构</div>
+					<div class="collapsible-header">组织机构</div>
 					<div class="collapsible-body">
 						<p>Lorem ipsum dolor sit amet.</p>
 					</div>
 				</li>
 				<li>
-					<div class="collapsible-header"><i class="mdi-social-whatshot"></i>角色管理</div>
+					<div class="collapsible-header">角色管理</div>
 					<div class="collapsible-body">
 						<p>Lorem ipsum dolor sit amet.</p>
 					</div>
 				</li>
 			</ul>
-			<script type="text/javascript">
-				function changeFrameHeight() {
-					var ifm = document.getElementById("contentIframe");
-					ifm.height = document.documentElement.clientHeight - 50;
-				}
-				window.onresize = function() {
-					changeFrameHeight();
-				}
-			</script>
-			<div id="content" class="row col s10">
-				<iframe src="" frameborder="no" class="col s12" id="contentIframe" onload="changeFrameHeight()"></iframe>
+
+			<div id="content" class="row col m9 s12">
+				<iframe src="" frameborder="no" class="col s12" id="contentIframe" onload="changeFrameHeight('contentIframe')"></iframe>
 			</div>
 		</div>
 

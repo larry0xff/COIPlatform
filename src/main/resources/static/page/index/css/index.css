@@ -4,3 +4,7 @@
 .myitem{
 	color:grey;
 }
+.collection, collection-item, .collapsible-body{
+	margin: 0;
+	padding: 0;
+}
