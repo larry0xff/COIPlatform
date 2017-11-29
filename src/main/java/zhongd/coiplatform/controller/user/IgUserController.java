@@ -8,10 +8,7 @@ import javax.validation.Valid;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import zhongd.coiplatform.controller.BaseController;
 import zhongd.coiplatform.entity.ReturnObj;
@@ -169,7 +166,7 @@ public class IgUserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/rmRole", method = RequestMethod.POST)
-	public ReturnObj rmRole(Integer igUserId, Integer igRoleId){
+	public ReturnObj rmRole(@RequestParam("igUserId") Integer igUserId, @RequestParam("igRoleId") Integer igRoleId){
 		ReturnObj obj = new ReturnObj();
 		try{
 			int result = igUserService.rmRole(igUserId, igRoleId);

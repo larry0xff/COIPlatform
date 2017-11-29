@@ -21,10 +21,13 @@ userApp.controller('userCtrl', ['$scope', '$http', function($scope, $http) {
 		})
 	};
 	$scope.showModal = function(id, user) {
+        $scope.temp = user;
 		if(id == '#editModal') {
 			$('label').addClass('active');
 		}
-		$scope.temp = user;
+		if(id == '#rolesModal') {
+            $scope.listRole();
+		}
 		$(id).openModal();
 	};
 	$scope.hideModal = function(id) {
@@ -38,6 +41,7 @@ userApp.controller('userCtrl', ['$scope', '$http', function($scope, $http) {
 			if(data.returnCode != 200){
 				Materialize.toast(data.msg, 2000);
 			}else{
+                Materialize.toast(data.msg, 2000);
 				$scope.hideModal('#addModal');
 				$scope.getUserList();
 			}
@@ -49,10 +53,34 @@ userApp.controller('userCtrl', ['$scope', '$http', function($scope, $http) {
 			if(data.returnCode != 200){
 				Materialize.toast(data.msg, 2000);
 			}else{
+                Materialize.toast(data.msg, 2000);
 				$scope.hideModal('#delModal');
 				$scope.getUserList();
 			}
 		});
+	};
+	$scope.listRole = function(){
+        $http.get(contextPath + "/user/roles?igUserId=" + $scope.temp.igUserId).then(function(response) {
+            var data = response.data;
+            if(data.returnCode != 200){
+                Materialize.toast(data.msg, 2000);
+                return;
+            }else{
+                $scope.roles = response.data.data.set;
+                $scope.rolesCount = response.data.data.count;
+            }
+        })
+	};
+	$scope.rmRole = function(igUserId, igRoleId){
+        $http.post(contextPath + "/user/rmRole?igUserId=" + igUserId + "&igRoleId=" + igRoleId).then(function(response) {
+            var data = response.data;
+            if(data.returnCode != 200){
+                Materialize.toast(data.msg, 2000);
+            }else{
+                Materialize.toast(data.msg, 2000);
+                $scope.listRole();
+            }
+        });
 	}
 	$scope.init = function() {
 		//拿数据

@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css" />
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="../node_modules/materialize-css/dist/css/icon.css" rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<link rel="stylesheet" href="css/user.css" />
 	</head>
@@ -17,8 +17,8 @@
 					<div class="col s12 m4 l3" ng-repeat="x in listData">
 						<div class="card light-green darken-1">
 							<div class="card-content white-text row">
-								<img class="responsive-img circle col s3" src="http://materializecss.com/images/yuna.jpg">
-								<div class=" col s9">
+								<!--<img class="responsive-img circle col s3" src="http://materializecss.com/images/yuna.jpg">-->
+								<div class=" col s12">
 								<span class="card-title">{{x.username}}</span>
 								<p>真实姓名:{{x.realname}}</p>
 								<p>组织：{{x.orgName}}</p>
@@ -29,14 +29,15 @@
 							<hr />
 							<div class="card-action">
 								<a class="btn btn-floating black waves-effect waves-light" ng-click="showModal('#editModal',x)"><i class="material-icons">create</i></a>
-								<a class="btn-floating grey waves-effect waves-light" ng-click="showModal('#delModal',x)"><i class="material-icons">close</i></a>
+								<a class="btn btn-floating grey waves-effect waves-light" ng-click="showModal('#rolesModal',x)"><i class="material-icons">create</i></a>
+								<a class="btn-floating white waves-effect waves-light" ng-click="showModal('#delModal',x)"><i class="black-text material-icons">close</i></a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="editBar centerd">
-				<div class="fixed-action-btn horizontal click-to-toggle">
+			<div class="editBar centered">
+				<div class="fixed-action-btn horizontal">
 					<a class="btn-floating btn-large black">
 						<i class="material-icons">menu</i>
 					</a>
@@ -59,39 +60,39 @@
 				<div class="row">
 					<form class="col s12">
 						<div class="row">
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<input id="icon_telephone" type="tel" class="validate" value="{{temp.igUserId}}" disabled>
 								<label for="icon_telephone">No.</label>
 							</div>
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<input id="icon_telephone" type="tel" class="validate" value="{{temp.gender == 'F' ? '男' : '女'}}">
 								<label for="icon_telephone">Gender</label>
 							</div>
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<input id="icon_telephone" type="tel" class="validate" value="{{temp.username}}">
 								<label for="icon_telephone">User Name</label>
 							</div>
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<input id="icon_realname" type="text" class="validate" value="{{temp.realname}}">
 								<label for="icon_realname">Real name</label>
 							</div>
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<input id="icon_telephone" type="tel" class="validate" value="{{temp.tel}}">
 								<label for="icon_telephone">Tel</label>
 							</div>
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<input id="icon_telephone" type="tel" class="validate" value="{{temp.email}}">
 								<label for="icon_telephone">E-mail</label>
 							</div>
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<input id="icon_telephone" type="tel" class="validate" value="{{temp.createByName}}" disabled>
 								<label for="icon_telephone">Created By</label>
 							</div>
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<input id="icon_telephone" type="tel" class="validate" value="{{temp.createTime}}" disabled>
 								<label for="icon_telephone">Created Time</label>
 							</div>
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<input id="icon_telephone" type="tel" class="validate" value="{{temp.orgName}}">
 								<label for="icon_telephone">Orgnization</label>
 							</div>
@@ -118,39 +119,40 @@
 		<div id="addModal" class="modal modal-fixed-footer">
 			<div class="modal-content">
 				<h4>添加</h4>
+				<hr>
 				<div class="row">
 					<form class="col s12" id="insertForm">
 						<div class="row">
 							<div class="col s12">
-								<label>Gender:</label>
+								<label>性别:</label>
 								<input class="with-gap" name="group1" type="radio" id="male" ng-model="insertForm.gender" value="M"/>
-								<label for="male">Male</label>
+								<label for="male">男性</label>
 								<input class="with-gap" name="group1" type="radio" id="female" ng-model="insertForm.gender" value="F"/>
-								<label for="female">Female</label>
+								<label for="female">女性</label>
 							</div>
-							<div class="input-field col s6">
-								<input id="icon_telephone" type="tel" class="validate" ng-model="insertForm.username">
-								<label for="icon_telephone">User Name</label>
+							<div class="input-field col s12 m6">
+								<input type="tel" class="validate" ng-model="insertForm.username">
+								<label for="icon_telephone">用户名(登录用)</label>
 							</div>
-							<div class="input-field col s6">
-								<input id="icon_realname" type="text" class="validate" ng-model="insertForm.realname">
-								<label for="icon_realname">Real name</label>
+							<div class="input-field col s12 m6">
+								<input  type="text" class="validate" ng-model="insertForm.realname">
+								<label for="icon_realname">真实姓名</label>
 							</div>
-							<div class="input-field col s6">
-								<input id="icon_telephone" type="tel" class="validate" ng-model="insertForm.tel">
-								<label for="icon_telephone">Tel</label>
+							<div class="input-field col s12 m6">
+								<input  type="tel" class="validate" ng-model="insertForm.tel">
+								<label for="icon_telephone">联系电话</label>
 							</div>
-							<div class="input-field col s6">
-								<input id="icon_telephone" type="tel" class="validate" ng-model="insertForm.email">
+							<div class="input-field col s12 m6">
+								<input  type="email" class="validate" ng-model="insertForm.email">
 								<label for="icon_telephone">E-mail</label>
 							</div>
-							<div class="input-field col s12">
+							<div class="input-field col s12 m12">
+								<p class="grey-text">请选择部门</p>
 								<select ng-model="insertForm.igOrgId" id="org">
 									<option value="1">宣传部门
 									<option value="2">搞事部门
-									<option value="3">其他部门 
+									<option value="3">其他部门
 								</select>
-								<label for="org">Organization</label>
 							</div>
 						</div>
 					</form>
@@ -161,8 +163,40 @@
 				<a class="modal-action modal-close waves-effect waves-green btn-flat red white-text">Cancel</a>
 			</div>
 		</div>
+
+		<!-- 查看角色模态框 -->
+		<div id="rolesModal" class="modal modal-fixed-footer">
+			<div class="modal-content">
+				<h4>所有角色</h4>
+				<p class="grey-text">{{temp.username}}总共{{rolesCount}}个角色</p>
+				<table class="light centered">
+					<thead>
+						<tr>
+							<th data-field="name">角色名</th>
+							<th data-field="code">角色代码</th>
+							<th data-field="desc">描述</th>
+							<th data-field="desc">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in roles">
+							<td>{{x.roleName}}</td>
+							<td>{{x.roleCode}}</td>
+							<td>{{x.description}}</td>
+							<td><a class="btn-floating btn-small waves-light waves-effect black" ng-click="rmRole(temp.igUserId, x.igRoleId)"><i class="tiny material-icons">close</i></a></td>
+						</tr>
+						<tr>
+							<td><a class="btn-floating btn-small waves-light waves-effect light-green" ng-click=""><i class="tiny material-icons">add</i></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<a href="" class="modal-action modal-close waves-effect waves-green btn-flat ">关闭</a>
+			</div>
+		</div>
 		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-		<script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+			<script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
 		<script src="../node_modules/angular/angular.js"></script>
 		<script src="../app.js"></script>
 		<script src="js/user.js"></script>

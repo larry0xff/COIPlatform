@@ -5,6 +5,7 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css" />
+		<link href="../node_modules/materialize-css/dist/css/icon.css" rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<link rel="stylesheet" href="css/index.css" />
 	</head>
@@ -13,20 +14,21 @@
         <script type="text/javascript">
             function changeFrameHeight(id) {
                 var ifm = document.getElementById(id);
-                console.log(ifm);
-                console.log(ifm.style.height);
-                ifm.style.height = ( document.documentElement.clientHeight - 80) +'px';
-                console.log(ifm.style.height);
+                ifm.style.height = ( document.documentElement.clientHeight - 120) +'px';
             }
+            window.onload = function() {
+                changeFrameHeight('contentIframe');
+                changeFrameHeight('navBar');
+			}
             window.onresize = function() {
                 changeFrameHeight('contentIframe');
                 changeFrameHeight('navBar');
             }
         </script>
 		<div class="row">
-			<nav class="col s12">
-				<div class="nav-wrapper">
-					<a href="#" class="brand-logo">Logo</a>
+			<nav class="col s12 black white-text">
+				<div class="nav-wrapper ">
+					<a href="#" class="brand-logo"><i class="material-icons tiny ">dashboard</i>Dashboard Of iG</a>
 					<ul id="nav-mobile" class="right hide-on-med-and-down">
 						<li>
 							<a href="sass.html">Sass</a>
@@ -42,24 +44,26 @@
 			</nav>
 		</div>
 		<div class="row">
+
 			<div style="width: 20px" class="col hide-on-small-only"></div>
-			<ul class="collapsible col m2 s12" data-collapsible="accordion" id="navBar" onload="changeFrameHeight('navBar')">
+			<ul class="collapsible col m2 s12 " data-collapsible="accordion" id="navBar" onload="changeFrameHeight('navBar')">
 				<li>
-					<div class="collapsible-header center">人员管理</div>
+					<div class="collapsible-header"><i class="material-icons tiny ">perm_identity</i>人员管理</div>
+
 					<div class="collapsible-body">
 						<div class="collection">
-							<a ng-click="changeContent('../user/user.html')" class="collection-item">管理人员</a>
+							<a ng-click="changeContent('../user/user.html')" class="collection-item grey-text">管理人员</a>
 						</div>
 					</div>
 				</li>
 				<li>
-					<div class="collapsible-header">组织机构</div>
+					<div class="collapsible-header"><i class="material-icons tiny ">view_module</i>组织机构</div>
 					<div class="collapsible-body">
 						<p>Lorem ipsum dolor sit amet.</p>
 					</div>
 				</li>
 				<li>
-					<div class="collapsible-header">角色管理</div>
+					<div class="collapsible-header"><i class="material-icons tiny ">supervisor_account</i>角色管理</div>
 					<div class="collapsible-body">
 						<p>Lorem ipsum dolor sit amet.</p>
 					</div>
