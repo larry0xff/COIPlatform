@@ -18,6 +18,25 @@ index.controller('indexCtrl',['$scope','$http', function($scope, $http){
 	};
 	$scope.logout = function(){
 		window.location = contextPath + '/logout';
-	}
+	};
+	$scope.showModal = function(id){
+        $(id).openModal();
+	};
+	$scope.changePsw = function(){
+		if($scope.changeForm.newPsw != $scope.changeForm.newPswRepeat){
+            Materialize.toast('新密码不一致！', 2000);
+            return;
+		}
+		$http.post(contextPath + '/user/updatePsw?oldPsw=' + $scope.changeForm.oldPsw + "&newPsw=" + $scope.changeForm.newPsw ).then(function(response){
+			var data = response.data;
+			if(data.returnCode != 200){
+                Materialize.toast(data.msg, 2000);
+            }else{
+                Materialize.toast(data.msg, 2000, 'rounded');
+                delete $scope.changeForm;
+                $('#updatePsw').closeModal();
+			}
+		});
+	};
 	
 }]);

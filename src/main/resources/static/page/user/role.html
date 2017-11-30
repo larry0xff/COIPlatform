@@ -85,14 +85,14 @@
                     <td>{{x.name}}</td>
                     <td>{{x.permissionCode}}</td>
                     <td>{{x.description}}</td>
-                    <td><a class="btn-floating btn-small waves-light waves-effect black" ng-click="rmPermission(temp.igUserId, x.igRoleId)"><i class="tiny material-icons">close</i></a></td>
+                    <td><a class="btn-floating btn-small waves-light waves-effect black" ng-click="rmPermission(x.igPermissionId)"><i class="tiny material-icons">close</i></a></td>
                 </tr>
                 <tr>
-                    <td colspan="4" ng-if="selectRolesCount > 0">请在下列{{selectRolesCount}}个标签中选择添加角色</td>
+                    <td class="grey-text" colspan="4" ng-if="selectPermissionsCount > 0">请在下列{{selectPermissionsCount}}个标签中选择添加权限</td>
                 </tr>
                 <tr>
                     <td colspan="4" class="row">
-                        <div class="chip col s3 m2 waves-effect waves-light light-green white-text" ng-repeat="x in selectRoles" ng-click="setRole(x.igRoleId)">{{x.roleName}}</div>
+                        <div class="chip col s3 m2 waves-effect waves-light light-green white-text" ng-repeat="x in selectPermissions" ng-click="setPermission(x.igPermissionId)">{{x.name}}</div>
                     </td>
                 </tr>
                 </tbody>
@@ -108,8 +108,8 @@
             <h4 >确认删除？？？</h4>
         </div>
         <div class="modal-footer">
-            <a href="" class="modal-action waves-effect waves-green btn-flat light-green  white-text" ng-click="del()">确认</a>
-            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat black white-text">取消</a>
+            <a href="" class="modal-action waves-effect waves-green btn-flat blue-grey  white-text" ng-click="del()">确认</a>
+            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
         </div>
     </div>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>

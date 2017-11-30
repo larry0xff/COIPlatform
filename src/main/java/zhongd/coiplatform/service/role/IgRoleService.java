@@ -21,4 +21,6 @@ public interface IgRoleService {
     int rmPermission(Integer igRoleId, Integer igPermissionId);
 
     Map<String, Object> getRolePermissionSet(Integer igRoleId);
+
+    Map<String, Object> getRolePermissionSelectSet(Integer igRoleId);
 }

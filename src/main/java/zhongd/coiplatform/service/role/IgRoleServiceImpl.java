@@ -15,7 +15,8 @@ import java.util.*;
  * @Description
  */
 @Service
-public class IgRoleServiceImpl implements IgRoleService {
+public class
+IgRoleServiceImpl implements IgRoleService {
     @Autowired
     IgRoleMapper igRoleMapper;
     @Autowired
@@ -62,6 +63,15 @@ public class IgRoleServiceImpl implements IgRoleService {
     @Override
     public Map<String, Object> getRolePermissionSet(Integer igRoleId) {
         Set<IgPermission> set = joinMapper.getPermissionSet(igRoleId);
+        Map<String, Object> data = new HashMap<>();
+        data.put("set", set);
+        data.put("count", set.size());
+        return data;
+    }
+
+    @Override
+    public Map<String, Object> getRolePermissionSelectSet(Integer igRoleId) {
+        Set<IgPermission> set = joinMapper.getPermissionSelectSet(igRoleId);
         Map<String, Object> data = new HashMap<>();
         data.put("set", set);
         data.put("count", set.size());

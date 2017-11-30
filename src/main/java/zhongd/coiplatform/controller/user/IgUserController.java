@@ -116,7 +116,33 @@ public class IgUserController extends BaseController{
 		}
 		return obj;
 	}
-
+	@PostMapping(value = "/updatePsw")
+	public ReturnObj updatePsw(@RequestParam("oldPsw") String oldPsw, @RequestParam("newPsw") String newPsw){
+		ReturnObj obj = new ReturnObj();
+		try {
+			IgUser currentUser = getCurrentUser().getIgUserDO();
+			if(!PasswordHandler.encodePassword(oldPsw, currentUser.getUsername(), Constant.MD5_STR).equals(currentUser.getPassword())){
+				obj.setMsg("旧密码错误！");
+				obj.setReturnCode(ReturnCode.FAIL);
+			}else{
+				currentUser.setPassword(PasswordHandler.encodePassword(newPsw, currentUser.getUsername(), Constant.MD5_STR));
+				int result = igUserService.update(currentUser);
+				if(result == 0) {
+					obj.setMsg("未修改成功，请尝试重新更新");
+					obj.setReturnCode(ReturnCode.FAIL);
+				}else {
+					obj.setData(result);
+					obj.setMsg("修改成功");
+					obj.setReturnCode(ReturnCode.SUCCESS);
+				}
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			obj.setReturnCode(ReturnCode.FAIL);
+			obj.setMsg("修改密码失败");
+		}
+		return obj;
+	}
 	/**
 	 * 分页获取用户列表
 	 * @param pageSize

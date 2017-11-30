@@ -41,7 +41,7 @@ userApp.controller('userCtrl', ['$scope', '$http', function($scope, $http) {
 			if(data.returnCode != 200){
 				Materialize.toast(data.msg, 2000);
 			}else{
-                Materialize.toast(data.msg, 2000);
+                Materialize.toast(data.msg, 2000, 'rounded');
 				$scope.hideModal('#addModal');
 				$scope.getUserList();
 			}
@@ -54,8 +54,8 @@ userApp.controller('userCtrl', ['$scope', '$http', function($scope, $http) {
             if(data.returnCode != 200){
                 Materialize.toast(data.msg, 2000);
             }else{
-                Materialize.toast(data.msg, 2000);
-                $scope.hideModal('#addModal');
+                Materialize.toast(data.msg, 2000, 'rounded');
+                $scope.hideModal('#editModal');
                 $scope.getUserList();
             }
         });
@@ -66,7 +66,7 @@ userApp.controller('userCtrl', ['$scope', '$http', function($scope, $http) {
 			if(data.returnCode != 200){
 				Materialize.toast(data.msg, 2000);
 			}else{
-                Materialize.toast(data.msg, 2000);
+                Materialize.toast(data.msg, 2000, 'rounded');
 				$scope.hideModal('#delModal');
 				$scope.getUserList();
 			}
@@ -100,7 +100,7 @@ userApp.controller('userCtrl', ['$scope', '$http', function($scope, $http) {
             if(data.returnCode != 200){
                 Materialize.toast(data.msg, 2000);
             }else{
-                Materialize.toast(data.msg, 2000);
+                Materialize.toast(data.msg, 2000, 'rounded');
                 $scope.listRole();
             }
         });
@@ -111,11 +111,11 @@ userApp.controller('userCtrl', ['$scope', '$http', function($scope, $http) {
             if(data.returnCode != 200){
                 Materialize.toast(data.msg, 2000);
             }else{
-                Materialize.toast(data.msg, 2000);
+                Materialize.toast(data.msg, 2000, 'rounded');
                 $scope.listRole();
             }
         });
-	}
+	};
 	$scope.init = function() {
 		//拿数据
 		$scope.getUserList();

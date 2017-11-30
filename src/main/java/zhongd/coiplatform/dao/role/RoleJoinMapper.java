@@ -13,4 +13,6 @@ public interface RoleJoinMapper {
     int rmPermission(Map<String, Object> param);
 
     Set<IgPermission> getPermissionSet(Integer igRoleId);
+
+    Set<IgPermission> getPermissionSelectSet(Integer igRoleId);
 }

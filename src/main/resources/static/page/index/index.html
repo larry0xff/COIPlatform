@@ -31,6 +31,9 @@
 					<a href="#" class="brand-logo"><i class="material-icons tiny ">dashboard</i>Dashboard Of iG</a>
 					<ul id="" class="right">
 						<li>
+							<a class="right waves-light waves-effect" ng-click="showModal('#updatePsw')">修改密码</a>
+						</li>
+						<li>
 							<a class="right waves-light waves-effect" ng-click="logout()">登出</a>
 						</li>
 					</ul>
@@ -69,7 +72,33 @@
 				<iframe src="" frameborder="no" class="col s12" id="contentIframe" onload="changeFrameHeight('contentIframe')"></iframe>
 			</div>
 		</div>
-
+		<div id="updatePsw" class="modal modal-fixed-footer">
+			<div class="modal-content">
+				<h4 >修改登录密码</h4>
+				<div class="row">
+					<form class="col s12" id="insertForm">
+						<div class="row">
+							<div class="input-field col s12">
+								<input type="password" class="validate" ng-model="changeForm.oldPsw">
+								<label>当前密码</label>
+							</div>
+							<div class="input-field col s12">
+								<input  type="password" class="validate" ng-model="changeForm.newPsw">
+								<label>新密码</label>
+							</div>
+							<div class="input-field col s12">
+								<input  type="password" class="validate" ng-model="changeForm.newPswRepeat">
+								<label>重复输入</label>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a href="" class="modal-action waves-effect waves-green btn-flat light-green  white-text" ng-click="changePsw()">确认</a>
+				<a href="" class="modal-action modal-close waves-effect waves-green btn-flat black white-text">取消</a>
+			</div>
+		</div>
 		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
 		<script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
 		<script src="../node_modules/angular/angular.js"></script>

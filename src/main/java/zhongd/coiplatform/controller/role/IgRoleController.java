@@ -2,10 +2,7 @@ package zhongd.coiplatform.controller.role;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import zhongd.coiplatform.controller.BaseController;
 import zhongd.coiplatform.entity.DO.user.IgRole;
 import zhongd.coiplatform.entity.DO.user.IgUser;
@@ -172,6 +169,26 @@ public class IgRoleController extends BaseController {
         }catch (Exception e){
             logger.error(e);
             obj.setMsg("获取角色权限失败");
+            obj.setReturnCode(ReturnCode.FAIL);
+        }
+        return obj;
+    }
+
+    /**
+     * 获取角色可添加的其他权限
+     * @param igRoleId
+     * @return
+     */
+    @GetMapping(value = "/permissionsSelect")
+    public ReturnObj permissionsSelect(Integer igRoleId){
+        ReturnObj obj = new ReturnObj();
+        try{
+            obj.setData(igRoleService.getRolePermissionSelectSet(igRoleId));
+            obj.setReturnCode(ReturnCode.SUCCESS);
+            obj.setMsg("获取角色可选权限成功");
+        }catch (Exception e){
+            logger.error(e);
+            obj.setMsg("获取角色可选权限失败");
             obj.setReturnCode(ReturnCode.FAIL);
         }
         return obj;

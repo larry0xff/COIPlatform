@@ -54,6 +54,14 @@
         left join <include refid="IgPermissionTable" /> on rp.ig_permission_id = p.ig_permission_id
         where rp.ig_role_id = #{igRoleId}
     </select>
+    <select id="getPermissionSelectSet" resultMap="IgPermissionMap" parameterType="Integer">
+        SELECT <include refid="IgPermissionColumns" />
+        FROM <include refid="IgPermissionTable" />
+        WHERE p.ig_permission_id NOT IN (
+          SELECT ig_permission_id FROM ig_role_permission rp
+          WHERE rp.ig_role_id = #{igRoleId}
+        )
+    </select>
     
     <insert id="setPermission" parameterType="map" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO ig_role_permission(ig_role_id, ig_permission_id, create_by, create_time, update_by, update_time)
