@@ -84,6 +84,14 @@
         left join <include refid="IgRoleTable" /> on ur.ig_role_id = r.ig_role_id
         where ur.ig_user_id = #{igUserId}
     </select>
+    <select id="getRoleSelectSet" resultMap="IgRoleMap" parameterType="Integer">
+        select <include refid="IgRoleColumns" />
+        from <include refid="IgRoleTable" />
+        where ig_role_id not in (
+          select ig_role_id from ig_user_role ur
+          where ur.ig_user_id = #{igUserId}
+        )
+    </select>
     <select id="getUserPermissionSet" resultMap="IgPermissionMap" parameterType="Integer">
         select <include refid="IgPermissionColumns" />
         from ig_user_role ur

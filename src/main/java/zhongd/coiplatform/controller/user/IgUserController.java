@@ -36,15 +36,20 @@ public class IgUserController extends BaseController{
 	public ReturnObj insert(@RequestBody IgUser user) {
 		ReturnObj returnObj = new ReturnObj();
 		try {
-			IgUser currentUser = getCurrentUser().getIgUserDO();
-			user.setCreateBy(currentUser.getIgUserId());
-			user.setUpdateBy(currentUser.getIgUserId());
-			user.setCreateTime(new Date());
-			user.setUpdateTime(new Date());
-			user.setPassword("123456");
-			returnObj.setData(igUserService.insert(user));
-			returnObj.setReturnCode(ReturnCode.SUCCESS);
-			returnObj.setMsg("新增用户成功");
+			if (igUserService.getIgUserByUsername(user.getUsername()) != null) {
+				returnObj.setReturnCode(ReturnCode.FAIL);
+				returnObj.setMsg("用户名已存在，请更换用户名！");
+			}else{
+				IgUser currentUser = getCurrentUser().getIgUserDO();
+				user.setCreateBy(currentUser.getIgUserId());
+				user.setUpdateBy(currentUser.getIgUserId());
+				user.setCreateTime(new Date());
+				user.setUpdateTime(new Date());
+				user.setPassword("123456");
+				returnObj.setData(igUserService.insert(user));
+				returnObj.setReturnCode(ReturnCode.SUCCESS);
+				returnObj.setMsg("新增用户成功");
+			}
 		} catch (Exception e) {
 			logger.error(e);
 			returnObj.setReturnCode(ReturnCode.FAIL);
@@ -86,7 +91,7 @@ public class IgUserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ReturnObj update(@Valid IgUser user) {
+	public ReturnObj update(@RequestBody IgUser user) {
 		ReturnObj obj = new ReturnObj();
 		try {
 			IgUser currentUser = getCurrentUser().getIgUserDO();
@@ -196,6 +201,21 @@ public class IgUserController extends BaseController{
 		ReturnObj obj = new ReturnObj();
 		try{
 			obj.setData(igUserService.getUserRoleSet(igUserId));
+			obj.setReturnCode(ReturnCode.SUCCESS);
+			obj.setMsg("获取用户角色成功");
+		}catch (Exception e){
+			logger.error(e);
+			obj.setMsg("获取用户角色失败");
+			obj.setReturnCode(ReturnCode.FAIL);
+		}
+		return obj;
+	}
+
+	@GetMapping(value = "/rolesSelect")
+	public ReturnObj rolesSelect(Integer igUserId){
+		ReturnObj obj = new ReturnObj();
+		try{
+			obj.setData(igUserService.getUserRoleSelectSet(igUserId));
 			obj.setReturnCode(ReturnCode.SUCCESS);
 			obj.setMsg("获取用户角色成功");
 		}catch (Exception e){

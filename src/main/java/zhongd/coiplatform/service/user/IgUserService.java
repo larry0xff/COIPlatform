@@ -74,4 +74,6 @@ public interface IgUserService {
 	int setRole(Integer igUserId, Integer igRoleId, Integer currentUserId);
 
 	int rmRole(Integer igUserId, Integer igRoleId);
+
+	Map<String, Object> getUserRoleSelectSet(Integer igUserId);
 }

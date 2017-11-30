@@ -131,4 +131,13 @@ public class IgUserServiceImpl implements IgUserService {
 		param.put("igRoleId", igRoleId);
 		return joinMapper.rmRole(param);
 	}
+
+	@Override
+	public Map<String, Object> getUserRoleSelectSet(Integer igUserId) {
+		Set<IgRole> set = joinMapper.getRoleSelectSet(igUserId);
+		Map<String, Object> data = new HashMap<>();
+		data.put("set", set);
+		data.put("count", set.size());
+		return data;
+	}
 }

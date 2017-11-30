@@ -29,15 +29,9 @@
 			<nav class="col s12 black white-text">
 				<div class="nav-wrapper ">
 					<a href="#" class="brand-logo"><i class="material-icons tiny ">dashboard</i>Dashboard Of iG</a>
-					<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<ul id="" class="right">
 						<li>
-							<a href="sass.html">Sass</a>
-						</li>
-						<li>
-							<a href="badges.html">Components</a>
-						</li>
-						<li>
-							<a ng-click="logout()">登出</a>
+							<a class="right waves-light waves-effect" ng-click="logout()">登出</a>
 						</li>
 					</ul>
 				</div>
@@ -52,7 +46,8 @@
 
 					<div class="collapsible-body">
 						<div class="collection">
-							<a ng-click="changeContent('../user/user.html')" class="collection-item grey-text">管理人员</a>
+							<a ng-click="changeContent('../user/user.html')" class="collection-item grey-text center-align">管理人员</a>
+							<a ng-click="changeContent('../user/role.html')" class="collection-item grey-text center-align">角色管理</a>
 						</div>
 					</div>
 				</li>

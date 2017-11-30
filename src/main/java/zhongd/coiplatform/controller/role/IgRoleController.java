@@ -2,6 +2,7 @@ package zhongd.coiplatform.controller.role;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +34,7 @@ public class IgRoleController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public ReturnObj insertRole(IgRole igRole){
+    public ReturnObj insertRole(@RequestBody IgRole igRole){
         ReturnObj obj = new ReturnObj();
         try{
             IgUser currentUser = getCurrentUser().getIgUserDO();
@@ -62,7 +63,7 @@ public class IgRoleController extends BaseController {
      * @param igRoleId
      * @return
      */
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ReturnObj insertRole(Integer igRoleId){
         ReturnObj obj = new ReturnObj();
         try{

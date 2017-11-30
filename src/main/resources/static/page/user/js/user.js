@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('select').material_select();
+    $('#orgSelect').material_select();
   });
 var userApp = angular.module('user', []);
 
@@ -18,7 +18,7 @@ userApp.controller('userCtrl', ['$scope', '$http', function($scope, $http) {
 			}else{
 				$scope.listData = response.data.data;
 			}
-		})
+		});
 	};
 	$scope.showModal = function(id, user) {
         $scope.temp = user;
@@ -45,8 +45,21 @@ userApp.controller('userCtrl', ['$scope', '$http', function($scope, $http) {
 				$scope.hideModal('#addModal');
 				$scope.getUserList();
 			}
-		});
+        });
 	};
+    $scope.update = function() {
+        console.log($scope.insertForm);
+        $http.post(contextPath + "/user/update", $scope.temp).then(function(response) {
+            var data = response.data;
+            if(data.returnCode != 200){
+                Materialize.toast(data.msg, 2000);
+            }else{
+                Materialize.toast(data.msg, 2000);
+                $scope.hideModal('#addModal');
+                $scope.getUserList();
+            }
+        });
+    };
 	$scope.del = function(){
 		$http.get(contextPath + "/user/delete?igUserId=" + $scope.temp.igUserId).then(function(response) {
 			var data = response.data;
@@ -66,13 +79,34 @@ userApp.controller('userCtrl', ['$scope', '$http', function($scope, $http) {
                 Materialize.toast(data.msg, 2000);
                 return;
             }else{
-                $scope.roles = response.data.data.set;
-                $scope.rolesCount = response.data.data.count;
+                $scope.userRoles = response.data.data.set;
+                $scope.userRolesCount = response.data.data.count;
             }
-        })
+        });
+        $http.get(contextPath + "/user/rolesSelect?igUserId=" + $scope.temp.igUserId).then(function(response) {
+            var data = response.data;
+            if(data.returnCode != 200){
+                Materialize.toast(data.msg, 2000);
+                return;
+            }else{
+                $scope.selectRoles = response.data.data.set;
+                $scope.selectRolesCount = response.data.data.count;
+            }
+        });
 	};
 	$scope.rmRole = function(igUserId, igRoleId){
         $http.post(contextPath + "/user/rmRole?igUserId=" + igUserId + "&igRoleId=" + igRoleId).then(function(response) {
+            var data = response.data;
+            if(data.returnCode != 200){
+                Materialize.toast(data.msg, 2000);
+            }else{
+                Materialize.toast(data.msg, 2000);
+                $scope.listRole();
+            }
+        });
+	};
+	$scope.setRole = function(igRoleId){
+        $http.post(contextPath + "/user/setRole?igUserId=" + $scope.temp.igUserId + "&igRoleId=" + igRoleId).then(function(response) {
             var data = response.data;
             if(data.returnCode != 200){
                 Materialize.toast(data.msg, 2000);

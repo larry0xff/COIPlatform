@@ -3,6 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<title></title>
 		<link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css" />
 		<link href="../node_modules/materialize-css/dist/css/icon.css" rel="stylesheet">
@@ -12,6 +13,7 @@
 
 	<body ng-app='user' ng-controller='userCtrl' ng-cloak>
 		<div class="">
+			<h6><p class="grey-text">人员管理&nbsp;&nbsp;&gt;&nbsp;&nbsp;管理人员配置</p></h6>
 			<div class="tableView">
 				<div class="row">
 					<div class="col s12 m4 l3" ng-repeat="x in listData">
@@ -19,17 +21,16 @@
 							<div class="card-content white-text row">
 								<!--<img class="responsive-img circle col s3" src="http://materializecss.com/images/yuna.jpg">-->
 								<div class=" col s12">
-								<span class="card-title">{{x.username}}</span>
-								<p>真实姓名:{{x.realname}}</p>
-								<p>组织：{{x.orgName}}</p>
+								<span class="card-title">{{x.realname}}</span>
+								<p>登录名:{{x.username}}</p>
 								<p>联系电话：{{x.tel}}</p>
-								<p>e-mail:{{x.email}}</p>
+								<p>E-mail:{{x.email}}</p>
 								</div>
 							</div>
 							<hr />
 							<div class="card-action">
 								<a class="btn btn-floating black waves-effect waves-light" ng-click="showModal('#editModal',x)"><i class="material-icons">create</i></a>
-								<a class="btn btn-floating grey waves-effect waves-light" ng-click="showModal('#rolesModal',x)"><i class="material-icons">create</i></a>
+								<a class="btn btn-floating grey waves-effect waves-light" ng-click="showModal('#rolesModal',x)"><i class="material-icons">assignment_ind</i></a>
 								<a class="btn-floating white waves-effect waves-light" ng-click="showModal('#delModal',x)"><i class="black-text material-icons">close</i></a>
 							</div>
 						</div>
@@ -61,58 +62,54 @@
 					<form class="col s12">
 						<div class="row">
 							<div class="input-field col s12 m6">
-								<input id="icon_telephone" type="tel" class="validate" value="{{temp.igUserId}}" disabled>
-								<label for="icon_telephone">No.</label>
+								<input type="tel" class="validate" ng-model="temp.igUserId" disabled>
+								<label>No.</label>
 							</div>
 							<div class="input-field col s12 m6">
-								<input id="icon_telephone" type="tel" class="validate" value="{{temp.gender == 'F' ? '男' : '女'}}">
-								<label for="icon_telephone">Gender</label>
+								<input type="tel" class="validate" value="{{temp.gender == 'F' ? '男' : '女'}}" disabled>
+								<label >Gender</label>
 							</div>
 							<div class="input-field col s12 m6">
-								<input id="icon_telephone" type="tel" class="validate" value="{{temp.username}}">
-								<label for="icon_telephone">User Name</label>
+								<input type="tel" class="validate" value="{{temp.createByName}}" disabled>
+								<label >Created By</label>
 							</div>
 							<div class="input-field col s12 m6">
-								<input id="icon_realname" type="text" class="validate" value="{{temp.realname}}">
-								<label for="icon_realname">Real name</label>
+								<input  type="tel" class="validate" value="{{temp.createTime}}" disabled>
+								<label >Created Time</label>
 							</div>
 							<div class="input-field col s12 m6">
-								<input id="icon_telephone" type="tel" class="validate" value="{{temp.tel}}">
-								<label for="icon_telephone">Tel</label>
+								<input  type="tel" class="validate" value="{{temp.username}}" disabled>
+								<label >User Name</label>
 							</div>
 							<div class="input-field col s12 m6">
-								<input id="icon_telephone" type="tel" class="validate" value="{{temp.email}}">
-								<label for="icon_telephone">E-mail</label>
+								<input  type="text" class="validate" ng-model="temp.realname">
+								<label>Real name</label>
 							</div>
 							<div class="input-field col s12 m6">
-								<input id="icon_telephone" type="tel" class="validate" value="{{temp.createByName}}" disabled>
-								<label for="icon_telephone">Created By</label>
+								<input  type="tel" class="validate" ng-model="temp.tel">
+								<label >Tel</label>
 							</div>
 							<div class="input-field col s12 m6">
-								<input id="icon_telephone" type="tel" class="validate" value="{{temp.createTime}}" disabled>
-								<label for="icon_telephone">Created Time</label>
-							</div>
-							<div class="input-field col s12 m6">
-								<input id="icon_telephone" type="tel" class="validate" value="{{temp.orgName}}">
-								<label for="icon_telephone">Orgnization</label>
+								<input  type="tel" class="validate" ng-model="temp.email">
+								<label >E-mail</label>
 							</div>
 						</div>
 					</form>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<a href="#" class="modal-action waves-effect waves-green btn-flat blue white-text">OKay</a>
-				<a href="#" class="modal-action modal-close waves-effect waves-green btn-flat red white-text">Cancel</a>
+				<a class="modal-action waves-effect waves-green btn-flat light-green  white-text" ng-click="update()">确认</a>
+				<a class="modal-action modal-close waves-effect waves-green btn-flat black white-text">取消</a>
 			</div>
 		</div>
 		<!-- 删除模态框 -->
 		<div id="delModal" class="modal modal-fixed-footer">
 			<div class="modal-content">
-				<h4>确认删除？？？</h4>
+				<h4 >确认删除？？？</h4>
 			</div>
 			<div class="modal-footer">
-				<a href="" class="modal-action waves-effect waves-green btn-flat " ng-click="del()">确认</a>
-				<a href="" class="modal-action modal-close waves-effect waves-green btn-flat ">取消</a>
+				<a href="" class="modal-action waves-effect waves-green btn-flat light-green  white-text" ng-click="del()">确认</a>
+				<a href="" class="modal-action modal-close waves-effect waves-green btn-flat black white-text">取消</a>
 			</div>
 		</div>
 		<!-- 新增模态框 -->
@@ -132,35 +129,27 @@
 							</div>
 							<div class="input-field col s12 m6">
 								<input type="tel" class="validate" ng-model="insertForm.username">
-								<label for="icon_telephone">用户名(登录用)</label>
+								<label >用户名(登录用)</label>
 							</div>
 							<div class="input-field col s12 m6">
 								<input  type="text" class="validate" ng-model="insertForm.realname">
-								<label for="icon_realname">真实姓名</label>
+								<label >真实姓名</label>
 							</div>
 							<div class="input-field col s12 m6">
 								<input  type="tel" class="validate" ng-model="insertForm.tel">
-								<label for="icon_telephone">联系电话</label>
+								<label >联系电话</label>
 							</div>
 							<div class="input-field col s12 m6">
 								<input  type="email" class="validate" ng-model="insertForm.email">
-								<label for="icon_telephone">E-mail</label>
-							</div>
-							<div class="input-field col s12 m12">
-								<p class="grey-text">请选择部门</p>
-								<select ng-model="insertForm.igOrgId" id="org">
-									<option value="1">宣传部门
-									<option value="2">搞事部门
-									<option value="3">其他部门
-								</select>
+								<label >E-mail</label>
 							</div>
 						</div>
 					</form>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<a ng-click="insert()" class="modal-action waves-effect waves-green btn-flat blue white-text">OKay</a>
-				<a class="modal-action modal-close waves-effect waves-green btn-flat red white-text">Cancel</a>
+				<a ng-click="insert()" class="modal-action waves-effect waves-green btn-flat light-green white-text">OKay</a>
+				<a class="modal-action modal-close waves-effect waves-green btn-flat black white-text">Cancel</a>
 			</div>
 		</div>
 
@@ -168,8 +157,8 @@
 		<div id="rolesModal" class="modal modal-fixed-footer">
 			<div class="modal-content">
 				<h4>所有角色</h4>
-				<p class="grey-text">{{temp.username}}总共{{rolesCount}}个角色</p>
-				<table class="light centered">
+				<p class="grey-text">{{temp.username}}总共{{userRolesCount}}个角色</p>
+				<table class="border centered">
 					<thead>
 						<tr>
 							<th data-field="name">角色名</th>
@@ -179,24 +168,29 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="x in roles">
+						<tr ng-repeat="x in userRoles">
 							<td>{{x.roleName}}</td>
 							<td>{{x.roleCode}}</td>
 							<td>{{x.description}}</td>
 							<td><a class="btn-floating btn-small waves-light waves-effect black" ng-click="rmRole(temp.igUserId, x.igRoleId)"><i class="tiny material-icons">close</i></a></td>
 						</tr>
 						<tr>
-							<td><a class="btn-floating btn-small waves-light waves-effect light-green" ng-click=""><i class="tiny material-icons">add</i></a></td>
+							<td colspan="4" ng-if="selectRolesCount > 0">请在下列{{selectRolesCount}}个标签中选择添加角色</td>
+						</tr>
+						<tr>
+							<td colspan="4" class="row">
+								<div class="chip col s3 m2 waves-effect waves-light light-green white-text" ng-repeat="x in selectRoles" ng-click="setRole(x.igRoleId)">{{x.roleName}}</div>
+							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="modal-footer">
-				<a href="" class="modal-action modal-close waves-effect waves-green btn-flat ">关闭</a>
+				<a href="" class="modal-action modal-close waves-effect waves-green btn-flat black white-text">关闭</a>
 			</div>
 		</div>
 		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-			<script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+		<script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
 		<script src="../node_modules/angular/angular.js"></script>
 		<script src="../app.js"></script>
 		<script src="js/user.js"></script>
