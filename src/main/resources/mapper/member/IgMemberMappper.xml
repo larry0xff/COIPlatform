@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zhongd.coiplatform.dao.member.IgMemberMapper">
+    <resultMap id="BaseResultMap" type="zhongd.coiplatform.entity.DO.member.IgMember">
+        <id column="ig_member_id" jdbcType="INTEGER" property="igMemberId" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="gender" jdbcType="VARCHAR" property="gender" />
+        <result column="tel" jdbcType="VARCHAR" property="tel" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="realname" jdbcType="VARCHAR" property="realname" />
+        <result column="ig_org_id" jdbcType="INTEGER" property="igOrgId" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_by" jdbcType="INTEGER" property="createBy" />
+        <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <sql id="BaseTable">
+        ig_member
+    </sql>
+    <sql id="BaseColumns">
+        ig_member_id,username,realname,tel,email,gender,ig_org_id,create_time,create_by,update_by,update_time,password
+    </sql>
+
+    <select id="getMemberList" resultMap="BaseResultMap" parameterType="map">
+        select <include refid="BaseColumns" />
+        from <include refid="BaseTable" />
+        WHERE 1=1
+        <if test="#{igUserId} != null && #{igMemberId} != ''">
+
+        </if>
+    </select>
+
+    <!--dataTables-->
+    <select id="selectByDateTable" >
+        select <include refid="BaseColumns" />
+    </select>
+</mapper>
