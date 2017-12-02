@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zhongd.coiplatform.dao.org.IgOrgMapper">
+    <resultMap id="BaseResultMap" type="zhongd.coiplatform.entity.DO.org.IgOrg">
+        <id column="ig_org_id" jdbcType="INTEGER" property="igOrgId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="manager_id" jdbcType="INTEGER" property="managerId" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_by" jdbcType="INTEGER" property="createBy" />
+        <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <sql id="BaseTable">
+        ig_org o
+    </sql>
+    <sql id="BaseColumns">
+        o.ig_org_id,o.name,o.description,o.manager_id,o.create_time,o.create_by,o.update_by,o.update_time
+    </sql>
+
+    <select id="getOrgList" resultMap="BaseResultMap">
+      SELECT <include refid="BaseColumns"/>,u.realname
+      FROM <include refid="BaseTable"/>
+      LEFT JOIN ig_user u on o.manager_id = u.ig_user_id
+    </select>
+
+</mapper>

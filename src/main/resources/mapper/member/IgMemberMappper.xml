@@ -26,7 +26,7 @@
         select <include refid="BaseColumns" />
         from <include refid="BaseTable" />
         WHERE 1=1
-        <if test="#{igUserId} != null && #{igMemberId} != ''">
+        <if test="igUserId != null">
 
         </if>
     </select>

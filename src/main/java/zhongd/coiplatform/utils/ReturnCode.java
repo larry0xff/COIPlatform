@@ -13,6 +13,7 @@ public class ReturnCode {
 	 * 登录成功
 	 */
 	public static final Integer LOGIN_SUCCESS = 10000;
+
 	/**
 	 * 服务出错
 	 */
@@ -21,6 +22,10 @@ public class ReturnCode {
 	 * 找不到请求
 	 */
 	public static final int REQUEST_NOT_FOUND = 404;
+	/**
+	 * 参数错误
+	 */
+	public static final int PARAMETERS_ERROR = 405;
 	/**
 	 * 处理成功
 	 */
