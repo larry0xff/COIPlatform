@@ -16,13 +16,13 @@
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     </resultMap>
     <sql id="BaseTable">
-        ig_member
+        ig_member m
     </sql>
     <sql id="BaseColumns">
         ig_member_id,username,realname,tel,email,gender,ig_org_id,create_time,create_by,update_by,update_time,password
     </sql>
 
-    <select id="getMemberList" resultType="zhongd.coiplatform.entity.DTO.member.IgMemberDTO" parameterType="map">
+    <select id="getMemberList" resultMap="BaseResultMap" parameterType="map">
         SELECT <include refid="BaseColumns" />
         FROM <include refid="BaseTable" />
         WHERE 1=1
@@ -30,16 +30,16 @@
             AND ig_member_id = #{igMemberId}
         </if>
         <if test="realname != null and realname != ''">
-            AND realname = #{realname}
+            AND realname like #{realname}
         </if>
         <if test="username != null and username != ''">
-            AND username = #{username}
+            AND username like #{username}
         </if>
         <if test="tel != null and tel != ''">
-            AND tel = #{tel}
+            AND tel like #{tel}
         </if>
         <if test="email != null and email != ''">
-            AND email = #{email}
+            AND email like #{email}
         </if>
         LIMIT #{page}, #{pageSize}
     </select>
