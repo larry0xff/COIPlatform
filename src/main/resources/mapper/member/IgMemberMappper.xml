@@ -22,13 +22,26 @@
         ig_member_id,username,realname,tel,email,gender,ig_org_id,create_time,create_by,update_by,update_time,password
     </sql>
 
-    <select id="getMemberList" resultMap="BaseResultMap" parameterType="map">
-        select <include refid="BaseColumns" />
-        from <include refid="BaseTable" />
+    <select id="getMemberList" resultType="zhongd.coiplatform.entity.DTO.member.IgMemberDTO" parameterType="map">
+        SELECT <include refid="BaseColumns" />
+        FROM <include refid="BaseTable" />
         WHERE 1=1
-        <if test="igUserId != null">
-
+        <if test="igMemberId != null">
+            AND ig_member_id = #{igMemberId}
         </if>
+        <if test="realname != null and realname != ''">
+            AND realname = #{realname}
+        </if>
+        <if test="username != null and username != ''">
+            AND username = #{username}
+        </if>
+        <if test="tel != null and tel != ''">
+            AND tel = #{tel}
+        </if>
+        <if test="email != null and email != ''">
+            AND email = #{email}
+        </if>
+        LIMIT #{page}, #{pageSize}
     </select>
 
     <!--dataTables-->
