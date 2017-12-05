@@ -2,9 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css" />
+    <link href="../node_modules/materialize-css/dist/css/icon.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="css/member.css" />
 </head>
-<body>
-
+<body ng-app="memberApp" ng-controller="listCtrl" ng-cloak>
+    <div class="content">
+        <table class="border centered striped">
+            <thead>
+            <tr>
+                <th data-field="name">姓名</th>
+                <th data-field="code">用户名</th>
+                <th data-field="desc">组织id</th>
+                <th data-field="desc">成员id</th>
+                <th>性别</th>
+                <th>E-mail</th>
+                <th>联系电话</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody class="grey-text">
+                <tr ng-repeat="x in memberList">
+                    <td>{{x.realname}}</td>
+                    <td>{{x.username}}</td>
+                    <td>{{x.igOrgId}}</td>
+                    <td>{{x.igMemberId}}</td>
+                    <td>{{x.gender}}</td>
+                    <td>{{x.email}}</td>
+                    <td>{{x.tel}}</td>
+                    <td>
+                        <a href><i></i>删除</a>
+                        <a href><i></i>重置密码</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="../app.js"></script>
+    <script src="js/member.js"></script>
 </body>
 </html>
