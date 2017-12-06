@@ -1,10 +1,7 @@
 package zhongd.coiplatform.utils;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.util.StringUtils;
@@ -437,7 +434,9 @@ public class StringUtil extends StringUtils {
 
 		return true;
 	}
-
+	public static String getUUIDString(){
+		return UUID.randomUUID().toString().replaceAll("-", "");
+	}
 	public static void main(String[] args) {
 		String mobile = "17060145780";
 		System.out.println(mobile + " is mobile :" + isMobile(mobile));
