@@ -42,7 +42,24 @@ public class IgMemberController extends BaseController {
         }
         return obj;
     }
-
+    /**
+     * 获取成员列表
+     * @param request
+     * @return
+     */
+    @PostMapping(value = "/search")
+    public ReturnObj search(@RequestBody String condition){
+        ReturnObj obj = new ReturnObj();
+        try{
+            obj.setData(igMemberService.searchMemberList(condition));
+            obj.setReturnCode(ReturnCode.SUCCESS);
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            obj.setReturnCode(ReturnCode.FAIL);
+            obj.setMsg("查询出错!");
+        }
+        return obj;
+    }
     /**
      * 根据id删除单个成员
      * @param igMemberId

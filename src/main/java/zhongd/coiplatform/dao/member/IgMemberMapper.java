@@ -12,4 +12,6 @@ import java.util.Map;
 @Mapper
 public interface IgMemberMapper extends BaseMapper<IgMember>{
     List<IgMemberDTO> getMemberList(Map<String, Object> param);
+
+    List<IgMemberDTO> searchMemberList(Map<String, Object> param);
 }

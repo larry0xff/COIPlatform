@@ -11,6 +11,13 @@
 </head>
 <body ng-app="memberApp" ng-controller="listCtrl" ng-cloak>
     <div class="content">
+        <h6><p class="grey-text">成员管理&nbsp;&nbsp;&gt;&nbsp;&nbsp;成员列表</p></h6>
+        <div class="row">
+            <div class="input-field col s3">
+                <input id="search" type="text" class="validate" ng-change="search()" ng-model="condition">
+                <label for="search"><i class="material-icons tiny">search</i>输入查询条件</label>
+            </div>
+        </div>
         <table class="border centered striped">
             <thead>
             <tr>
@@ -34,12 +41,38 @@
                     <td>{{x.email}}</td>
                     <td>{{x.tel}}</td>
                     <td>
-                        <a href><i></i>删除</a>
-                        <a href><i></i>重置密码</a>
+                        <a href class="blue-grey-text" title="删除" ng-click="showModal('#delModal', x)"><i class="material-icons small">close</i></a>
+                        <a href class="green-text" title="重置密码"><i class="material-icons small" ng-click="showModal('#resetModal', x)">autorenew</i></a>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <div id="pageCtrl">
+            <ul class="pagination">
+                <li class="waves-effect" ng-click="whitchPage(param.page - 1)"><a href ><i class="material-icons">chevron_left</i></a></li>
+                <li class="waves-effect" ng-click="whitchPage(param.page + 1)"><a href><i class="material-icons">chevron_right</i></a></li>
+            </ul>
+        </div>
+    </div>
+    <!--删除模态框-->
+    <div id="delModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4 >确认删除？？？</h4>
+        </div>
+        <div class="modal-footer">
+            <a href="" class="modal-action waves-effect waves-green btn-flat blue-grey  white-text" ng-click="del()">确认</a>
+            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
+        </div>
+    </div>
+    <!--重置模态框-->
+    <div id="resetModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4 >确认重置密码？？？</h4>
+        </div>
+        <div class="modal-footer">
+            <a href="" class="modal-action waves-effect waves-green btn-flat blue-grey  white-text" ng-click="reset()">确认</a>
+            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
+        </div>
     </div>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>

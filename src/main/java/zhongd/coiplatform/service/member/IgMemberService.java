@@ -18,4 +18,6 @@ public interface IgMemberService {
     int insert(IgMemberDTO dto);
 
     int resetPassword(Integer igMemberId, String username);
+
+    Map<String, Object> searchMemberList(String condition);
 }

@@ -31,12 +31,13 @@ public class IgMemberServiceImpl implements IgMemberService {
     @Override
     public Map<String, Object> getMemberList(HttpServletRequest request) {
         Map<String, Object> param = new HashMap<>();
-        if(StringUtil.isNotEmpty(request.getParameter("igMemberId")))
-            param.put("igMemberId", Integer.parseInt(request.getParameter("igMemberId")));
-        param.put("username", "%" + (request.getParameter("username")==null?"":request.getParameter("username")) + "%");
-        param.put("realname", "%" + (request.getParameter("realname")==null?"":request.getParameter("realname")) + "%");
-        param.put("tel", "%" + (request.getParameter("tel")==null?"":request.getParameter("tel")) + "%");
-        param.put("email", "%" + (request.getParameter("email")==null?"":request.getParameter("email")) + "%");
+        String condition = request.getParameter("condition")==null?"":request.getParameter("condition");
+        if(StringUtil.isNum(condition))
+            param.put("igMemberId", Integer.parseInt(condition));
+        param.put("username", "%" + condition + "%");
+        param.put("realname", "%" + condition + "%");
+        param.put("tel", "%" + condition + "%");
+        param.put("email", "%" + condition + "%");
         int page = Integer.parseInt(request.getParameter("page"));
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
         page = (page - 1) * pageSize;
@@ -67,5 +68,18 @@ public class IgMemberServiceImpl implements IgMemberService {
         member.setIgMemberId(igMemberId);
         member.setPassword(PasswordHandler.encodePassword("123456", username, Constant.MD5_STR));
         return igMemberMapper.updateByPrimaryKeySelective(member);
+    }
+
+    @Override
+    public Map<String, Object> searchMemberList(String condition) {
+        Map<String, Object> param = new HashMap<>();
+        if(StringUtil.isNum(condition))
+            param.put("idcondition", Integer.parseInt(condition));
+        param.put("condition", "%" + condition + "%");
+        Map<String, Object> data = new HashMap<>();
+        List<IgMemberDTO> list = igMemberMapper.searchMemberList(param);
+        data.put("list", list);
+        data.put("count", list.size());
+        return data;
     }
 }

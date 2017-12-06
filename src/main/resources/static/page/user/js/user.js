@@ -35,7 +35,6 @@ userApp.controller('userCtrl', ['$scope', '$http', function($scope, $http) {
 		$(id).closeModal();
 	};
 	$scope.insert = function() {
-		console.log($scope.insertForm);
 		$http.post(contextPath + "/user/insert", $scope.insertForm).then(function(response) {
 			var data = response.data;
 			if(data.returnCode != 200){
