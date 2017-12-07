@@ -89,3 +89,13 @@ memberApp.controller('listCtrl', ['$scope', '$http', function($scope, $http){
     $scope.init();
 
 }]);
+
+memberApp.controller('bulkCtrl', ['$http', '$scope', function($http, $scope){
+    $scope.upload = function(){
+        var file = document.getElementById('uploadfile');
+        var filepath = file.value;
+        var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+
+        console.log(filename, file.value);
+    };
+}]);

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css" />
+    <link href="../node_modules/materialize-css/dist/css/icon.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="css/member.css" />
+</head>
+<body ng-app="memberApp" ng-controller="bulkCtrl" ng-cloak>
+    <div id="content">
+        <form action="#">
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>文件</span>
+                    <input type="file" name="file" id="uploadfile">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+            <div class="btn blue-grey" ng-click="upload()">
+                <span>上传</span>
+            </div>
+        </form>
+
+        <button id="test" value="aaa"></button>
+    </div>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="../app.js"></script>
+    <script src="js/member.js"></script>
+</body>
+</html>
