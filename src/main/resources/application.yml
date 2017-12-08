@@ -56,3 +56,6 @@ logging:
     com.einwin.framework.mybatis: debug
     com.github.pagehelper: TRACE
     com.zaxxer.hikari: TRACE
+
+fileupload:
+  path: file/

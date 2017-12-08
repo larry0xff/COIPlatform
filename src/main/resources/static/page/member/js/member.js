@@ -92,10 +92,26 @@ memberApp.controller('listCtrl', ['$scope', '$http', function($scope, $http){
 
 memberApp.controller('bulkCtrl', ['$http', '$scope', function($http, $scope){
     $scope.upload = function(){
-        var file = document.getElementById('uploadfile');
-        var filepath = file.value;
-        var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
-
-        console.log(filename, file.value);
+        var file = document.getElementById('uploadfile').files[0];
+        var fd = new FormData();
+        fd.append('file', file);
+        fd.append('type', 2);
+        $http({
+            url: contextPath + '/upload/file',
+            method: 'POST',
+            data: fd,
+            headers: {'Content-Type':undefined}
+        }).then(function(response){
+            var data = response.data;
+            if(data.returnCode != 200){
+                Materialize.toast(data.msg, 2000);
+            }else{
+                $scope.bulkinsert(data.data);
+            }
+        });
     };
+
+    $scope.bulkinsert = function(filename){
+        console.log('upload success, file name is', filename);
+    }
 }]);

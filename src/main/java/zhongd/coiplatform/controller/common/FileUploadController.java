@@ -27,7 +27,7 @@ public class FileUploadController extends BaseController{
     FileService fileService;
 
     /**
-     * 上传excel表格
+     * 上传文件
      * @param file
      * @param type 1:excel 2:img 3:compress
      * @return
@@ -57,6 +57,7 @@ public class FileUploadController extends BaseController{
                         obj.setMsg("图片格式有误,上传失败！请确保文件格式为jpg/jpeg/png");
                         obj.setReturnCode(ReturnCode.PARAMETERS_ERROR);
                     }
+                    break;
                 }
                 case FileTypeConstant.FILE_COMPRESS: {
                     if(filename.endsWith(".zip") || filename.endsWith(".rar")
@@ -67,6 +68,7 @@ public class FileUploadController extends BaseController{
                         obj.setMsg("压缩文件格式有误，上传失败！请确保文件格式为zip/rar/7z");
                         obj.setReturnCode(ReturnCode.PARAMETERS_ERROR);
                     }
+                    break;
                 }
             }
         }catch (Exception e){
