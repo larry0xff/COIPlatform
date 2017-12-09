@@ -1,22 +1,24 @@
 package zhongd.coiplatform.service.member;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import zhongd.coiplatform.dao.member.IgMemberMapper;
 import zhongd.coiplatform.entity.DO.member.IgMember;
 import zhongd.coiplatform.entity.DTO.member.IgMemberDTO;
 import zhongd.coiplatform.entity.DTO.user.IgUserLoginDTO;
-import zhongd.coiplatform.utils.Constant;
-import zhongd.coiplatform.utils.ConvertTools;
-import zhongd.coiplatform.utils.PasswordHandler;
-import zhongd.coiplatform.utils.StringUtil;
+import zhongd.coiplatform.entity.ReturnObj;
+import zhongd.coiplatform.utils.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.*;
 
 /**
  * @Author xiezd
@@ -25,6 +27,8 @@ import java.util.Map;
  */
 @Service
 public class IgMemberServiceImpl implements IgMemberService {
+    @Value("${fileupload.path}")
+    private String path;
     @Autowired
     IgMemberMapper igMemberMapper;
 
@@ -81,5 +85,30 @@ public class IgMemberServiceImpl implements IgMemberService {
         data.put("list", list);
         data.put("count", list.size());
         return data;
+    }
+
+    @Override
+    public ReturnObj bulkInsert(String filepath, ReturnObj obj) throws Exception{
+        String msg  = "";
+        File file = new File(path + filepath);
+        if(file.exists() && file.isFile()){
+            FileInputStream fis = new FileInputStream(file);
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            Iterator<Row> rows = sheet.iterator();
+            while(rows.hasNext()){
+                Row row = rows.next();
+                Iterator<Cell> cells = row.cellIterator();
+                while(cells.hasNext()){
+                    msg += (" " + cells.next());
+                }
+            }
+            obj.setReturnCode(ReturnCode.SUCCESS);
+        }else{
+            msg += "找不到上传的文件，请重新上传文件！";
+            obj.setReturnCode(ReturnCode.FAIL);
+        }
+        obj.setMsg(msg);
+        return obj;
     }
 }

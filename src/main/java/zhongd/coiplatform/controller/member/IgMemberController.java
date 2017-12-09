@@ -120,4 +120,18 @@ public class IgMemberController extends BaseController {
         }
         return obj;
     }
+
+
+    @PostMapping(value = "/bulkinsert")
+    public ReturnObj bulkInsert(@RequestBody String filename){
+        ReturnObj obj = new ReturnObj();
+        try{
+            obj = igMemberService.bulkInsert(filename, obj);
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            obj.setReturnCode(ReturnCode.FAIL);
+            obj.setMsg("批量导入失败！");
+        }
+        return obj;
+    }
 }

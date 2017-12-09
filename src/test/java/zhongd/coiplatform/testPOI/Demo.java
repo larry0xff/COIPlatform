@@ -22,19 +22,19 @@ public class Demo {
 
     public static void main(String[] a){
         try{
-//            File file = new File("G:/temp/test.xlsx");
-//            FileInputStream fis = new FileInputStream(file);
-//            XSSFWorkbook workbook = new XSSFWorkbook(fis);
-//            XSSFSheet sheet = workbook.getSheetAt(0);
-//            Iterator<Row> rows = sheet.iterator();
-//            while(rows.hasNext()){
-//                Row row = rows.next();
-//                Iterator<Cell> cells = row.cellIterator();
-//                while(cells.hasNext()){
-//                    System.out.print((int)(cells.next().getNumericCellValue()) + " ");
-//                }
-//                System.out.println();
-//            }
+            File file = new File("G:/temp/test.xlsx");
+            FileInputStream fis = new FileInputStream(file);
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            Iterator<Row> rows = sheet.iterator();
+            while(rows.hasNext()){
+                Row row = rows.next();
+                Iterator<Cell> cells = row.cellIterator();
+                while(cells.hasNext()){
+                    System.out.print((int)(cells.next().getNumericCellValue()) + " ");
+                }
+                System.out.println();
+            }
 
             for(int i = 0; i < 20; i++){
                 String uuid = UUID.randomUUID().toString().replaceAll("-", "");

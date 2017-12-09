@@ -1,6 +1,7 @@
 package zhongd.coiplatform.service.member;
 
 import zhongd.coiplatform.entity.DTO.member.IgMemberDTO;
+import zhongd.coiplatform.entity.ReturnObj;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -20,4 +21,6 @@ public interface IgMemberService {
     int resetPassword(Integer igMemberId, String username);
 
     Map<String, Object> searchMemberList(String condition);
+
+    ReturnObj bulkInsert(String filepath, ReturnObj obj) throws Exception;
 }

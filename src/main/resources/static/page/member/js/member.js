@@ -95,7 +95,7 @@ memberApp.controller('bulkCtrl', ['$http', '$scope', function($http, $scope){
         var file = document.getElementById('uploadfile').files[0];
         var fd = new FormData();
         fd.append('file', file);
-        fd.append('type', 2);
+        fd.append('type', 1);
         $http({
             url: contextPath + '/upload/file',
             method: 'POST',
@@ -112,6 +112,13 @@ memberApp.controller('bulkCtrl', ['$http', '$scope', function($http, $scope){
     };
 
     $scope.bulkinsert = function(filename){
-        console.log('upload success, file name is', filename);
+        $http({
+            url: contextPath + '/member/bulkinsert',
+            data: filename,
+            method: 'POST'
+        }).then(function(response){
+            var data = response.data;
+            console.log(data);
+        });
     }
 }]);

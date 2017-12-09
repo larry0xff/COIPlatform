@@ -29,6 +29,6 @@ public class FileServiceImpl implements FileService {
                 new BufferedOutputStream(new FileOutputStream(new File(pathname)));
         bos.write(file.getBytes());
         bos.close();
-        return pathname;
+        return fullName;
     }
 }
