@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zhongd.coiplatform.dao.member.IgMemberBulkRecordMapper">
+    <resultMap id="BaseResultMap" type="zhongd.coiplatform.entity.DO.member.IgMemberBulkRecord">
+        <id column="ig_member_bulk_record_id" jdbcType="INTEGER" property="igMemberId" />
+        <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_by" jdbcType="INTEGER" property="createBy" />
+        <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <sql id="BaseTable">
+        ig_member_bulk_record mbr
+    </sql>
+    <sql id="BaseColumns">
+        ig_member_bulk_record_id,file_name,description,create_time,create_by,update_by,update_time
+    </sql>
+
+    <select id="list" resultType="zhongd.coiplatform.entity.DTO.member.IgMemberBulkRecordDTO" >
+        SELECT ig_member_bulk_record_id,file_name as fileName,description,date_format(mbr.create_time, '%Y-%m-%d %H:%I:%S') as createTime,u.realname as createBy
+        FROM <include refid="BaseTable"/>
+        LEFT JOIN ig_user u on(mbr.create_by = u.ig_user_id)
+    </select>
+</mapper>

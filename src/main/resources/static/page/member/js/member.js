@@ -41,12 +41,13 @@ memberApp.controller('listCtrl', ['$scope', '$http', function($scope, $http){
             }
         });
     };
-    $scope.whitchPage = function(page){
+    $scope.whitchPage = function(index){
+        var page = $scope.param.page + index;
         if(page == 0 ){
             Materialize.toast('你正在第一页!', 2000);
             return;
         }
-        if($scope.memberCount < $scope.param.pageSize){
+        if(($scope.memberCount < $scope.param.pageSize) && index > 0){
             Materialize.toast('没了!', 2000);
             return;
         }
@@ -62,6 +63,19 @@ memberApp.controller('listCtrl', ['$scope', '$http', function($scope, $http){
                 Materialize.toast(data.msg, 2000, 'rounded');
                 $scope.hideModal('#delModal');
                 $scope.list();
+            }
+        });
+    };
+    $scope.insert = function() {
+        $http.post(contextPath + "/member/insert", $scope.insertForm).then(function(response) {
+            var data = response.data;
+            if(data.returnCode != 200){
+                Materialize.toast(data.msg, 2000);
+            }else{
+                Materialize.toast(data.msg, 2000, 'rounded');
+                $scope.hideModal('#addModal');
+                delete $scope.insertForm;
+                $scope.getUserList();
             }
         });
     };
@@ -91,6 +105,9 @@ memberApp.controller('listCtrl', ['$scope', '$http', function($scope, $http){
 }]);
 
 memberApp.controller('bulkCtrl', ['$http', '$scope', function($http, $scope){
+    $scope.showModal = function(id){
+        $(id).openModal();
+    };
     $scope.upload = function(){
         var file = document.getElementById('uploadfile').files[0];
         var fd = new FormData();
@@ -112,13 +129,37 @@ memberApp.controller('bulkCtrl', ['$http', '$scope', function($http, $scope){
     };
 
     $scope.bulkinsert = function(filename){
+        delete $scope.successRecords, $scope.uploadMsg;
+        $scope.showLoading = true;
         $http({
             url: contextPath + '/member/bulkinsert',
             data: filename,
             method: 'POST'
         }).then(function(response){
+            $scope.showLoading = false;
+            var data = response.data;
+            $scope.uploadMsg = data.msg;
+            if(data.returnCode == 200){
+                $scope.successRecords = data.data;
+            }
+            $scope.bulkRecords();
+        });
+    };
+    $scope.bulkRecords = function(){
+        $http({
+            url: contextPath + '/member/bulkRecords',
+            method: 'GET'
+        }).then(function(response){
             var data = response.data;
             console.log(data);
+            if(data.returnCode != 200){
+                Materialize.toast(data.msg, 2000);
+            }else{
+                $scope.blukList = data.data;
+            }
         });
-    }
+    };
+    $scope.init = function(){
+        $scope.bulkRecords();
+    }();
 }]);

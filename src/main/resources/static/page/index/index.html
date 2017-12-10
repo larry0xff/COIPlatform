@@ -41,38 +41,38 @@
 			</nav>
 		</div>
 		<div class="row">
+			<div class="row col m2 s12" style="padding: 20px">
+				<ul class="collapsible col m12 s12 " data-collapsible="accordion" id="navBar" onload="changeFrameHeight('navBar')">
+					<li>
+						<div class="collapsible-header"><i class="material-icons tiny ">perm_identity</i>人员管理</div>
 
-			<div style="width: 20px" class="col hide-on-small-only"></div>
-			<ul class="collapsible col m2 s12 " data-collapsible="accordion" id="navBar" onload="changeFrameHeight('navBar')">
-				<li>
-					<div class="collapsible-header"><i class="material-icons tiny ">perm_identity</i>人员管理</div>
-
-					<div class="collapsible-body">
-						<div class="collection">
-							<a ng-click="changeContent('../user/user.html')" class="collection-item grey-text center-align">管理人员</a>
-							<a ng-click="changeContent('../user/role.html')" class="collection-item grey-text center-align">角色管理</a>
+						<div class="collapsible-body">
+							<div class="collection">
+								<a ng-click="changeContent('../user/user.html')" class="collection-item grey-text center-align">管理人员</a>
+								<a ng-click="changeContent('../user/role.html')" class="collection-item grey-text center-align">角色管理</a>
+							</div>
 						</div>
-					</div>
-				</li>
-				<li>
-					<div class="collapsible-header"><i class="material-icons tiny ">view_module</i>组织&机构管理</div>
-					<div class="collapsible-body">
-						<div class="collection">
-						<a ng-click="changeContent('../org/org.html')" class="collection-item grey-text center-align">组织管理</a>
+					</li>
+					<li>
+						<div class="collapsible-header"><i class="material-icons tiny ">view_module</i>组织&机构管理</div>
+						<div class="collapsible-body">
+							<div class="collection">
+							<a ng-click="changeContent('../org/org.html')" class="collection-item grey-text center-align">组织管理</a>
+							</div>
 						</div>
-					</div>
-				</li>
-				<li>
-					<div class="collapsible-header"><i class="material-icons tiny ">supervisor_account</i>成员管理</div>
-					<div class="collapsible-body">
-						<div class="collection">
-							<a ng-click="changeContent('../member/memberList.html')" class="collection-item grey-text center-align">成员列表</a>
+					</li>
+					<li>
+						<div class="collapsible-header"><i class="material-icons tiny ">supervisor_account</i>成员管理</div>
+						<div class="collapsible-body">
+							<div class="collection">
+								<a ng-click="changeContent('../member/memberList.html')" class="collection-item grey-text center-align">成员列表</a>
+								<a ng-click="changeContent('../member/bulkinsert.html')" class="collection-item grey-text center-align">批量处理</a>
+							</div>
 						</div>
-					</div>
-				</li>
-			</ul>
-
-			<div id="content" class="row col m9 s12">
+					</li>
+				</ul>
+			</div>
+			<div id="content" class="row col m10 s12">
 				<iframe src="" frameborder="no" class="col s12" id="contentIframe" onload="changeFrameHeight('contentIframe')"></iframe>
 			</div>
 		</div>

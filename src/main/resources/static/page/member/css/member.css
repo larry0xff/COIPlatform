@@ -1,0 +1,19 @@
+.title{
+    color: rgb(255, 171, 64);
+}
+.loading{
+    color:white;
+    background:#7d9fb0;
+    border-radius: 50px;
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    animation: load 2s infinite linear;
+}
+
+@keyframes load
+{
+    0% {background: #7d9fb0;}
+    50%{background: #607d8b;}
+    100% {background: #7d9fb0;}
+}

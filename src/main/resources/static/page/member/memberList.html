@@ -49,8 +49,20 @@
         </table>
         <div id="pageCtrl">
             <ul class="pagination">
-                <li class="waves-effect" ng-click="whitchPage(param.page - 1)"><a href ><i class="material-icons">chevron_left</i></a></li>
-                <li class="waves-effect" ng-click="whitchPage(param.page + 1)"><a href><i class="material-icons">chevron_right</i></a></li>
+                <li class="waves-effect" ng-click="whitchPage(-1)"><a href ><i class="material-icons">chevron_left</i></a></li>
+                <li class="waves-effect" ng-click="whitchPage(1)"><a href><i class="material-icons">chevron_right</i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="editBar centered">
+        <div class="fixed-action-btn horizontal">
+            <a class="btn-floating btn-large black">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul>
+                <li>
+                    <a class="btn-floating light-green waves-effect waves-light" ng-click="showModal('#addModal')"><i class="material-icons">add</i></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -72,6 +84,49 @@
         <div class="modal-footer">
             <a href="" class="modal-action waves-effect waves-green btn-flat blue-grey  white-text" ng-click="reset()">确认</a>
             <a href="" class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
+        </div>
+    </div>
+    <div id="addModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>添加</h4>
+            <hr>
+            <div class="row">
+                <form class="col s12" id="insertForm">
+                    <div class="row">
+                        <div class="col s12">
+                            <label>性别:</label>
+                            <input class="with-gap" name="group1" type="radio" id="male" ng-model="insertForm.gender" value="M"/>
+                            <label for="male">男性</label>
+                            <input class="with-gap" name="group1" type="radio" id="female" ng-model="insertForm.gender" value="F"/>
+                            <label for="female">女性</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input type="tel" class="validate" ng-model="insertForm.username">
+                            <label >用户名(登录用)</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input  type="text" class="validate" ng-model="insertForm.realname">
+                            <label >真实姓名</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input  type="tel" class="validate" ng-model="insertForm.tel">
+                            <label >联系电话</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input  type="email" class="validate" ng-model="insertForm.email">
+                            <label >E-mail</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input  type="number" class="validate" ng-model="insertForm.igOrgId">
+                            <label >组织id</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="insert()" class="modal-action waves-effect waves-green btn-flat light-green white-text">OKay</a>
+            <a class="modal-action modal-close waves-effect waves-green btn-flat black white-text">Cancel</a>
         </div>
     </div>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>

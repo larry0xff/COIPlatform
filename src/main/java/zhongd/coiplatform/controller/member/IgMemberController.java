@@ -44,7 +44,7 @@ public class IgMemberController extends BaseController {
     }
     /**
      * 获取成员列表
-     * @param request
+     * @param condition
      * @return
      */
     @PostMapping(value = "/search")
@@ -122,15 +122,39 @@ public class IgMemberController extends BaseController {
     }
 
 
+    /**
+     * 批量导入成员信息
+     * @param filename
+     * @return
+     */
     @PostMapping(value = "/bulkinsert")
     public ReturnObj bulkInsert(@RequestBody String filename){
         ReturnObj obj = new ReturnObj();
         try{
+            Thread.sleep(5000);
             obj = igMemberService.bulkInsert(filename, obj);
         }catch (Exception e){
             logger.error(e.getMessage(), e);
             obj.setReturnCode(ReturnCode.FAIL);
-            obj.setMsg("批量导入失败！");
+            obj.setMsg(e.getMessage());
+        }
+        return obj;
+    }
+
+    /**
+     * 获取导入记录
+     * @return
+     */
+    @GetMapping(value = "/bulkRecords")
+    public ReturnObj listBlukRecords(){
+        ReturnObj obj = new ReturnObj();
+        try{
+            obj.setData(igMemberService.getBulkRecords());
+            obj.setReturnCode(ReturnCode.SUCCESS);
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            obj.setReturnCode(ReturnCode.FAIL);
+            obj.setMsg(e.getMessage());
         }
         return obj;
     }

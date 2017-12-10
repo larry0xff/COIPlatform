@@ -11,23 +11,85 @@
 </head>
 <body ng-app="memberApp" ng-controller="bulkCtrl" ng-cloak>
     <div style="height: 30px"></div>
-    <div id="content" class="row center">
-        <div class="col s4"></div>
-        <form action="#" class="col s4">
-            <div class="file-field input-field">
-                <div class="btn">
-                    <span>文件</span>
-                    <input type="file" name="file" id="uploadfile">
-                </div>
-                <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text">
+    <div class="col s12 ">
+        <div class="card horizontal blue-grey row">
+            <div class="card-stacked col s8">
+                <div class="card-content">
+                    <div class="white-text">
+                        <h5 class="title">批量处理说明：</h5><br>
+                        <p><span>1. 上传的文件要求为：xls 或者 xlsx 格式</span></p>
+                        <p><span>2. 上传的文件格式要严格按照模板填写</span></p>
+                        <p><span>3. 若上传成功，反馈信息中会提示成功处理的记录条数</span></p>
+                        <p><span>4. 若上传失败，反馈信息中会提示在处理哪一行时出错，需要修正后重新上传</span></p>
+                        <p>&nbsp;</p>
+                        <p><i>附：<a href="" class="title">模板下载</a>/<a href="" class="title" ng-click="showModal('#bulkModal')">点击查看历史记录</a></i></p>
+                    </div>
                 </div>
             </div>
-            <div class="btn blue-grey" ng-click="upload()">
-                <span>上传</span>
+            <div class="col s2 valign-wrapper center">
+                <img src="../img/backup.png" alt="">
             </div>
-        </form>
+        </div>
     </div>
+    <div class="col s12 ">
+        <div class="card horizontal grey row">
+            <div class="card-stacked col s8">
+                <div class="card-content">
+                    <div id="content" class="row">
+                        <form action="#" class="col s3">
+                            <div class="file-field input-field">
+                                <div class="btn ">
+                                    <span>选择文件</span>
+                                    <input type="file" name="file" id="uploadfile">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                            <div class="btn blue-grey" ng-click="upload()">
+                                <span>上传</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col s2 valign-wrapper center">
+                <div class="loading" ng-if="showLoading"><b>处理中...</b></div>
+            </div>
+        </div>
+        <div class="row">
+            <span class="col s12"><h5>反馈信息：</h5></span>
+            <div class="chip" ng-if="uploadMsg">
+                {{uploadMsg}}
+            </div>
+        </div>
+    </div>
+    <div id="bulkModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <table class="border centered">
+                <thead>
+                <tr>
+                    <th data-field="name">记录描述</th>
+                    <th data-field="code">批量上传的文件</th>
+                    <th data-field="desc">操作者id</th>
+                    <th data-field="desc">操作时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x in blukList">
+                    <td>{{x.description}}</td>
+                    <td>{{x.fileName}}</td>
+                    <td>{{x.createBy}}</td>
+                    <td>{{x.createTime}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat blue-grey white-text">关闭</a>
+        </div>
+    </div>
+
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
     <script src="../node_modules/angular/angular.js"></script>

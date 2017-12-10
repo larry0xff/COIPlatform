@@ -1,9 +1,12 @@
 package zhongd.coiplatform.service.member;
 
+import zhongd.coiplatform.entity.DO.member.IgMemberBulkRecord;
+import zhongd.coiplatform.entity.DTO.member.IgMemberBulkRecordDTO;
 import zhongd.coiplatform.entity.DTO.member.IgMemberDTO;
 import zhongd.coiplatform.entity.ReturnObj;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,4 +26,6 @@ public interface IgMemberService {
     Map<String, Object> searchMemberList(String condition);
 
     ReturnObj bulkInsert(String filepath, ReturnObj obj) throws Exception;
+
+    List<IgMemberBulkRecordDTO> getBulkRecords();
 }

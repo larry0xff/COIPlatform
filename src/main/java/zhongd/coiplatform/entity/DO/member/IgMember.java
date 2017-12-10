@@ -19,6 +19,10 @@ public class IgMember extends BaseDO {
     private String tel;
     private String gender;
     private Integer igOrgId;
+    public IgMember(){}
+    public IgMember(String username) {
+        this.username = username;
+    }
 
     public Integer getIgMemberId() {
         return igMemberId;
