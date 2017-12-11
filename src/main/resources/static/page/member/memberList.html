@@ -12,10 +12,17 @@
 <body ng-app="memberApp" ng-controller="listCtrl" ng-cloak>
     <div class="content">
         <h6><p class="grey-text">成员管理&nbsp;&nbsp;&gt;&nbsp;&nbsp;成员列表</p></h6>
-        <div class="row">
-            <div class="input-field col s3">
-                <input id="search" type="text" class="validate" ng-change="search()" ng-model="condition">
-                <label for="search"><i class="material-icons tiny">search</i>输入查询条件</label>
+        <div class="col s12 ">
+            <div class="card horizontal blue-grey row">
+                <div class="card-stacked col s8">
+                    <div class="card-content">
+                        <input id="search" type="text" class="validate" ng-change="search()" ng-model="condition">
+                        <label for="search"><i class="material-icons tiny">search</i>输入查询条件</label>
+                    </div>
+                </div>
+                <div class="col s2 valign-wrapper center">
+                    <img src="../img/backup.png" alt="">
+                </div>
             </div>
         </div>
         <table class="border centered striped">

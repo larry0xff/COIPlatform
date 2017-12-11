@@ -95,7 +95,7 @@ memberApp.controller('listCtrl', ['$scope', '$http', function($scope, $http){
     $scope.init = function(){
         $scope.param = {
             page: 1,
-            pageSize: 40
+            pageSize: 20
         };
         $scope.list();
     };
