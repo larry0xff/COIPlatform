@@ -15,8 +15,17 @@ public class IgAdviceCollectionDTO {
     private Integer status;
     private String attachmentUrl;
     private String createTime;
+    private String updateTime;
     private String orgName;
     private String createBy;
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
 
     public Integer getIgAdviceCollectionId() {
         return igAdviceCollectionId;

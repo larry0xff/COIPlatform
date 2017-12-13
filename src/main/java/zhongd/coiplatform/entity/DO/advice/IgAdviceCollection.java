@@ -2,6 +2,7 @@ package zhongd.coiplatform.entity.DO.advice;
 
 import zhongd.coiplatform.entity.DO.BaseDO;
 
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
@@ -10,6 +11,7 @@ import java.util.Date;
  * @Description
  */
 public class IgAdviceCollection extends BaseDO{
+    @Id
     private Integer igAdviceCollectionId;
     private String subject;
     private String content;
