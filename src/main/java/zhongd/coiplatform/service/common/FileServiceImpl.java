@@ -16,7 +16,7 @@ import java.io.FileOutputStream;
  */
 @Service
 public class FileServiceImpl implements FileService {
-    @Value("${fileupload.path}")
+    @Value("${file.uploadpath}")
     private String path;
     @Override
     public String save(MultipartFile file) throws Exception{
@@ -30,5 +30,12 @@ public class FileServiceImpl implements FileService {
         bos.write(file.getBytes());
         bos.close();
         return fullName;
+    }
+
+    @Override
+    public File get(String filename) {
+        String pathname = path + filename;
+        File rtFile = new File(pathname);
+        return rtFile;
     }
 }

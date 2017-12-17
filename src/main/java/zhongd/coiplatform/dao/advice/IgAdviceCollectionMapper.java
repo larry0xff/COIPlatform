@@ -16,4 +16,6 @@ import java.util.List;
 @Mapper
 public interface IgAdviceCollectionMapper extends BaseMapper<IgAdviceCollection> {
     List<IgAdviceCollectionDTO> list(IgAdviceCollectionDTO paramMap);
+
+    List<IgAdviceCollection> getAllCollectingCollection();
 }

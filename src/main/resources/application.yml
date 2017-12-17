@@ -57,5 +57,6 @@ logging:
     com.github.pagehelper: TRACE
     com.zaxxer.hikari: TRACE
 
-fileupload:
-  path: file/
+file:
+  uploadpath: file/upload/
+  downloadpath: file/download/

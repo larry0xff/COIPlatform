@@ -1,4 +1,4 @@
-package zhongd.coiplatform.utils;
+package zhongd.coiplatform.utils.constant;
 
 public final class Constant {
 	public final static String MD5_STR = "md5";

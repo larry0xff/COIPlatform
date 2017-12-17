@@ -7,7 +7,7 @@ import zhongd.coiplatform.controller.BaseController;
 import zhongd.coiplatform.entity.DO.org.IgOrg;
 import zhongd.coiplatform.entity.ReturnObj;
 import zhongd.coiplatform.service.org.IgOrgService;
-import zhongd.coiplatform.utils.ReturnCode;
+import zhongd.coiplatform.utils.constant.ReturnCode;
 
 import java.util.Date;
 

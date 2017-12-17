@@ -8,7 +8,7 @@ import zhongd.coiplatform.entity.DO.user.IgRole;
 import zhongd.coiplatform.entity.DO.user.IgUser;
 import zhongd.coiplatform.entity.ReturnObj;
 import zhongd.coiplatform.service.role.IgRoleService;
-import zhongd.coiplatform.utils.ReturnCode;
+import zhongd.coiplatform.utils.constant.ReturnCode;
 
 import java.util.Date;
 import java.util.Map;

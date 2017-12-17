@@ -7,10 +7,8 @@ import zhongd.coiplatform.controller.BaseController;
 import zhongd.coiplatform.entity.DO.advice.IgAdviceCollection;
 import zhongd.coiplatform.entity.DTO.advice.IgAdviceCollectionDTO;
 import zhongd.coiplatform.entity.ReturnObj;
-import zhongd.coiplatform.service.advice.IgAdviceCollectionService;
-import zhongd.coiplatform.utils.ReturnCode;
-
-import java.util.HashMap;
+import zhongd.coiplatform.service.advice.IgAdviceService;
+import zhongd.coiplatform.utils.constant.ReturnCode;
 
 /**
  * @Author xiezd
@@ -23,7 +21,7 @@ import java.util.HashMap;
 public class IgAdviceCollectionController extends BaseController{
 
     @Autowired
-    IgAdviceCollectionService igAdviceCollectionService;
+    IgAdviceService igAdviceService;
 
     /**
      * 保存或者更新
@@ -34,7 +32,7 @@ public class IgAdviceCollectionController extends BaseController{
     public ReturnObj save(@RequestBody IgAdviceCollection igAdviceCollection){
         ReturnObj obj = new ReturnObj();
         try{
-            obj.setData(igAdviceCollectionService.save(igAdviceCollection));
+            obj.setData(igAdviceService.save(igAdviceCollection));
             obj.setReturnCode(ReturnCode.SUCCESS);
             obj.setMsg("操作成功！");
         }catch (Exception e){
@@ -54,7 +52,7 @@ public class IgAdviceCollectionController extends BaseController{
     public ReturnObj delete(Integer igAdviceCollectionId){
         ReturnObj obj = new ReturnObj();
         try {
-            obj.setData(igAdviceCollectionService.deleteById(igAdviceCollectionId));
+            obj.setData(igAdviceService.deleteById(igAdviceCollectionId));
             obj.setReturnCode(ReturnCode.SUCCESS);
             obj.setMsg("删除成功！");
         }catch (Exception e){
@@ -65,11 +63,16 @@ public class IgAdviceCollectionController extends BaseController{
         return obj;
     }
 
+    /**
+     * 获取列表、含查询
+     * @param dto
+     * @return
+     */
     @PostMapping("/list")
     public ReturnObj list(@RequestBody IgAdviceCollectionDTO dto){
         ReturnObj obj = new ReturnObj();
         try{
-            obj.setData(igAdviceCollectionService.list(dto));
+            obj.setData(igAdviceService.list(dto));
             obj.setReturnCode(ReturnCode.SUCCESS);
         }catch (Exception e){
             logger.error(e.getMessage(), e);
@@ -78,5 +81,6 @@ public class IgAdviceCollectionController extends BaseController{
         }
         return obj;
     }
+
 
 }

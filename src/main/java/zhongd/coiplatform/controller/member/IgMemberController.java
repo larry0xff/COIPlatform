@@ -1,6 +1,5 @@
 package zhongd.coiplatform.controller.member;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +7,7 @@ import zhongd.coiplatform.controller.BaseController;
 import zhongd.coiplatform.entity.DTO.member.IgMemberDTO;
 import zhongd.coiplatform.entity.ReturnObj;
 import zhongd.coiplatform.service.member.IgMemberService;
-import zhongd.coiplatform.utils.ReturnCode;
+import zhongd.coiplatform.utils.constant.ReturnCode;
 
 import javax.servlet.http.HttpServletRequest;
 
