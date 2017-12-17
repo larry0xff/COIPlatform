@@ -20,9 +20,9 @@ import zhongd.coiplatform.entity.DO.user.IgRole;
 import zhongd.coiplatform.entity.DO.user.IgUser;
 import zhongd.coiplatform.entity.DTO.user.IgUserDTO;
 import zhongd.coiplatform.entity.DTO.user.IgUserLoginDTO;
-import zhongd.coiplatform.utils.Constant;
+import zhongd.coiplatform.utils.constant.Constant;
 import zhongd.coiplatform.utils.PasswordHandler;
-import zhongd.coiplatform.utils.ReturnCode;
+import zhongd.coiplatform.utils.constant.ReturnCode;
 
 @Service
 public class IgUserServiceImpl implements IgUserService {

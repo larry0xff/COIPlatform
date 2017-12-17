@@ -4,8 +4,11 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zhongd.coiplatform.dao.advice.IgAdviceCollectionMapper;
+import zhongd.coiplatform.dao.advice.IgAdviceRecordMapper;
 import zhongd.coiplatform.entity.DO.advice.IgAdviceCollection;
+import zhongd.coiplatform.entity.DO.advice.IgAdviceRecord;
 import zhongd.coiplatform.entity.DTO.advice.IgAdviceCollectionDTO;
+import zhongd.coiplatform.entity.DTO.advice.IgAdviceRecordDTO;
 import zhongd.coiplatform.entity.DTO.user.IgUserLoginDTO;
 
 import java.util.Date;
@@ -18,10 +21,12 @@ import java.util.List;
  * @Description
  */
 @Service
-public class IgAdviceCollectionServiceImpl implements IgAdviceCollectionService {
+public class IgAdviceServiceImpl implements IgAdviceService {
 
     @Autowired
     IgAdviceCollectionMapper igAdviceCollectionMapper;
+    @Autowired
+    IgAdviceRecordMapper igAdviceRecordMapper;
     @Override
     public boolean save(IgAdviceCollection igAdviceCollection) {
         Integer igAdviceCollectionId = igAdviceCollection.getIgAdviceCollectionId();
@@ -55,5 +60,20 @@ public class IgAdviceCollectionServiceImpl implements IgAdviceCollectionService 
         paramMap.setSubject("%" + (paramMap.getSubject()== null?"" : paramMap.getSubject()) + "%");
         paramMap.setOrgName("%" + (paramMap.getOrgName() == null?"" : paramMap.getOrgName()) + "%");
         return igAdviceCollectionMapper.list(paramMap);
+    }
+
+    @Override
+    public List<IgAdviceCollection> getAllCollectingCollection(){
+        return igAdviceCollectionMapper.getAllCollectingCollection();
+    }
+
+    @Override
+    public List<IgAdviceRecordDTO> getRecordsByCollectionId(Integer igAdviceCollectionId) {
+        return igAdviceRecordMapper.selectByCollectionId(igAdviceCollectionId);
+    }
+
+    @Override
+    public Integer baseSave(IgAdviceCollection collection) {
+        return igAdviceCollectionMapper.updateByPrimaryKeySelective(collection);
     }
 }

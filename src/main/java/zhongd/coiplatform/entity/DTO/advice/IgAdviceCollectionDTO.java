@@ -14,11 +14,27 @@ public class IgAdviceCollectionDTO {
     private String deadline;
     private Integer status;
     private String attachmentUrl;
+    private String resultAttachmentUrl;
     private String createTime;
     private String updateTime;
     private String orgName;
     private String createBy;
+    private String advicesAttachmentUrl;
 
+    public String getAdvicesAttachmentUrl() {
+        return advicesAttachmentUrl;
+    }
+
+    public void setAdvicesAttachmentUrl(String advicesAttachmentUrl) {
+        this.advicesAttachmentUrl = advicesAttachmentUrl;
+    }
+    public String getResultAttachmentUrl() {
+        return resultAttachmentUrl;
+    }
+
+    public void setResultAttachmentUrl(String resultAttachmentUrl) {
+        this.resultAttachmentUrl = resultAttachmentUrl;
+    }
     public String getUpdateTime() {
         return updateTime;
     }

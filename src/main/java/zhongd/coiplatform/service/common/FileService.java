@@ -2,6 +2,8 @@ package zhongd.coiplatform.service.common;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+
 /**
  * @Author xiezd
  * @Description
@@ -11,4 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 public interface FileService {
 
     String save(MultipartFile file) throws Exception;
+
+    File get(String filename);
 }

@@ -2,6 +2,7 @@ package zhongd.coiplatform.utils;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
+import zhongd.coiplatform.utils.constant.Constant;
 
 public class PasswordHandler {
 	static final int HASH_ITERATIONS = 2;

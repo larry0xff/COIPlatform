@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +14,9 @@ import zhongd.coiplatform.entity.ReturnObj;
 import zhongd.coiplatform.entity.DO.user.IgUser;
 import zhongd.coiplatform.entity.DTO.user.IgUserDTO;
 import zhongd.coiplatform.service.user.IgUserService;
-import zhongd.coiplatform.utils.Constant;
+import zhongd.coiplatform.utils.constant.Constant;
 import zhongd.coiplatform.utils.PasswordHandler;
-import zhongd.coiplatform.utils.ReturnCode;
+import zhongd.coiplatform.utils.constant.ReturnCode;
 import zhongd.coiplatform.utils.StringUtil;
 
 @Controller

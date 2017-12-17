@@ -11,7 +11,7 @@ import zhongd.coiplatform.controller.BaseController;
 import zhongd.coiplatform.entity.ReturnObj;
 import zhongd.coiplatform.entity.DO.user.IgUser;
 import zhongd.coiplatform.service.user.IgUserService;
-import zhongd.coiplatform.utils.ReturnCode;
+import zhongd.coiplatform.utils.constant.ReturnCode;
 
 @Controller
 public class PermissionController extends BaseController{

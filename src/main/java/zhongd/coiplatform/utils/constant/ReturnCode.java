@@ -1,4 +1,4 @@
-package zhongd.coiplatform.utils;
+package zhongd.coiplatform.utils.constant;
 
 public class ReturnCode {
 	/**

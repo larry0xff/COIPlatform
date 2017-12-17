@@ -1,7 +1,6 @@
 package zhongd.coiplatform.service.member;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -22,6 +21,8 @@ import zhongd.coiplatform.entity.DTO.member.IgMemberDTO;
 import zhongd.coiplatform.entity.DTO.user.IgUserLoginDTO;
 import zhongd.coiplatform.entity.ReturnObj;
 import zhongd.coiplatform.utils.*;
+import zhongd.coiplatform.utils.constant.Constant;
+import zhongd.coiplatform.utils.constant.ReturnCode;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -36,7 +37,7 @@ import java.util.*;
  */
 @Service
 public class IgMemberServiceImpl implements IgMemberService {
-    @Value("${fileupload.path}")
+    @Value("${file.uploadpath}")
     private String path;
     @Autowired
     IgMemberMapper igMemberMapper;

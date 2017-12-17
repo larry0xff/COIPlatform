@@ -9,6 +9,8 @@
         <result column="deadline" jdbcType="TIMESTAMP" property="deadline" />
         <result column="status" jdbcType="INTEGER" property="status" />
         <result column="attachment_url" jdbcType="VARCHAR" property="attachmentUrl" />
+        <result column="result_attachment_url" jdbcType="VARCHAR" property="resultAttachmentUrl" />
+        <result column="advices_attachment_url" jdbcType="VARCHAR" property="advicesAttachmentUrl" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="create_by" jdbcType="INTEGER" property="createBy" />
         <result column="update_by" jdbcType="INTEGER" property="updateBy" />
@@ -18,12 +20,12 @@
         ig_advice_collection ac
     </sql>
     <sql id="BaseColumns">
-        ig_advice_collection_id,subject,content,igOrgId, deadline, status, attachment_url,create_time,create_by,update_by,update_time
+        ig_advice_collection_id,subject,content,igOrgId, deadline, status, attachment_url,result_attachment_url,advices_attachment_url,create_time,create_by,update_by,update_time
     </sql>
 
     <select id="list" parameterType="zhongd.coiplatform.entity.DTO.advice.IgAdviceCollectionDTO" resultType="zhongd.coiplatform.entity.DTO.advice.IgAdviceCollectionDTO">
         SELECT ig_advice_collection_id as igAdviceCollectionId,subject,content,
-         date_format(deadline, '%Y-%m-%d %H:%i:%S') as deadline, status, attachment_url as attachmentUrl,
+         date_format(deadline, '%Y-%m-%d %H:%i:%S') as deadline, status, attachment_url as attachmentUrl, result_attachment_url as resultAttachmentUrl, advices_attachment_url as advicesAttachmentUrl,
          date_format(ac.create_time, '%Y-%m-%d %H:%i:%S') as createTime,date_format(ac.update_time, '%Y-%m-%d %H:%i:%S') as updateTime,
          u1.realname as createBy, u2.realname as updateBy, o.name as orgName
         FROM ig_advice_collection ac
@@ -34,5 +36,9 @@
         AND ac.subject like #{subject}
         AND o.name like #{orgName}
         AND u1.realname like #{createBy}
+    </select>
+
+    <select id="getAllCollectingCollection" resultMap="BaseResultMap">
+        SELECT * FROM ig_advice_collection WHERE status = 1
     </select>
 </mapper>
