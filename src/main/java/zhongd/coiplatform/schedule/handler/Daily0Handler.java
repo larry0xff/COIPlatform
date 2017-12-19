@@ -42,7 +42,7 @@ public class Daily0Handler {
     @Autowired
     IgAdviceService igAdviceService;
 
-    @Scheduled(cron = "*/20 * * * * ?")
+    @Scheduled(cron = "0 0 0 * * ?")
     @Async
     public void execute(){
         try{

@@ -1,0 +1,18 @@
+.title2{
+    color: rgb(255, 171, 64);
+    font-size: 70px;
+    line-height: 162px;
+}
+.title1{
+    color: rgb(255, 171, 64);
+    font-size: 20px;
+}
+.card{
+    height:210px;
+}
+.content{
+    color: white;
+}
+.file{
+    color:lightgrey;
+}

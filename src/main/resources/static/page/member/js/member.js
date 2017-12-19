@@ -114,7 +114,7 @@ memberApp.controller('bulkCtrl', ['$http', '$scope', function($http, $scope){
         fd.append('file', file);
         fd.append('type', 1);
         $http({
-            url: contextPath + '/upload/file',
+            url: contextPath + '/file/upload',
             method: 'POST',
             data: fd,
             headers: {'Content-Type':undefined}

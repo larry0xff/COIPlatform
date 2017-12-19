@@ -20,6 +20,15 @@ public class IgAdviceCollectionDTO {
     private String orgName;
     private String createBy;
     private String advicesAttachmentUrl;
+    private Integer dayOut;
+
+    public Integer getDayOut() {
+        return dayOut;
+    }
+
+    public void setDayOut(Integer dayOut) {
+        this.dayOut = dayOut;
+    }
 
     public String getAdvicesAttachmentUrl() {
         return advicesAttachmentUrl;

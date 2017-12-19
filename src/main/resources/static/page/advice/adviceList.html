@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css" />
+    <link href="../node_modules/materialize-css/dist/css/icon.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="css/advice.css" />
+</head>
+<body ng-app="adviceApp" ng-controller="adviceListCtrl" ng-cloak>
+    <div>
+        <h6><p class="grey-text">意见征集&nbsp;&nbsp;&gt;&nbsp;&nbsp;征集列表</p></h6>
+        <div class="col s12 " ng-repeat="x in adviceCollections">
+            <div class="card horizontal blue-grey row">
+                <div class="card-stacked col s8">
+                    <div class="card-content">
+                        <div class="col s8 content">
+                            <p><i class="title1">{{x.subject}}</i></p>
+                            <p>编号：{{x.igAdviceCollectionId}}</p>
+                            <p>截止日期：{{x.deadline}}</p>
+                            <p>创建者：{{x.createBy}}</p>
+                            <p>创建时间：{{x.createTime}}</p>
+                            <p>内容简介：{{x.content}}</p>
+                            {{}}
+                            <p>附件：<a ng-href="{{contextPath + '/file/download?filename=' + x.attachmentUrl + '&showname=' + (x.subject + x.attachmentUrl.substring(x.attachmentUrl.indexOf('.')))}}" class="file"><i>{{x.subject}}附件(点击下载)</i></a></p>
+                        </div>
+                        <div class="col s4 title2 right-align">
+
+                            {{(x.dayOut % 24).toFixed(0) <= 12 ?(x.dayOut / 24).toFixed(0):(x.dayOut / 24).toFixed(0)-1}}天{{(x.dayOut % 24).toFixed(0)}}时
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 新增模态框 -->
+    <div id="addModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>添加</h4>
+            <hr>
+            <div class="row">
+                <form class="col s12" id="insertForm">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="text" class="validate" ng-model="insertForm.name">
+                            <label >组织名</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input type="text" class="validate" ng-model="insertForm.managerId">
+                            <label >管理者id</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="textarea1" class="materialize-textarea" maxlength="30" ng-model="insertForm.description"></textarea>
+                            <label >组织描述</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="insert()" class="modal-action waves-effect waves-green btn-flat blue-grey white-text">确认</a>
+            <a class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
+        </div>
+    </div>
+    <!-- 修改资料模态框 -->
+    <div id="updateModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>修改资料</h4>
+            <hr />
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <input type="tel" class="validate" ng-model="temp.igOrgId" disabled>
+                            <label>No.</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input type="tel" class="validate" ng-model="temp.name">
+                            <label >组织名称</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input  type="tel" class="validate" ng-model="temp.managerId">
+                            <label >组织管理者Id</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input  type="tel" class="validate" ng-model="temp.description">
+                            <label >描述</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="update()" class="modal-action waves-effect waves-green btn-flat blue-grey white-text">确认</a>
+            <a class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
+        </div>
+    </div>
+    <!-- 删除模态框 -->
+    <div id="delModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4 >确认删除？？？</h4>
+        </div>
+        <div class="modal-footer">
+            <a href="" class="modal-action waves-effect waves-green btn-flat blue-grey  white-text" ng-click="delete()">确认</a>
+            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
+        </div>
+    </div>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="../app.js"></script>
+    <script src="js/advice.js"></script>
+</body>
+</html>
