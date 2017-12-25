@@ -45,70 +45,25 @@
         <div class="row">
             <form class="col s12" id="insertForm">
                 <div class="row">
-                    <div class="input-field col s12">
-                        <input type="text" class="validate" ng-model="insertForm.name">
-                        <label>组织名</label>
+                    <div class="file-field input-field">
+                        <div class="btn ">
+                            <span>选择文件</span>
+                            <input type="file" name="file" id="uploadfile">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
                     </div>
-                    <div class="input-field col s12">
-                        <input type="text" class="validate" ng-model="insertForm.managerId">
-                        <label>管理者id</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <textarea id="textarea1" class="materialize-textarea" maxlength="30"
-                                  ng-model="insertForm.description"></textarea>
-                        <label>组织描述</label>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <a ng-click="insert()" class="modal-action waves-effect waves-green btn-flat blue-grey white-text">确认</a>
-        <a class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
-    </div>
-</div>
-<!-- 修改资料模态框 -->
-<div id="updateModal" class="modal modal-fixed-footer">
-    <div class="modal-content">
-        <h4>修改资料</h4>
-        <hr/>
-        <div class="row">
-            <form class="col s12">
-                <div class="row">
-                    <div class="input-field col s12 m6">
-                        <input type="tel" class="validate" ng-model="temp.igOrgId" disabled>
-                        <label>No.</label>
-                    </div>
-                    <div class="input-field col s12 m6">
-                        <input type="tel" class="validate" ng-model="temp.name">
-                        <label>组织名称</label>
-                    </div>
-                    <div class="input-field col s12 m6">
-                        <input type="tel" class="validate" ng-model="temp.managerId">
-                        <label>组织管理者Id</label>
-                    </div>
-                    <div class="input-field col s12 m6">
-                        <input type="tel" class="validate" ng-model="temp.description">
-                        <label>描述</label>
+                    <div class="btn blue-grey" ng-click="handle()">
+                        <span>上传</span>
                     </div>
                 </div>
             </form>
         </div>
     </div>
     <div class="modal-footer">
-        <a ng-click="update()" class="modal-action waves-effect waves-green btn-flat blue-grey white-text">确认</a>
+        <a ng-click="handle()" class="modal-action waves-effect waves-green btn-flat blue-grey white-text">确认</a>
         <a class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
-    </div>
-</div>
-<!-- 删除模态框 -->
-<div id="delModal" class="modal modal-fixed-footer">
-    <div class="modal-content">
-        <h4>确认删除？？？</h4>
-    </div>
-    <div class="modal-footer">
-        <a href="" class="modal-action waves-effect waves-green btn-flat blue-grey  white-text"
-           ng-click="delete()">确认</a>
-        <a href="" class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
     </div>
 </div>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
