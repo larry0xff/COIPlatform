@@ -36,6 +36,7 @@
         AND ac.subject like #{subject}
         AND o.name like #{orgName}
         AND u1.realname like #{createBy}
+        AND status = #{status}
     </select>
 
     <select id="getAllCollectingCollection" resultMap="BaseResultMap">

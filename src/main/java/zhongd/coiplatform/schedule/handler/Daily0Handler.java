@@ -42,7 +42,7 @@ public class Daily0Handler {
     @Autowired
     IgAdviceService igAdviceService;
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     @Async
     public void execute(){
         try{
@@ -63,8 +63,9 @@ public class Daily0Handler {
         for(IgAdviceCollection collection : collectionList){
             logger.info(DateUtil.diff(collection.getDeadline(), now, Calendar.SECOND) +"");
             if(DateUtil.diff(collection.getDeadline(), now, Calendar.SECOND) >= 0){
-                createRecordsFile(collection.getIgAdviceCollectionId());
+                String filename = createRecordsFile(collection.getIgAdviceCollectionId());
                 collection.setStatus(2);
+                collection.setAdvicesAttachmentUrl(filename);
                 igAdviceService.baseSave(collection);
             }
         }
@@ -75,7 +76,7 @@ public class Daily0Handler {
      * @param igAdviceCollectionId
      */
     @Transactional
-    public void createRecordsFile(Integer igAdviceCollectionId) throws Exception {
+    public String createRecordsFile(Integer igAdviceCollectionId) throws Exception {
         List<IgAdviceRecordDTO> list = igAdviceService.getRecordsByCollectionId(igAdviceCollectionId);
         File file = new File(downloadpath + StringUtil.getUUIDString() + ".xlsx");
         file.createNewFile();
@@ -104,5 +105,6 @@ public class Daily0Handler {
 
         wb.write(fos);
         fos.close();
+        return file.getName();
     }
 }

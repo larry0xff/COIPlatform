@@ -8,6 +8,7 @@ import zhongd.coiplatform.entity.DO.advice.IgAdviceCollection;
 import zhongd.coiplatform.entity.DTO.advice.IgAdviceCollectionDTO;
 import zhongd.coiplatform.entity.ReturnObj;
 import zhongd.coiplatform.service.advice.IgAdviceService;
+import zhongd.coiplatform.utils.constant.IgAdviceCollectionConstant;
 import zhongd.coiplatform.utils.constant.ReturnCode;
 
 /**
@@ -64,14 +65,16 @@ public class IgAdviceCollectionController extends BaseController{
     }
 
     /**
-     * 获取列表、含查询
+     * 获取征集列表、含查询
      * @param dto
+     * @param status 状态：1征集中 2已截止（待处理） 3已处理
      * @return
      */
     @PostMapping("/list")
-    public ReturnObj list(@RequestBody IgAdviceCollectionDTO dto){
+    public ReturnObj list(@RequestBody IgAdviceCollectionDTO dto, @RequestParam Integer status){
         ReturnObj obj = new ReturnObj();
         try{
+            dto.setStatus(status);
             obj.setData(igAdviceService.list(dto));
             obj.setReturnCode(ReturnCode.SUCCESS);
         }catch (Exception e){
@@ -82,5 +85,29 @@ public class IgAdviceCollectionController extends BaseController{
         return obj;
     }
 
-
+    /**
+     * 处理征集结果
+     * @param igAdviceCollection
+     * @return
+     */
+    @PostMapping("/handle")
+    public ReturnObj handle(@RequestBody IgAdviceCollection igAdviceCollection){
+        ReturnObj obj = new ReturnObj();
+        try{
+            igAdviceCollection.setStatus(IgAdviceCollectionConstant.STATUS_FINISH);
+            boolean flag = igAdviceService.save(igAdviceCollection);
+            if(flag){
+                obj.setReturnCode(ReturnCode.SUCCESS);
+                obj.setMsg("处理成功！");
+            }else{
+                obj.setReturnCode(ReturnCode.SUCCESS);
+                obj.setMsg("处理失败，请重新尝试！");
+            }
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            obj.setMsg("处理征集失败！");
+            obj.setReturnCode(ReturnCode.FAIL);
+        }
+        return obj;
+    }
 }

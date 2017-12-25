@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link rel="stylesheet" href="css/advice.css"/>
 </head>
-<body ng-app="adviceApp" ng-controller="adviceListCtrl" ng-cloak>
+<body ng-app="adviceApp" ng-controller="adviceDeadListCtrl" ng-cloak>
 <div>
     <h6><p class="grey-text">意见征集&nbsp;&nbsp;&gt;&nbsp;&nbsp;征集列表</p></h6>
     <div class="col s12 " ng-repeat="x in adviceCollections">
@@ -23,14 +23,14 @@
                         <p>创建者：{{x.createBy}}</p>
                         <p>创建时间：{{x.createTime}}</p>
                         <p>内容简介：{{x.content}}</p>
-                        <p>附件：<a ng-href="{{contextPath + '/file/download?filename=' + x.attachmentUrl + '&showname=' + (x.subject + x.attachmentUrl.substring(x.attachmentUrl.indexOf('.')))}}"
-                                class="file"><i>{{x.subject}}附件(点击下载)</i></a></p>
+                        <p>附件：<a ng-href="{{contextPath + '/file/download?filename=' + x.attachmentUrl + '&showname=' + ('附件:' + x.subject + x.attachmentUrl.substring(x.attachmentUrl.indexOf('.')))}}"
+                                 class="file"><i>{{x.subject}}附件(点击下载)</i></a>/
+                        征集结果：<a ng-href="{{contextPath + '/file/download?filename=' + x.advicesAttachmentUrl + '&showname=' + ('征集文件:' + x.subject + x.advicesAttachmentUrl.substring(x.advicesAttachmentUrl.indexOf('.')))}}"
+                                 class="file"><i>{{x.subject}}征集文件(点击下载)</i></a>
+                        </p>
                     </div>
                     <div class="col s4 title2 right-align">
-                        <span ng-if="x.dayOut > 0">
-                            {{(x.dayOut % 24).toFixed(0) <= 12 ?(x.dayOut / 24).toFixed(0):(x.dayOut / 24).toFixed(0)-1}}天{{(x.dayOut % 24).toFixed(0)}}时
-                        </span>
-                        <span ng-if="x.dayOut <= 0">已截止</span>
+                        <a href="">处理</a>
                     </div>
                 </div>
             </div>

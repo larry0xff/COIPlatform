@@ -16,7 +16,7 @@ import java.io.FileOutputStream;
  */
 @Service
 public class FileServiceImpl implements FileService {
-    @Value("${file.uploadpath}")
+    @Value("${file.downloadpath}")
     private String path;
     @Override
     public String save(MultipartFile file) throws Exception{
