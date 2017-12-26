@@ -8,7 +8,7 @@ memberApp.controller('listCtrl', ['$scope', '$http', function($scope, $http){
     $scope.hideModal = function(id){
         delete $scope.temp;
         $(id).closeModal();
-    }
+    };
     $scope.list = function(){
         $scope.pageParam = '?page=' + $scope.param.page + '&pageSize=' + $scope.param.pageSize;
         $http.post(contextPath + '/member/list' + $scope.pageParam).then(function(response){

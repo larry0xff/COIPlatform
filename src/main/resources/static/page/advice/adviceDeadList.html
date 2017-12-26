@@ -11,7 +11,8 @@
 </head>
 <body ng-app="adviceApp" ng-controller="adviceDeadListCtrl" ng-cloak>
 <div>
-    <h6><p class="grey-text">意见征集&nbsp;&nbsp;&gt;&nbsp;&nbsp;征集列表</p></h6>
+    <h6><p class="grey-text">意见征集&nbsp;&nbsp;&gt;&nbsp;&nbsp;待处理列表</p></h6>
+    <div class="col s12 " ng-if="adviceCollections.length == 0">暂无数据</div>
     <div class="col s12 " ng-repeat="x in adviceCollections">
         <div class="card horizontal blue-grey row">
             <div class="card-stacked col s8">
@@ -29,8 +30,8 @@
                                  class="file"><i>{{x.subject}}征集文件(点击下载)</i></a>
                         </p>
                     </div>
-                    <div class="col s4 title2 right-align">
-                        <a href="">处理</a>
+                    <div class="col s4 title3 right-align">
+                        <a href="" class="btn-flat waves-orange" ng-click="showModal(x.igAdviceCollectionId)">处理</a>
                     </div>
                 </div>
             </div>
@@ -38,9 +39,9 @@
     </div>
 </div>
 <!-- 新增模态框 -->
-<div id="addModal" class="modal modal-fixed-footer">
+<div id="handleModal" class="modal modal-fixed-footer">
     <div class="modal-content">
-        <h4>添加</h4>
+        <h4>上传结果文件</h4>
         <hr>
         <div class="row">
             <form class="col s12" id="insertForm">
@@ -54,15 +55,12 @@
                             <input class="file-path validate" type="text">
                         </div>
                     </div>
-                    <div class="btn blue-grey" ng-click="handle()">
-                        <span>上传</span>
-                    </div>
                 </div>
             </form>
         </div>
     </div>
     <div class="modal-footer">
-        <a ng-click="handle()" class="modal-action waves-effect waves-green btn-flat blue-grey white-text">确认</a>
+        <a ng-click="upload()" class="modal-action waves-effect waves-green btn-flat blue-grey white-text">上传</a>
         <a class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
     </div>
 </div>

@@ -27,7 +27,10 @@ spring:
     test-on-return: false
     pool-prepared-statements: true
     max-open-prepared-statements: 20
-    
+  http:
+    multipart:
+      max-file-size: 50Mb
+      max-request-size: 100Mb
 mybatis:
   config:
     logImpl: STDOUT_LOGGING
