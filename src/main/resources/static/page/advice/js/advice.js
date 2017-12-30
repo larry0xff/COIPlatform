@@ -125,3 +125,20 @@ adviceApp.controller('adviceDeadListCtrl', ['$scope', '$http', function ($scope,
         getList();
     }();
 }]);
+
+adviceApp.controller('adviceHistoryListCtrl', ['$scope', '$http', function($scope, $http){
+    (function init() {
+        getList();
+    })();
+
+    function getList(){
+        $http.post(contextPath + '/adviceCollection/list?status=3',{}).then(function(result){
+            var data = result.data;
+            if(data.returnCode != 200){
+                Materialize.toast(data.msg, 2000);
+            }else{
+                $scope.adviceCollections = data.data;
+            }
+        });
+    }
+}]);

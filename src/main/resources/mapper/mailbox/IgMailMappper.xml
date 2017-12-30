@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zhongd.coiplatform.dao.mailbox.IgMailMapper">
+    <resultMap id="BaseResultMap" type="zhongd.coiplatform.entity.DO.mailbox.IgMail">
+        <id column="ig_mail_id" jdbcType="INTEGER" property="igMailId" />
+        <result column="ig_org_id" jdbcType="INTEGER" property="igOrgId" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="is_read" jdbcType="VARCHAR" property="isRead" />
+        <result column="reply" jdbcType="VARCHAR" property="reply" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_by" jdbcType="INTEGER" property="createBy" />
+        <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <sql id="BaseTable">
+        ig_mail
+    </sql>
+    <sql id="BaseColumns">
+        ig_mail_id,ig_org_id,title,content,is_read,reply,create_time,create_by,update_by,update_time
+    </sql>
+
+    <select id="list" resultMap="BaseResultMap">
+        select <include refid="BaseColumns" />
+        from <include refid="BaseTable" />
+        WHERE 1=1
+        <if test="igOrgId != null">
+            AND ig_org_id = #{igOrgId}
+        </if>
+    </select>
+</mapper>
