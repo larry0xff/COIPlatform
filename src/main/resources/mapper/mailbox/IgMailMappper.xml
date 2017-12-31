@@ -27,5 +27,8 @@
         <if test="igOrgId != null">
             AND ig_org_id = #{igOrgId}
         </if>
+        <if test="status == 'waitting'">
+            AND reply IS NULL
+        </if>
     </select>
 </mapper>

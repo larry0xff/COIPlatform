@@ -10,7 +10,7 @@ import java.util.List;
  * @Description
  */
 public interface IgMailboxService {
-    List<IgMail> list(Integer igOrgId);
+    List<IgMail> list(Integer igOrgId, String status);
 
     boolean reply(String reply, Integer igMailId, Integer igUserId);
 

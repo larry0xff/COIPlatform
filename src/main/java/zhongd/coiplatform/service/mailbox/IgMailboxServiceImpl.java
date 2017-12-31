@@ -21,10 +21,14 @@ public class IgMailboxServiceImpl implements IgMailboxService {
     IgMailMapper igMailMapper;
 
     @Override
-    public List<IgMail> list(Integer igOrgId) {
+    public List<IgMail> list(Integer igOrgId, String status) {
         Map<String, Object> paramMap = new HashMap<>();
         if(igOrgId != 1){
             paramMap.put("igOrgId", igOrgId);
+        }
+        //筛选未回复的
+        if(status.equals("waitting")){
+            paramMap.put("status", "waitting");
         }
         return igMailMapper.list(paramMap);
     }

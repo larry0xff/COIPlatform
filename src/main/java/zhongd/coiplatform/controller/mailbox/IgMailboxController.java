@@ -27,10 +27,10 @@ public class IgMailboxController extends BaseController{
      * @return
      */
     @GetMapping("/list")
-    public ReturnObj getList(){
+    public ReturnObj getList(String status){
         ReturnObj obj = new ReturnObj();
         try{
-            obj.setData(igMailboxService.list(getCurrentUser().getIgUserDO().getIgOrgId()));
+            obj.setData(igMailboxService.list(getCurrentUser().getIgUserDO().getIgOrgId(), status));
             obj.setReturnCode(ReturnCode.SUCCESS);
         }catch (Exception e){
             logger.error(e.getMessage(), e);
