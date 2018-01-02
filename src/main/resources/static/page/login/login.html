@@ -11,19 +11,48 @@
 		<link rel="stylesheet" href="css/login.css" />
 	</head>
 
-	<body ng-app="loginApp" ng-controller="loginCtrl" ng-cloak class="light-green">
-		<div style="height:100px"></div>
-		<div class="row">
-			<div class="col m7"></div>
-			<div class="card col s11 m4">
+	<body ng-app="loginApp" ng-controller="loginCtrl" ng-cloak class="blue-grey">
+		<script type="text/javascript">
+			function changeFrameHeight(id) {
+				var ifm = document.getElementById(id);
+				ifm.style.height = ( document.documentElement.clientHeight + 100) +'px';
+			}
+			window.onload = function() {
+				changeFrameHeight('leftBoard');
+			}
+			window.onresize = function() {
+				changeFrameHeight('leftBoard');
+			}
+		</script>
+		<div class="row" style="margin-bottom: 0">
+
+			<div class="col m4 center white blue-grey-text" id="leftBoard" style="font-family: 'THIN'">
+				<div style="height:130px"></div>
+				<h1>The Most </h1>
+				<h1>Fantastic</h1>
+				<h1>User Interface,</h1>
+				<h1>Isn't it?</h1>
+				<h1>是的,没错</h1>
+			</div>
+			<div class="col m2 center">
+
+			</div>
+			<div class="col s12 m6">
+				<div style="height:200px"></div>
+				<div class="card col s8">
+
 				<div class="card-content black-text row center">
-					<img class="circle" height="80" width="80" src="../img/userlogo.png">
-					<div class=" col s12">
+					<div class="col s12">
+						<img class="circle" height="70" width="70" src="../img/userlogo.png">
+					</div>
+					<div class="col s12 center">
 						<div class="input-field col s12">
-							<input id="first_name" type="text" class="" ng-model="ctx.username">
+							<i class="material-icons prefix">account_circle</i>
+							<input id="" type="text" class="" ng-model="ctx.username">
 							<label for="first_name" class="grey-text">用户名</label>
 						</div>
 						<div class="input-field col s12">
+							<i class="material-icons prefix">vpn_key</i>
 							<input id="first_name" type="password" class="" ng-model="ctx.password">
 							<label for="first_name" class="grey-text">密码</label>
 						</div>
@@ -35,13 +64,35 @@
 						<a class="waves-effect waves-light btn black" ng-click="login()">登&nbsp;&nbsp;录</a>
 					</div>
 					<div class="col s6 center">
-						<a class="waves-effect waves-light btn grey">忘记密码</a>
+						<a class="waves-effect waves-light btn grey" ng-click="fogotPsw()">忘记密码</a>
 					</div>
 				</div>
 			</div>
+			</div>
 		</div>
-		<div class="row">
-		</div>
+		<footer class="page-footer black">
+			<div class="container">
+				<div class="row">
+					<div class="col l6 s12">
+						<h5 class="white-text">意见反馈采集平台</h5>
+						<p class="grey-text text-lighten-4">适用于任何中小型组织，专为成功者打造！</p>
+					</div>
+					<div class="col l4 offset-l2 s12">
+						<h5 class="white-text">联系方式</h5>
+						<ul>
+							<li><a class="grey-text text-lighten-3" href>联系人：谢仲东</a></li>
+							<li><a class="grey-text text-lighten-3" href>E-mail：xzdGet2y@163.com</a></li>
+							<li><a class="grey-text text-lighten-3" href>Tel：13267048303</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright black">
+				<div class="container">
+					© 2018 毕业设计
+				</div>
+			</div>
+		</footer>
 		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
 		<script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
 		<script src="../node_modules/angular/angular.js"></script>

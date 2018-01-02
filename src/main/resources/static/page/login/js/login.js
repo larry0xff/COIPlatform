@@ -6,7 +6,7 @@ loginApp.controller('loginCtrl', ['$scope', '$http','$location', function($scope
 		var param = {
 			username: $scope.ctx.username,
 			password: $scope.ctx.password
-		}
+		};
 		console.log(param);
 		$http.post(contextPath + '/login',param).then(function(result){
 			var data = result.data;
@@ -18,5 +18,8 @@ loginApp.controller('loginCtrl', ['$scope', '$http','$location', function($scope
 			}
 			
 		})
+	};
+	$scope.fogotPsw = function(){
+		Materialize.toast('关我屁事！', 1000, 'rounded');
 	}
 }]);

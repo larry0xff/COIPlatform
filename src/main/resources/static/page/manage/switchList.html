@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title></title>
+    <link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css"/>
+    <link href="../node_modules/materialize-css/dist/css/icon.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="css/manage.css"/>
+</head>
+<body ng-app="manageApp" ng-cloak ng-controller="switchListCtrl">
+    <h6><p class="grey-text">网站管理&nbsp;&nbsp;&gt;&nbsp;&nbsp;服务开关列表</p></h6>
+    <table class="striped">
+        <thead>
+        <tr>
+            <th data-field="name">服务名称</th>
+            <th data-field="id">状态</th>
+            <th data-field="price">描述</th>
+            <th data-field="price">操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="switch in switchList">
+            <td>{{switch.name}}</td>
+            <td>{{switch.status == 1 ?'关闭':'开启'}}</td>
+            <td>{{switch.description}}</td>
+            <td>
+                <a href ng-click="changeStatus(switch.igSwitchId, switch.status == 1 ? 2:1)">{{switch.status == 1 ?'开启服务':'关闭服务'}}</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+<script src="../node_modules/angular/angular.js"></script>
+<script src="../app.js"></script>
+<script src="js/manage.js"></script>
+</body>
+
+</html>

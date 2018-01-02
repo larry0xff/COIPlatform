@@ -25,10 +25,10 @@
                 changeFrameHeight('navBar');
             }
         </script>
-		<div class="row">
+		<div class="row" style="margin-bottom: 0px">
 			<nav class="col s12 black white-text">
 				<div class="nav-wrapper ">
-					<a href="#" class="brand-logo"><i class="material-icons tiny ">dashboard</i>Dashboard Of iG</a>
+					<a href="#" class="brand-logo" style="font-family: 'Maiandra GD'"><i class="material-icons tiny">dashboard</i>Dashboard Of iG</a>
 					<ul id="" class="right">
 						<li>
 							<a class="right waves-light waves-effect" ng-click="showModal('#updatePsw')">修改密码</a>
@@ -41,7 +41,7 @@
 			</nav>
 		</div>
 		<div class="row">
-			<div class="row col m2 s12" style="padding: 20px">
+			<div class="row col m2 s12" style="padding: 10px">
 				<ul class="collapsible col m12 s12 " data-collapsible="accordion" id="navBar" onload="changeFrameHeight('navBar')">
 					<li>
 						<div class="collapsible-header"><i class="material-icons tiny ">perm_identity</i>人员管理</div>
@@ -86,6 +86,14 @@
 							<div class="collection">
 								<a ng-click="changeContent('../mailbox/mailList.html')" class="collection-item grey-text center-align">查看信件</a>
 								<a ng-click="changeContent('../mailbox/mailHistoryList.html')" class="collection-item grey-text center-align">回复记录</a>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="collapsible-header"><i class="material-icons tiny ">settings</i>网站管理</div>
+						<div class="collapsible-body">
+							<div class="collection">
+								<a ng-click="changeContent('../manage/switchList.html')" class="collection-item grey-text center-align">服务开关</a>
 							</div>
 						</div>
 					</li>
