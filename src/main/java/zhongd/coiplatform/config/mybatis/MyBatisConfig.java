@@ -1,4 +1,4 @@
-package zhongd.coiplatform.config;
+package zhongd.coiplatform.config.mybatis;
 
 import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.mapping.VendorDatabaseIdProvider;

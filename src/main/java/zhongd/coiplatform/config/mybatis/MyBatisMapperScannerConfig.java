@@ -1,10 +1,11 @@
-package zhongd.coiplatform.config;
+package zhongd.coiplatform.config.mybatis;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.PropertySource;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
+import zhongd.coiplatform.config.mybatis.MyBatisConfig;
 import zhongd.coiplatform.utils.YamlLoadUtil;
 
 import javax.xml.bind.PropertyException;

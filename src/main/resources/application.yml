@@ -13,7 +13,7 @@ spring:
     # 密码
     password: 99999
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     filters: stat, wall
     max-active: 20
     initial-size: 1
