@@ -1,10 +1,13 @@
 package zhongd.coiplatform.service.member;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,7 @@ import zhongd.coiplatform.entity.DO.member.IgMember;
 import zhongd.coiplatform.entity.DO.member.IgMemberBulkRecord;
 import zhongd.coiplatform.entity.DTO.member.IgMemberBulkRecordDTO;
 import zhongd.coiplatform.entity.DTO.member.IgMemberDTO;
+import zhongd.coiplatform.entity.DTO.member.IgMemberLoginDTO;
 import zhongd.coiplatform.entity.DTO.user.IgUserLoginDTO;
 import zhongd.coiplatform.entity.ReturnObj;
 import zhongd.coiplatform.utils.*;
@@ -184,5 +188,34 @@ public class IgMemberServiceImpl implements IgMemberService {
     @Override
     public List<IgMemberBulkRecordDTO> getBulkRecords() {
         return igMemberBulkRecordMapper.list();
+    }
+
+    @Override
+    public ReturnObj login(HttpServletRequest request) {
+        ReturnObj obj = new ReturnObj();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        IgMember member = new IgMember();
+        member.setUsername(username);
+        IgMember result = igMemberMapper.selectOne(member);
+        if(result != null){
+            if(result.getPassword().equals(PasswordHandler.encodePassword(password, result.getUsername(), Constant.MD5_STR))) {
+                UsernamePasswordToken token = new UsernamePasswordToken(result.getUsername(), result.getPassword());
+                Subject subject = SecurityUtils.getSubject();
+                subject.login(token);
+                // 将登录信息放进Session中
+                IgMemberLoginDTO loginDTO = new IgMemberLoginDTO(result, new Date());
+                subject.getSession().setAttribute("currentMember", loginDTO);
+                obj.setMsg("登录成功");
+                obj.setReturnCode(ReturnCode.LOGIN_SUCCESS);
+            }else{
+                obj.setReturnCode(ReturnCode.LOGIN_ERROR_USER_NOT_EXIST);
+                obj.setMsg("密码错误");
+            }
+        }else{
+            obj.setReturnCode(ReturnCode.LOGIN_ERROR_USER_NOT_EXIST);
+            obj.setMsg("用户不存在");
+        }
+        return obj;
     }
 }

@@ -28,4 +28,6 @@ public interface IgMemberService {
     ReturnObj bulkInsert(String filepath, ReturnObj obj) throws Exception;
 
     List<IgMemberBulkRecordDTO> getBulkRecords();
+
+    ReturnObj login(HttpServletRequest request);
 }
