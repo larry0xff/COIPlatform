@@ -193,19 +193,27 @@ public class IgMemberServiceImpl implements IgMemberService {
     @Override
     public ReturnObj login(HttpServletRequest request) {
         ReturnObj obj = new ReturnObj();
+        Subject subject = SecurityUtils.getSubject();
+        String verifyCode = request.getParameter("verifyCode");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        //校验验证码
+        if(!verifyCode.equalsIgnoreCase((String)subject.getSession().getAttribute("loginVerifyCode"))){
+            obj.setReturnCode(ReturnCode.PARAMETERS_ERROR);
+            obj.setMsg("验证码不正确！");
+            return obj;
+        }
         IgMember member = new IgMember();
         member.setUsername(username);
         IgMember result = igMemberMapper.selectOne(member);
         if(result != null){
             if(result.getPassword().equals(PasswordHandler.encodePassword(password, result.getUsername(), Constant.MD5_STR))) {
                 UsernamePasswordToken token = new UsernamePasswordToken(result.getUsername(), result.getPassword());
-                Subject subject = SecurityUtils.getSubject();
                 subject.login(token);
                 // 将登录信息放进Session中
                 IgMemberLoginDTO loginDTO = new IgMemberLoginDTO(result, new Date());
                 subject.getSession().setAttribute("currentMember", loginDTO);
+                obj.setData(result);
                 obj.setMsg("登录成功");
                 obj.setReturnCode(ReturnCode.LOGIN_SUCCESS);
             }else{

@@ -36,7 +36,9 @@
         AND ac.subject like #{subject}
         AND o.name like #{orgName}
         AND u1.realname like #{createBy}
-        AND status = #{status}
+        <if test="status != null">
+          AND status = #{status}
+        </if>
     </select>
 
     <select id="getAllCollectingCollection" resultMap="BaseResultMap">
