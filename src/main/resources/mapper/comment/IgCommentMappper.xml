@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zhongd.coiplatform.dao.comment.IgCommentMapper">
+    <resultMap id="BaseResultMap" type="zhongd.coiplatform.entity.DO.comment.IgComment">
+        <id column="ig_comment_id" jdbcType="INTEGER" property="igCommentId" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="is_read" jdbcType="VARCHAR" property="isRead" />
+        <result column="against" jdbcType="INTEGER" property="against" />
+        <result column="agree" jdbcType="INTEGER" property="agree" />
+        <result column="reply_id" jdbcType="INTEGER" property="replyId" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_by" jdbcType="INTEGER" property="createBy" />
+        <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <sql id="BaseTable">
+        ig_comment c
+    </sql>
+    <sql id="BaseColumns">
+        ig_comment_id,content,against, agree, reply_id,create_time,create_by,update_by,update_time
+    </sql>
+
+    <select id="list" parameterType="map" resultType="zhongd.coiplatform.entity.DTO.comment.IgCommentDTO">
+        SELECT c.create_by as createById, ig_comment_id as igCommentId,content,against, agree, m.realname as createBy,date_format(c.create_time, '%Y-%m-%d %H:%i') as createTime,is_read as isRead
+        FROM <include refid="BaseTable"/>
+        LEFT JOIN ig_member m ON (m.ig_member_id = c.create_by)
+        WHERE 1=1
+        <if test="igMemberId != 0 and igMemberId != null">
+            AND c.create_by = #{igMemberId}
+        </if>
+        ORDER BY c.agree DESC, c.create_time DESC
+        LIMIT #{page}, #{pageSize}
+    </select>
+</mapper>

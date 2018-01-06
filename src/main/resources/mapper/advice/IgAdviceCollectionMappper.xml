@@ -39,6 +39,7 @@
         <if test="status != null">
           AND status = #{status}
         </if>
+        ORDER BY status ASC, ac.deadline ASC
     </select>
 
     <select id="getAllCollectingCollection" resultMap="BaseResultMap">
