@@ -30,4 +30,18 @@
         LEFT JOIN ig_advice_collection ac ON(ar.ig_advice_collection_id = ac.ig_advice_collection_id)
         WHERE ar.ig_advice_collection_id = #{igAdviceCollectionId}
     </select>
+    <select id="selectByMemberIdAndCollectionId" resultType="zhongd.coiplatform.entity.DTO.advice.IgAdviceRecordDTO" parameterType="Integer">
+        SELECT
+        ar.ig_advice_record_id as igAdviceRecordId,
+        ar.ig_advice_collection_id as igAdviceCollectionId,
+        ar.content,
+        date_format(ar.create_time, '%Y-%m-%d %H:%i:%S') as createTime,
+        ac.subject as collectionSubject,
+        m.realname as createBy
+        FROM <include refid="BaseTable"/>
+        LEFT JOIN ig_member m ON (ar.create_by = m.ig_member_id)
+        LEFT JOIN ig_advice_collection ac ON(ar.ig_advice_collection_id = ac.ig_advice_collection_id)
+        WHERE ar.ig_advice_collection_id = #{arg0}
+        AND ar.create_by = #{arg1}
+    </select>
 </mapper>

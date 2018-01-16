@@ -16,4 +16,6 @@ import java.util.List;
 public interface IgAdviceRecordMapper extends BaseMapper<IgAdviceRecord>{
 
     List<IgAdviceRecordDTO> selectByCollectionId(Integer igAdviceCollectionId);
+
+    IgAdviceRecordDTO selectByMemberIdAndCollectionId(Integer igMemberId, Integer igAdviceCollectionId);
 }

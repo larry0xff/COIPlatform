@@ -18,4 +18,6 @@ public interface IgAdviceCollectionMapper extends BaseMapper<IgAdviceCollection>
     List<IgAdviceCollectionDTO> list(IgAdviceCollectionDTO paramMap);
 
     List<IgAdviceCollection> getAllCollectingCollection();
+
+    IgAdviceCollectionDTO getAdviceCollectionById(Integer igAdviceCollectionId);
 }

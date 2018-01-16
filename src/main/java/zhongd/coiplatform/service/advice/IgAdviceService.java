@@ -25,4 +25,8 @@ public interface IgAdviceService {
     List<IgAdviceRecordDTO> getRecordsByCollectionId(Integer igAdviceCollectionId);
 
     Integer baseSave(IgAdviceCollection collection);
+
+    IgAdviceCollectionDTO getById(Integer igAdviceCollectionId);
+
+    IgAdviceRecordDTO getByMemberIdAndCollectionId(Integer igMemberId, Integer igAdviceCollectionId);
 }

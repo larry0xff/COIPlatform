@@ -76,4 +76,14 @@ public class IgAdviceServiceImpl implements IgAdviceService {
     public Integer baseSave(IgAdviceCollection collection) {
         return igAdviceCollectionMapper.updateByPrimaryKeySelective(collection);
     }
+
+    @Override
+    public IgAdviceCollectionDTO getById(Integer igAdviceCollectionId) {
+        return igAdviceCollectionMapper.getAdviceCollectionById(igAdviceCollectionId);
+    }
+
+    @Override
+    public IgAdviceRecordDTO getByMemberIdAndCollectionId(Integer igMemberId, Integer igAdviceCollectionId) {
+        return igAdviceRecordMapper.selectByMemberIdAndCollectionId(igMemberId, igAdviceCollectionId);
+    }
 }

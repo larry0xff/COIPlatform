@@ -61,5 +61,5 @@ logging:
     com.zaxxer.hikari: TRACE
 
 file:
-  uploadpath: file/upload/
-  downloadpath: file/download/
+  uploadpath: f:/file/upload/
+  downloadpath: f:/file/download/
