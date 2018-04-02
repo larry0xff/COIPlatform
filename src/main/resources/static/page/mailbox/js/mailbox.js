@@ -1,6 +1,6 @@
 var mailboxApp = angular.module('mailboxApp', []);
 
-mailboxApp.controller('mailListCtrl', ['$scope', '$http', function($scope, $http){
+mailboxApp.controller('mailListCtrl', ['$scope', '$http', '$filter', function($scope, $http, $filter){
     function getList(){
         $http.get(contextPath + '/mailbox/list?status=waitting').then(function(result){
             var data = result.data;

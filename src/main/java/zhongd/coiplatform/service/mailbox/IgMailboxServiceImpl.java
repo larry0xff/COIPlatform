@@ -5,10 +5,7 @@ import org.springframework.stereotype.Service;
 import zhongd.coiplatform.dao.mailbox.IgMailMapper;
 import zhongd.coiplatform.entity.DO.mailbox.IgMail;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author xiezd
@@ -23,12 +20,14 @@ public class IgMailboxServiceImpl implements IgMailboxService {
     @Override
     public List<IgMail> list(Integer igOrgId, String status) {
         Map<String, Object> paramMap = new HashMap<>();
-        if(igOrgId != 1){
+        if(Objects.nonNull(igOrgId) && igOrgId != 1){
             paramMap.put("igOrgId", igOrgId);
         }
         //筛选未回复的
         if(status.equals("waitting")){
             paramMap.put("status", "waitting");
+        } else {
+            paramMap.put("status", "done");
         }
         return igMailMapper.list(paramMap);
     }

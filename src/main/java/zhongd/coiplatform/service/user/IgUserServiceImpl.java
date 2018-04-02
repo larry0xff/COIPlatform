@@ -9,6 +9,8 @@ import java.util.Set;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,8 @@ public class IgUserServiceImpl implements IgUserService {
 	IgUserMapper igUserMapper;
 	@Autowired
 	UserJoinMapper joinMapper;
+
+	Logger logger = LoggerFactory.getLogger(getClass());
 	public IgUser getQueryUserDO() {
 		return new IgUser();
 	}
@@ -68,6 +72,7 @@ public class IgUserServiceImpl implements IgUserService {
 			obj.setMsg("登录成功");
 			obj.setReturnCode(ReturnCode.LOGIN_SUCCESS);
 		}catch (Exception e){
+			logger.error(e.getMessage(), e);
 			obj.setMsg("登录失败，请重新登录");
 			obj.setReturnCode(ReturnCode.FAIL);
 		}

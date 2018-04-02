@@ -41,7 +41,7 @@ import java.util.*;
  */
 @Service
 public class IgMemberServiceImpl implements IgMemberService {
-    @Value("${file.uploadpath}")
+    @Value("${file.downloadpath}")
     private String path;
     @Autowired
     IgMemberMapper igMemberMapper;
