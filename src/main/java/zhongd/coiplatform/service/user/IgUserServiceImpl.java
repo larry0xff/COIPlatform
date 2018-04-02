@@ -71,6 +71,7 @@ public class IgUserServiceImpl implements IgUserService {
 
 			obj.setMsg("登录成功");
 			obj.setReturnCode(ReturnCode.LOGIN_SUCCESS);
+			logger.info("===========成功===========");
 		}catch (Exception e){
 			logger.error(e.getMessage(), e);
 			obj.setMsg("登录失败，请重新登录");
