@@ -1,6 +1,7 @@
 package zhongd.coiplatform.config;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -31,11 +32,15 @@ public class MyShiroRealm extends AuthorizingRealm{
 		Set<IgPermission> permissionSet = (Set<IgPermission>) igUserService.getUserUserPermissions(currentUser.getIgUserId()).get("set");
 		Set<String> roleNames = new HashSet<String>();
 		Set<String> permissionNames = new HashSet<String>();
-		for(IgRole role : roleSet) {
-			roleNames.add(role.getRoleCode());
+		if (Objects.nonNull(roleSet) && !roleSet.isEmpty()) {
+			for (IgRole role : roleSet) {
+				roleNames.add(role.getRoleCode());
+			}
 		}
-		for(IgPermission permission : permissionSet){
-			permissionNames.add(permission.getPermissionCode());
+		if (Objects.nonNull(permissionSet) && !permissionSet.isEmpty()) {
+			for (IgPermission permission : permissionSet) {
+				permissionNames.add(permission.getPermissionCode());
+			}
 		}
 		info.setRoles(roleNames);
 		info.setStringPermissions(permissionNames);
