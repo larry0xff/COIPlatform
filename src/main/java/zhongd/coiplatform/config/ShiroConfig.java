@@ -1,6 +1,6 @@
 package zhongd.coiplatform.config;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.shiro.mgt.SecurityManager;
@@ -15,8 +15,9 @@ public class ShiroConfig {
 	public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
 		ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
 		factoryBean.setSecurityManager(securityManager);
-		
-		Map<String, String> filterChainMap = new HashMap<String, String>();
+
+		//这里要使用LinkedHashMap，才能保证权限验证的顺序性
+		Map<String, String> filterChainMap = new LinkedHashMap<String, String>();
 		filterChainMap.put("/page/login/login.html", "anon");
 		// 注销url
 		filterChainMap.put("/logout", "logout");
@@ -28,7 +29,7 @@ public class ShiroConfig {
 		filterChainMap.put("/role/setPermission", "authc,perms[role_set_permission]");
 		filterChainMap.put("/role/rmPermission", "authc,perms[role_remove_permission]");
 
-		//人员管理权限
+//		//人员管理权限
 		filterChainMap.put("/user/insert", "authc,perms[user_insert]");
 		filterChainMap.put("/user/delete", "authc,perms[user_delete]");
 		filterChainMap.put("/user/update", "authc,perms[user_update]");
@@ -36,13 +37,13 @@ public class ShiroConfig {
 		filterChainMap.put("/user/setRole", "authc,perms[user_set_role]");
 		filterChainMap.put("/user/rmRole", "authc,perms[user_remove_role]");
 
-		//组织管理权限
+//		//组织管理权限
 		filterChainMap.put("/org/list", "authc,perms[org_list]");
 		filterChainMap.put("/org/update", "authc,perms[org_update]");
 		filterChainMap.put("/org/delete", "authc,perms[org_delete]");
 		filterChainMap.put("/org/save", "authc,perms[org_save]");
 
-		//成员管理
+//		//成员管理
 		filterChainMap.put("/member/list", "authc,perms[member_list]");
 		filterChainMap.put("/member/delete", "authc,perms[member_delete]");
 		filterChainMap.put("/member/insert", "authc,perms[member_insert]");
@@ -50,23 +51,24 @@ public class ShiroConfig {
 		filterChainMap.put("/member/bulkinsert", "authc,perms[member_bulkinsert]");
 		filterChainMap.put("/member/bulkRecords", "authc,perms[member_bulkRecords]");
 
-		//信箱权限
+//		//信箱权限
 		filterChainMap.put("/mailbox/list", "authc,perms[mailbox_list]");
 		filterChainMap.put("/mailbox/reply", "authc,perms[mailbox_reply]");
 
-		//意见征集权限
+//		//意见征集权限
 		filterChainMap.put("/adviceCollection/save", "authc,perms[advice_collection_save]");
 		filterChainMap.put("/adviceCollection/delete", "authc,perms[advice_collection_delete]");
-		filterChainMap.put("/adviceCollection/list", "authc,perms[advice_collection_list]");
+		filterChainMap.put("/adviceCollection/listAll", "authc,perms[advice_collection_list]");
 		filterChainMap.put("/adviceCollection/handle", "authc,perms[advice_collection_handle]");
+
+		//系统开关权限
+		filterChainMap.put("/manage/switch/changeStatus", "authc,perms[manage_switch_change_status]");
+		filterChainMap.put("/manage/switch/listA", "authc,perms[manage_switch_list]");
 
 
 		// 需要授权访问的链接
 		filterChainMap.put("/**", "anon");
 		// anon表示可以匿名访问的url
-//		filterChainMap.put("/page/user/**", "authc");
-//		filterChainMap.put("/page/role/**", "authc");
-//		filterChainMap.put("/page/index/**", "authc");
 		factoryBean.setLoginUrl("/page/login/login.html");
 		factoryBean.setUnauthorizedUrl("/403");
 		factoryBean.setFilterChainDefinitionMap(filterChainMap);

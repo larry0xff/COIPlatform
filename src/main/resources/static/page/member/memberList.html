@@ -123,10 +123,9 @@
                             <input  type="email" class="validate" ng-model="insertForm.email">
                             <label >E-mail</label>
                         </div>
-                        <div class="input-field col s12 m6">
-                            <input  type="number" class="validate" ng-model="insertForm.igOrgId">
-                            <label >组织id</label>
-                        </div>
+                        <label>选择所属组织</label>
+                        <select class="browser-default" ng-model="insertForm.igOrgId" ng-options="o.igOrgId as o.name for o in orgs">
+                        </select>
                     </div>
                 </form>
             </div>

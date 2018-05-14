@@ -92,6 +92,9 @@
 								<input  type="tel" class="validate" ng-model="temp.email">
 								<label >E-mail</label>
 							</div>
+							<label>选择所属组织</label>
+							<select class="browser-default" ng-model="temp.igOrgId" ng-options="o.igOrgId as o.name for o in orgs">
+							</select>
 						</div>
 					</form>
 				</div>
@@ -142,6 +145,9 @@
 								<input  type="email" class="validate" ng-model="insertForm.email">
 								<label >E-mail</label>
 							</div>
+							<label>选择所属组织</label>
+							<select class="browser-default" ng-model="insertForm.igOrgId" ng-options="o.igOrgId as o.name for o in orgs">
+							</select>
 						</div>
 					</form>
 				</div>

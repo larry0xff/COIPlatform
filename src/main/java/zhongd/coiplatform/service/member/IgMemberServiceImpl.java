@@ -51,8 +51,8 @@ public class IgMemberServiceImpl implements IgMemberService {
     IgMemberBulkRecordMapper igMemberBulkRecordMapper;
 
     @Override
-    public Map<String, Object> getMemberList(HttpServletRequest request) {
-        Map<String, Object> param = new HashMap<>();
+    public Map<String, Object> getMemberList(HttpServletRequest request, Integer igOrgId) {
+            Map<String, Object> param = new HashMap<>();
         String condition = request.getParameter("condition")==null?"":request.getParameter("condition");
         if(StringUtil.isNum(condition))
             param.put("igMemberId", Integer.parseInt(condition));
@@ -60,6 +60,9 @@ public class IgMemberServiceImpl implements IgMemberService {
         param.put("realname", "%" + condition + "%");
         param.put("tel", "%" + condition + "%");
         param.put("email", "%" + condition + "%");
+        if (!igOrgId.equals(1)) {
+            param.put("igOrgId", igOrgId);
+        }
         int page = Integer.parseInt(request.getParameter("page"));
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
         page = (page - 1) * pageSize;
@@ -94,11 +97,14 @@ public class IgMemberServiceImpl implements IgMemberService {
     }
 
     @Override
-    public Map<String, Object> searchMemberList(String condition) {
+    public Map<String, Object> searchMemberList(String condition, Integer igOrgId) {
         Map<String, Object> param = new HashMap<>();
         if(StringUtil.isNum(condition))
             param.put("idcondition", Integer.parseInt(condition));
         param.put("condition", "%" + condition + "%");
+        if (!igOrgId.equals(1)) {
+            param.put("igOrgId", igOrgId);
+        }
         Map<String, Object> data = new HashMap<>();
         List<IgMemberDTO> list = igMemberMapper.searchMemberList(param);
         data.put("list", list);

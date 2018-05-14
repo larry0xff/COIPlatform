@@ -32,7 +32,7 @@ public class IgMemberController extends BaseController {
     public ReturnObj list(HttpServletRequest request){
         ReturnObj obj = new ReturnObj();
         try{
-            obj.setData(igMemberService.getMemberList(request));
+            obj.setData(igMemberService.getMemberList(request, getCurrentUser().getIgUserDO().getIgOrgId()));
             obj.setReturnCode(ReturnCode.SUCCESS);
         }catch (Exception e){
             logger.error(e.getMessage(),e);
@@ -50,7 +50,7 @@ public class IgMemberController extends BaseController {
     public ReturnObj search(@RequestBody String condition){
         ReturnObj obj = new ReturnObj();
         try{
-            obj.setData(igMemberService.searchMemberList(condition));
+            obj.setData(igMemberService.searchMemberList(condition, getCurrentUser().getIgUserDO().getIgOrgId()));
             obj.setReturnCode(ReturnCode.SUCCESS);
         }catch (Exception e){
             logger.error(e.getMessage(),e);
@@ -130,7 +130,7 @@ public class IgMemberController extends BaseController {
     public ReturnObj bulkInsert(@RequestBody String filename){
         ReturnObj obj = new ReturnObj();
         try{
-            Thread.sleep(5000);
+            Thread.sleep(2000);
             obj = igMemberService.bulkInsert(filename, obj);
         }catch (Exception e){
             logger.error(e.getMessage(), e);

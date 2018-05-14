@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zhongd.coiplatform.dao.mailbox.IgMailMapper;
 import zhongd.coiplatform.entity.DO.mailbox.IgMail;
+import zhongd.coiplatform.entity.DTO.mail.IgMailDTO;
 
 import java.util.*;
 
@@ -18,7 +19,7 @@ public class IgMailboxServiceImpl implements IgMailboxService {
     IgMailMapper igMailMapper;
 
     @Override
-    public List<IgMail> list(Integer igOrgId, String status) {
+    public List<IgMailDTO> list(Integer igOrgId, String status) {
         Map<String, Object> paramMap = new HashMap<>();
         if(Objects.nonNull(igOrgId) && igOrgId != 1){
             paramMap.put("igOrgId", igOrgId);

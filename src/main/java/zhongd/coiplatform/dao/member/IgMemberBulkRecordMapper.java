@@ -5,6 +5,7 @@ import zhongd.coiplatform.entity.DO.member.IgMemberBulkRecord;
 import zhongd.coiplatform.entity.DTO.member.IgMemberBulkRecordDTO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author xiezd

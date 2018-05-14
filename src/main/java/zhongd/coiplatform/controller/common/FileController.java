@@ -12,10 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 import zhongd.coiplatform.controller.BaseController;
 import zhongd.coiplatform.entity.ReturnObj;
 import zhongd.coiplatform.service.common.FileService;
+import zhongd.coiplatform.utils.StringUtil;
 import zhongd.coiplatform.utils.constant.FileTypeConstant;
 import zhongd.coiplatform.utils.constant.ReturnCode;
 
 import java.io.File;
+import java.util.UUID;
 
 /**
  * @Author xiezd
@@ -94,7 +96,9 @@ public class FileController extends BaseController{
         ResponseEntity<byte[]> data = null;
         try{
             File file = fileService.get(filename);
-
+            if (StringUtil.isEmpty(showname)) {
+                showname = UUID.randomUUID().toString();
+            }
             HttpHeaders headers = new HttpHeaders();
             //下载显示的文件名，解决中文名称乱码问题
             String downloadFielName = new String(showname.getBytes("UTF-8"),"iso-8859-1");

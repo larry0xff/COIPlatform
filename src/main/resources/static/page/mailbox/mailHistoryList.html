@@ -25,7 +25,7 @@
         <tbody>
         <tr ng-repeat="mail in mailList">
             <td>{{mail.title}}</td>
-            <td>{{mail.createTime}}</td>
+            <td>{{mail.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
             <td>{{mail.createBy}}</td>
             <td><a href ng-click="openModal(mail)">详情</a></td>
         </tr>
@@ -35,8 +35,9 @@
     <div id="detailModal" class="modal modal-fixed-footer" style="height: 400px">
         <div class="modal-content">
             <h5>{{item.createBy}} 的信件</h5>
-            <p>发件时间：{{item.createTime}}</p>
-            <p>回复时间：{{item.updateTime}}</p>
+            <p>发件时间：{{item.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+            <p>回复者：{{item.updateBy}}</p>
+            <p>回复时间：{{item.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}</p>
             <p>信件内容：{{item.content}}</p>
             <p>回复内容：{{item.reply}}</p>
         </div>

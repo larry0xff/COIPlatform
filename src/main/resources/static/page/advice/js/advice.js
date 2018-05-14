@@ -9,12 +9,22 @@ adviceApp.controller('adviceListCtrl', ['$scope', '$http', function ($scope, $ht
         $(id).closeModal();
     };
     var getList = function(){
-        $http.post(contextPath + '/adviceCollection/list?status=1',{}).then(function(result){
+        $http.post(contextPath + '/adviceCollection/listAll',{status:1}).then(function(result){
             var data = result.data;
             if(data.returnCode != 200){
                 Materialize.toast(data.msg, 2000);
             }else{
                 $scope.adviceCollections = data.data;
+            }
+        });
+    };
+    var getOrgList = function () {
+        $http.get(contextPath + '/org/list').then(function(result){
+            var data = result.data;
+            if(data.returnCode != 200){
+                Materialize.toast(data.msg, 2000);
+            }else{
+                $scope.orgs = data.data.list;
             }
         });
     };
@@ -26,6 +36,7 @@ adviceApp.controller('adviceListCtrl', ['$scope', '$http', function ($scope, $ht
         $scope.contextPath = contextPath;
         $scope.insertForm = {};
         getList();
+        getOrgList();
     }();
     $scope.upload = function(){
         var file = document.getElementById('uploadfile').files[0];
@@ -72,7 +83,7 @@ adviceApp.controller('adviceDeadListCtrl', ['$scope', '$http', function ($scope,
         $('#handleModal').closeModal();
     };
     var getList = function(){
-        $http.post(contextPath + '/adviceCollection/list?status=2',{}).then(function(result){
+        $http.post(contextPath + '/adviceCollection/listAll',{status:2}).then(function(result){
             var data = result.data;
             if(data.returnCode != 200){
                 Materialize.toast(data.msg, 2000);
@@ -132,7 +143,7 @@ adviceApp.controller('adviceHistoryListCtrl', ['$scope', '$http', function($scop
     })();
 
     function getList(){
-        $http.post(contextPath + '/adviceCollection/list?status=3',{}).then(function(result){
+        $http.post(contextPath + '/adviceCollection/listAll',{status:3}).then(function(result){
             var data = result.data;
             if(data.returnCode != 200){
                 Materialize.toast(data.msg, 2000);

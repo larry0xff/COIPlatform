@@ -10,7 +10,9 @@ import zhongd.coiplatform.entity.DO.advice.IgAdviceRecord;
 import zhongd.coiplatform.entity.DTO.advice.IgAdviceCollectionDTO;
 import zhongd.coiplatform.entity.DTO.advice.IgAdviceRecordDTO;
 import zhongd.coiplatform.entity.DTO.user.IgUserLoginDTO;
+import zhongd.coiplatform.utils.DateUtil;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +39,7 @@ public class IgAdviceServiceImpl implements IgAdviceService {
                 igAdviceCollection.setIgAdviceCollectionId(DO.getIgAdviceCollectionId());
                 igAdviceCollection.setUpdateBy(((IgUserLoginDTO)SecurityUtils.getSubject().getSession().getAttribute("currentUser")).getIgUserDO().getIgUserId());
                 igAdviceCollection.setUpdateTime(new Date());
+                igAdviceCollection.setDeadline(DateUtil.add(igAdviceCollection.getDeadline(), Calendar.DAY_OF_MONTH, 1));
                 return igAdviceCollectionMapper.updateByPrimaryKeySelective(igAdviceCollection) > 0;
             }else{
                 return false;
@@ -45,6 +48,7 @@ public class IgAdviceServiceImpl implements IgAdviceService {
             igAdviceCollection.setStatus(1);
             igAdviceCollection.setCreateBy(((IgUserLoginDTO)SecurityUtils.getSubject().getSession().getAttribute("currentUser")).getIgUserDO().getIgUserId());
             igAdviceCollection.setCreateTime(new Date());
+            igAdviceCollection.setDeadline(DateUtil.add(igAdviceCollection.getDeadline(), Calendar.DAY_OF_MONTH, 1));
             return igAdviceCollectionMapper.insertSelective(igAdviceCollection) > 0;
         }
     }

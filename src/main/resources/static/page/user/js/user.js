@@ -115,9 +115,20 @@ userApp.controller('userCtrl', ['$scope', '$http', function($scope, $http) {
             }
         });
 	};
+    var getOrgList = function () {
+        $http.get(contextPath + '/org/list').then(function(result){
+            var data = result.data;
+            if(data.returnCode != 200){
+                Materialize.toast(data.msg, 2000);
+            }else{
+                $scope.orgs = data.data.list;
+            }
+        });
+    };
 	$scope.init = function() {
 		//拿数据
 		$scope.getUserList();
+		getOrgList();
 	};
 	$scope.init();
 }]);

@@ -15,7 +15,7 @@ import java.util.Map;
  * @Date Created in  16:15 星期六 2017/12/2/002
  */
 public interface IgMemberService {
-    Map<String, Object> getMemberList(HttpServletRequest request);
+    Map<String, Object> getMemberList(HttpServletRequest request, Integer igOrgId);
 
     int deleteById(int igMemberId);
 
@@ -23,7 +23,7 @@ public interface IgMemberService {
 
     int resetPassword(Integer igMemberId, String username);
 
-    Map<String, Object> searchMemberList(String condition);
+    Map<String, Object> searchMemberList(String condition, Integer igOrgId);
 
     ReturnObj bulkInsert(String filepath, ReturnObj obj) throws Exception;
 

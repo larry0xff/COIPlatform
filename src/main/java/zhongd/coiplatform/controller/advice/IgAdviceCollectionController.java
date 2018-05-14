@@ -70,11 +70,10 @@ public class IgAdviceCollectionController extends BaseController{
      * @param status 状态：1征集中 2已截止（待处理） 3已处理
      * @return
      */
-    @PostMapping("/list")
-    public ReturnObj list(@RequestBody IgAdviceCollectionDTO dto, @RequestParam Integer status){
+    @PostMapping("/listAll")
+    public ReturnObj list(@RequestBody IgAdviceCollectionDTO dto){
         ReturnObj obj = new ReturnObj();
         try{
-            dto.setStatus(status);
             obj.setData(igAdviceService.list(dto));
             obj.setReturnCode(ReturnCode.SUCCESS);
         }catch (Exception e){

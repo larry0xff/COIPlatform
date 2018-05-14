@@ -53,6 +53,7 @@
         from ig_role_permission rp
         left join <include refid="IgPermissionTable" /> on rp.ig_permission_id = p.ig_permission_id
         where rp.ig_role_id = #{igRoleId}
+        ORDER BY p.ig_permission_id
     </select>
     <select id="getPermissionSelectSet" resultMap="IgPermissionMap" parameterType="Integer">
         SELECT <include refid="IgPermissionColumns" />
@@ -61,6 +62,7 @@
           SELECT ig_permission_id FROM ig_role_permission rp
           WHERE rp.ig_role_id = #{igRoleId}
         )
+        ORDER BY p.ig_permission_id
     </select>
     
     <insert id="setPermission" parameterType="map" useGeneratedKeys="true" keyProperty="id">

@@ -20,7 +20,7 @@ public class WebsiteManageController extends BaseController{
     @Autowired
     IgSwitchService igSwitchService;
 
-    @GetMapping("/switch/list")
+    @GetMapping("/switch/listA")
     public ReturnObj getSwitchList(){
         ReturnObj obj = new ReturnObj();
         try{

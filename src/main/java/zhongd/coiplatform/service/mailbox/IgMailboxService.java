@@ -1,6 +1,7 @@
 package zhongd.coiplatform.service.mailbox;
 
 import zhongd.coiplatform.entity.DO.mailbox.IgMail;
+import zhongd.coiplatform.entity.DTO.mail.IgMailDTO;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @Description
  */
 public interface IgMailboxService {
-    List<IgMail> list(Integer igOrgId, String status);
+    List<IgMailDTO> list(Integer igOrgId, String status);
 
     boolean reply(String reply, Integer igMailId, Integer igUserId);
 

@@ -2,6 +2,7 @@ package zhongd.coiplatform.dao.mailbox;
 
 import zhongd.coiplatform.dao.BaseMapper;
 import zhongd.coiplatform.entity.DO.mailbox.IgMail;
+import zhongd.coiplatform.entity.DTO.mail.IgMailDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -12,5 +13,5 @@ import java.util.Map;
  * @Description
  */
 public interface IgMailMapper extends BaseMapper<IgMail>{
-    List<IgMail> list(Map<String, Object> paramMap);
+    List<IgMailDTO> list(Map<String, Object> paramMap);
 }

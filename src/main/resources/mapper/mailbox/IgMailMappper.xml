@@ -20,18 +20,20 @@
         ig_mail_id,ig_org_id,title,content,is_read,reply,create_time,create_by,update_by,update_time
     </sql>
 
-    <select id="list" resultMap="BaseResultMap">
-        select <include refid="BaseColumns" />
-        from <include refid="BaseTable" />
+    <select id="list" resultType="zhongd.coiplatform.entity.DTO.mail.IgMailDTO">
+        select ig_mail_id,mail.ig_org_id,title,content,is_read,reply,mail.create_time AS createTime,m.realname as createBy,u.realname as updateBy,mail.update_time AS updateTime
+        from <include refid="BaseTable" /> mail
+        LEFT JOIN ig_member m ON m.ig_member_id = mail.create_by
+        LEFT JOIN ig_user u ON u.ig_user_id = mail.update_by
         WHERE 1=1
         <if test="igOrgId != null">
-            AND ig_org_id = #{igOrgId}
+            AND mail.ig_org_id = #{igOrgId}
         </if>
         <if test="status != null and status == 'waitting'">
-            AND reply IS NULL
+            AND mail.reply IS NULL
         </if>
         <if test="status != null and status == 'done'">
-            AND reply IS NOT NULL
+            AND mail.reply IS NOT NULL
         </if>
     </select>
 </mapper>

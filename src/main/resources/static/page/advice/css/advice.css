@@ -8,7 +8,7 @@
     font-size: 20px;
 }
 .card{
-    height:210px;
+    height:220px;
 }
 .content{
     color: white;
@@ -20,5 +20,5 @@
 .title3{
     color: rgb(255, 171, 64);
     font-size: 30px;
-    line-height: 162px;
+    line-height: 185px;
 }

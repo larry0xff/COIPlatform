@@ -25,12 +25,19 @@
     <select id="getMemberList" resultMap="BaseResultMap" parameterType="map">
         SELECT <include refid="BaseColumns" />
         FROM <include refid="BaseTable" />
+        WHERE 1=1
+        <if test="igOrgId != null">
+            AND ig_org_id = #{igOrgId}
+        </if>
         LIMIT #{page}, #{pageSize}
     </select>
     <select id="searchMemberList" resultMap="BaseResultMap" parameterType="map">
         SELECT <include refid="BaseColumns" />
         FROM <include refid="BaseTable" />
         WHERE 1=1
+        <if test="igOrgId != null">
+          AND ig_org_id = #{igOrgId}
+        </if>
         <if test="idcondition != null">
             AND( ig_member_id = #{idcondition} OR
         </if>

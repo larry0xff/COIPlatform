@@ -22,6 +22,7 @@
                         <p>编号：{{x.igAdviceCollectionId}}</p>
                         <p>截止日期：{{x.deadline}}</p>
                         <p>创建者：{{x.createBy}}</p>
+                        <p>所属组织：{{x.orgName}}</p>
                         <p>创建时间：{{x.createTime}}</p>
                         <p>内容简介：{{x.content}}</p>
                         <p>附件：<a ng-href="{{contextPath + '/file/download?filename=' + x.attachmentUrl + '&showname=' + (x.subject + x.attachmentUrl.substring(x.attachmentUrl.indexOf('.')))}}"
@@ -63,17 +64,17 @@
                         <label>主题</label>
                     </div>
                     <div class="input-field col s12">
-                        <input type="date" class="datepicker" ng-model="insertForm.deadline">
+                        <input type="date" ng-model="insertForm.deadline">
                     </div>
                     <div class="input-field col s12">
                         <textarea id="textarea1" class="materialize-textarea" maxlength="30"
                                   ng-model="insertForm.content"></textarea>
-                        <label>内容</label>
+                        <label>内容概述</label>
                     </div>
                     <div class="input-field col s12">
                         <div class="file-field input-field">
                             <div class="btn ">
-                                <span>选择文件</span>
+                                <span>选择文件(相关文档)</span>
                                 <input type="file" name="file" id="uploadfile">
                             </div>
                             <div class="file-path-wrapper">
@@ -81,6 +82,10 @@
                             </div>
                         </div>
                     </div>
+                    <label>选择所属组织</label>
+                    <select class="browser-default" ng-model="insertForm.igOrgId" ng-options="o.igOrgId as o.name for o in orgs">
+                        <!--<option value="" disabled selected>请选择该征集任务所属组织</option>-->
+                    </select>
                 </div>
             </form>
         </div>
@@ -101,6 +106,7 @@
         <a href="" class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
     </div>
 </div>
+
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
 <script src="../node_modules/angular/angular.js"></script>
