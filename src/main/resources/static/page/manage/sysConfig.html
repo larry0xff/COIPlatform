@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title></title>
+    <link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css"/>
+    <link href="../node_modules/materialize-css/dist/css/icon.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="css/sysConfig.css"/>
+</head>
+<body ng-app="manageApp" ng-controller="sysConfigCtrl">
+    <h6><p class="grey-text">网站管理&nbsp;&nbsp;&gt;&nbsp;&nbsp;系统配置列表</p></h6>
+    <button class="btn" ng-click="showModal('#saveModal')">新增</button>
+    <button class="btn" ng-click="showModal('#uploadModal')">图片上传</button>
+    <table class="striped">
+        <thead>
+        <tr>
+            <th data-field="name">名称</th>
+            <th data-field="id">值</th>
+            <th data-field="price">描述</th>
+            <th data-field="price">最后操作者</th>
+            <th data-field="price">最后操作时间</th>
+            <th data-field="price">操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="config in configList">
+            <td>{{config.name}}</td>
+            <td>{{config.value}}</td>
+            <td>{{config.description}}</td>
+            <td>{{config.updateBy}}</td>
+            <td>{{config.updateTime | date:'yyyy-MM-dd HH:mm'}}</td>
+            <td>
+                <a href ng-click="showUpdate(config)">修改 </a> |<a href style="color: red"> 删除</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="saveModal" class="modal modal-fixed-footer" style="width: 500px; height: 450px;">
+        <div class="modal-content">
+            <h5>新增配置项</h5>
+            <div class="row">
+                <form class="col s12" id="insertForm">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="text" class="validate" ng-model="insertForm.name">
+                            <label>名称</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input type="text" ng-model="insertForm.value">
+                            <label>值</label>
+                        </div>
+                        <div class="input-field col s12">
+                        <textarea id="textarea1" class="materialize-textarea" maxlength="30"
+                                  ng-model="insertForm.description"></textarea>
+                            <label>配置概述</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="" class="modal-action waves-effect waves-green btn-flat blue-grey  white-text" ng-click="save()">确认</a>
+            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
+        </div>
+    </div>
+    <div id="updateModal" class="modal modal-fixed-footer" style="width: 500px; height: 450px;">
+        <div class="modal-content">
+            <h5>修改配置项</h5>
+            <div class="row">
+                <form class="col s12" id="insertForm">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="text" class="validate" ng-model="temp.name">
+                            <label class="active">名称</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input type="text" ng-model="temp.value">
+                            <label class="active">值</label>
+                        </div>
+                        <div class="input-field col s12">
+                        <textarea id="textarea1" class="materialize-textarea" maxlength="30"
+                                  ng-model="temp.description"></textarea>
+                            <label class="active">配置概述</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="" class="modal-action waves-effect waves-green btn-flat blue-grey  white-text" ng-click="update()">确认</a>
+            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
+        </div>
+    </div>
+    <div id="uploadModal" class="modal modal-fixed-footer" >
+        <div class="modal-content">
+            <h5>图片链接获取</h5>
+            <div class="row">
+                <form class="col s12" id="insertForm">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <div class="file-field input-field">
+                                <div class="btn ">
+                                    <span>选择文件(相关文档)</span>
+                                    <input type="file" name="file" id="uploadfile">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-field col s12" ng-if="imgUrl">
+                            <input type="text" class="validate" ng-model="imgUrl">
+                            <label class="active">链接</label>
+                        </div>
+                        <img style="width: 200px; height: 200px;" src="{{imgUrl}}" alt="">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="" class="waves-effect waves-green btn-flat orange white-text" ng-click="upload()">上传</a>
+            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
+        </div>
+    </div>
+
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+<script src="../node_modules/angular/angular.js"></script>
+<script src="../app.js"></script>
+<script src="js/sysConfig.js"></script>
+</body>
+</html>
