@@ -28,7 +28,7 @@
                                  class="file"><i>{{x.subject}}附件(点击下载)</i></a>
                             征集结果：<a ng-href="{{contextPath + '/file/download?filename=' + x.advicesAttachmentUrl + '&showname=' + ('征集文件:' + x.subject + x.advicesAttachmentUrl.substring(x.advicesAttachmentUrl.indexOf('.')))}}"
                                     class="file"><i>{{x.subject}}征集文件(点击下载)</i></a>
-                            处理结果：<a ng-href="{{contextPath + '/file/download?filename=' + x.resultAttachmentUrl + '&showname=' + ('征集文件:' + x.subject + x.advicesAttachmentUrl.substring(x.advicesAttachmentUrl.indexOf('.')))}}"
+                            处理结果：<a ng-href="{{contextPath + '/file/download?filename=' + x.resultAttachmentUrl + '&showname=' + ('征集文件:' + x.subject + x.resultAttachmentUrl.substring(x.resultAttachmentUrl.indexOf('.')))}}"
                                     class="file"><i>{{x.subject}}征集文件(点击下载)</i></a>
                         </p>
                     </div>

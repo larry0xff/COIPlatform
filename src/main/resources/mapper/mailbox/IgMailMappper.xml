@@ -21,7 +21,7 @@
     </sql>
 
     <select id="list" resultType="zhongd.coiplatform.entity.DTO.mail.IgMailDTO">
-        select ig_mail_id,mail.ig_org_id,title,content,is_read,reply,mail.create_time AS createTime,m.realname as createBy,u.realname as updateBy,mail.update_time AS updateTime
+        select ig_mail_id igMailId,mail.ig_org_id igOrgId,title,content,is_read isRead,reply,mail.create_time AS createTime,m.realname as createBy,u.realname as updateBy,mail.update_time AS updateTime
         from <include refid="BaseTable" /> mail
         LEFT JOIN ig_member m ON m.ig_member_id = mail.create_by
         LEFT JOIN ig_user u ON u.ig_user_id = mail.update_by

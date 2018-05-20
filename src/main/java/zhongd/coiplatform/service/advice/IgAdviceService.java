@@ -18,7 +18,7 @@ public interface IgAdviceService {
 
     boolean deleteById(Integer igAdviceCollectionId);
 
-    List<IgAdviceCollectionDTO> list(IgAdviceCollectionDTO paramMap);
+    List<IgAdviceCollectionDTO> list(IgAdviceCollectionDTO paramMap, Integer igOrgId);
 
     List<IgAdviceCollection> getAllCollectingCollection();
 

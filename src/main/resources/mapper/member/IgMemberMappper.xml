@@ -23,11 +23,12 @@
     </sql>
 
     <select id="getMemberList" resultMap="BaseResultMap" parameterType="map">
-        SELECT <include refid="BaseColumns" />
+        SELECT username,realname,tel,email,gender, o.name as orgName, ig_member_id
         FROM <include refid="BaseTable" />
+        LEFT JOIN ig_org o ON o.ig_org_id = m.ig_org_id
         WHERE 1=1
         <if test="igOrgId != null">
-            AND ig_org_id = #{igOrgId}
+            AND m.ig_org_id = #{igOrgId}
         </if>
         LIMIT #{page}, #{pageSize}
     </select>

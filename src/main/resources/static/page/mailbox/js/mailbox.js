@@ -20,8 +20,22 @@ mailboxApp.controller('mailListCtrl', ['$scope', '$http', '$filter', function($s
         delete $scope.item;
         $('#replyModal').closeModal();
     };
+    $scope.checkSwitch = function () {
+        $http.get(contextPath + "/manage/switch/check?name=MAILBOX_MODULE").then(function (result) {
+            var data = result.data;
+            if(data.returnCode != 200) {
+                Materialize.toast(data.msg, 2000);
+            } else {
+                $scope.sw =  data.data;
+            }
+        });
+    };
     //回复信件
     $scope.reply = function(){
+        if ($scope.sw.status == 1) {
+            Materialize.toast($scope.sw.message, 2000);
+            return;
+        }
         $http.post(contextPath + '/mailbox/reply?igMailId=' + $scope.item.igMailId + '&reply=' + $scope.replyStr).then(function(result){
             var data = result.data;
             if(data.returnCode != 200){

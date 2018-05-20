@@ -33,6 +33,7 @@ public class IgAdviceCollectionController extends BaseController{
     public ReturnObj save(@RequestBody IgAdviceCollection igAdviceCollection){
         ReturnObj obj = new ReturnObj();
         try{
+            igAdviceCollection.setIgOrgId(getCurrentUser().getIgUserDO().getIgOrgId());
             obj.setData(igAdviceService.save(igAdviceCollection));
             obj.setReturnCode(ReturnCode.SUCCESS);
             obj.setMsg("操作成功！");
@@ -74,7 +75,7 @@ public class IgAdviceCollectionController extends BaseController{
     public ReturnObj list(@RequestBody IgAdviceCollectionDTO dto){
         ReturnObj obj = new ReturnObj();
         try{
-            obj.setData(igAdviceService.list(dto));
+            obj.setData(igAdviceService.list(dto, getCurrentUser().getIgUserDO().getIgOrgId()));
             obj.setReturnCode(ReturnCode.SUCCESS);
         }catch (Exception e){
             logger.error(e.getMessage(), e);

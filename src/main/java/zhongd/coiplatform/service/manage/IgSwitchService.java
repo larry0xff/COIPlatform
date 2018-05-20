@@ -13,4 +13,6 @@ public interface IgSwitchService {
     List<IgSwitch> getSwitchList();
 
     boolean changeStatus(Integer igSwitchId, Integer status);
+
+    IgSwitch getById(String name);
 }

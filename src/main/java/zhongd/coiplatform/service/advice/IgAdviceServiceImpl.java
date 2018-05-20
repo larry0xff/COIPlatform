@@ -11,11 +11,9 @@ import zhongd.coiplatform.entity.DTO.advice.IgAdviceCollectionDTO;
 import zhongd.coiplatform.entity.DTO.advice.IgAdviceRecordDTO;
 import zhongd.coiplatform.entity.DTO.user.IgUserLoginDTO;
 import zhongd.coiplatform.utils.DateUtil;
+import zhongd.coiplatform.utils.constant.IgAdviceCollectionConstant;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author xiezd
@@ -39,7 +37,8 @@ public class IgAdviceServiceImpl implements IgAdviceService {
                 igAdviceCollection.setIgAdviceCollectionId(DO.getIgAdviceCollectionId());
                 igAdviceCollection.setUpdateBy(((IgUserLoginDTO)SecurityUtils.getSubject().getSession().getAttribute("currentUser")).getIgUserDO().getIgUserId());
                 igAdviceCollection.setUpdateTime(new Date());
-                igAdviceCollection.setDeadline(DateUtil.add(igAdviceCollection.getDeadline(), Calendar.DAY_OF_MONTH, 1));
+                if (igAdviceCollection.getStatus() != IgAdviceCollectionConstant.STATUS_FINISH)
+                    igAdviceCollection.setDeadline(DateUtil.add(igAdviceCollection.getDeadline(), Calendar.DAY_OF_MONTH, 1));
                 return igAdviceCollectionMapper.updateByPrimaryKeySelective(igAdviceCollection) > 0;
             }else{
                 return false;
@@ -59,10 +58,13 @@ public class IgAdviceServiceImpl implements IgAdviceService {
     }
 
     @Override
-    public List<IgAdviceCollectionDTO> list(IgAdviceCollectionDTO paramMap) {
-        paramMap.setCreateBy("%" + (paramMap.getCreateBy() == null?"" : paramMap.getCreateBy()) + "%");
-        paramMap.setSubject("%" + (paramMap.getSubject()== null?"" : paramMap.getSubject()) + "%");
-        paramMap.setOrgName("%" + (paramMap.getOrgName() == null?"" : paramMap.getOrgName()) + "%");
+    public List<IgAdviceCollectionDTO> list(IgAdviceCollectionDTO dto, Integer igOrgId) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("subject", "%" + (dto.getSubject() == null?"" : dto.getSubject()) + "%");
+        paramMap.put("status", dto.getStatus());
+        if (!igOrgId.equals(1)) {
+            paramMap.put("igOrgId", igOrgId);
+        }
         return igAdviceCollectionMapper.list(paramMap);
     }
 

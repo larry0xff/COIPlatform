@@ -8,6 +8,16 @@ adviceApp.controller('adviceListCtrl', ['$scope', '$http', function ($scope, $ht
         delete $scope.insertForm;
         $(id).closeModal();
     };
+    $scope.delete = function(id) {
+        $http.get(contextPath + '/adviceCollection/delete?igAdviceCollectionId=' + id).then(function(result){
+            var data = result.data;
+            if(data.returnCode != 200){
+                Materialize.toast(data.msg, 2000);
+            }else{
+                getList();
+            }
+        });
+    };
     var getList = function(){
         $http.post(contextPath + '/adviceCollection/listAll',{status:1}).then(function(result){
             var data = result.data;
@@ -28,6 +38,16 @@ adviceApp.controller('adviceListCtrl', ['$scope', '$http', function ($scope, $ht
             }
         });
     };
+    $scope.checkSwitch = function () {
+        $http.get(contextPath + "/manage/switch/check?name=COLLECTION_MODULE").then(function (result) {
+            var data = result.data;
+            if(data.returnCode != 200) {
+                Materialize.toast(data.msg, 2000);
+            } else {
+                $scope.sw =  data.data;
+            }
+        });
+    };
     var init = function(){
         $('.datepicker').pickadate({
             selectMonths: true, // Creates a dropdown to control month
@@ -36,7 +56,8 @@ adviceApp.controller('adviceListCtrl', ['$scope', '$http', function ($scope, $ht
         $scope.contextPath = contextPath;
         $scope.insertForm = {};
         getList();
-        getOrgList();
+        $scope.checkSwitch();
+        //getOrgList();
     }();
     $scope.upload = function(){
         var file = document.getElementById('uploadfile').files[0];
@@ -59,6 +80,10 @@ adviceApp.controller('adviceListCtrl', ['$scope', '$http', function ($scope, $ht
         });
     };
     $scope.insert = function(filename){
+        if ($scope.sw.status == 1) {
+            Materialize.toast($scope.sw.message, 2000);
+            return;
+        }
         $scope.insertForm.attachmentUrl = filename;
         $http.post(contextPath + "/adviceCollection/save", $scope.insertForm).then(function(response) {
             var data = response.data;
@@ -92,8 +117,22 @@ adviceApp.controller('adviceDeadListCtrl', ['$scope', '$http', function ($scope,
             }
         });
     };
+    $scope.checkSwitch = function () {
+        $http.get(contextPath + "/manage/switch/check?name=COLLECTION_MODULE").then(function (result) {
+            var data = result.data;
+            if(data.returnCode != 200) {
+                Materialize.toast(data.msg, 2000);
+            } else {
+                $scope.sw =  data.data;
+            }
+        });
+    };
     //上传文件后处理结果
     $scope.handle = function(filename){
+        if ($scope.sw.status == 1) {
+            Materialize.toast($scope.sw.message, 2000);
+            return;
+        }
         var formData = {
             resultAttachmentUrl: filename,
             igAdviceCollectionId: $scope.igAdviceCollectionId
@@ -134,11 +173,13 @@ adviceApp.controller('adviceDeadListCtrl', ['$scope', '$http', function ($scope,
     var init = function(){
         $scope.contextPath = contextPath;
         getList();
+        $scope.checkSwitch();
     }();
 }]);
 
 adviceApp.controller('adviceHistoryListCtrl', ['$scope', '$http', function($scope, $http){
     (function init() {
+        $scope.contextPath = contextPath;
         getList();
     })();
 

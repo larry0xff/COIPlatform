@@ -7,6 +7,7 @@ import zhongd.coiplatform.entity.DTO.advice.IgAdviceCollectionDTO;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author xiezd
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Mapper
 public interface IgAdviceCollectionMapper extends BaseMapper<IgAdviceCollection> {
-    List<IgAdviceCollectionDTO> list(IgAdviceCollectionDTO paramMap);
+    List<IgAdviceCollectionDTO> list(Map<String, Object> paramMap);
 
     List<IgAdviceCollection> getAllCollectingCollection();
 

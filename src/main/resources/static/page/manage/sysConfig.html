@@ -33,12 +33,12 @@
             <td>{{config.updateBy}}</td>
             <td>{{config.updateTime | date:'yyyy-MM-dd HH:mm'}}</td>
             <td>
-                <a href ng-click="showUpdate(config)">修改 </a> |<a href style="color: red"> 删除</a>
+                <a href ng-click="showUpdate(config)">修改 </a> <span ng-if="config.name.indexOf('HOMEPAGE') < 0">|<a href style="color: red"> 删除</a></span>
             </td>
         </tr>
         </tbody>
     </table>
-    <div id="saveModal" class="modal modal-fixed-footer" style="width: 500px; height: 450px;">
+    <div id="saveModal" class="modal modal-fixed-footer" style="width: 500px;">
         <div class="modal-content">
             <h5>新增配置项</h5>
             <div class="row">
@@ -66,14 +66,14 @@
             <a href="" class="modal-action modal-close waves-effect waves-green btn-flat white">取消</a>
         </div>
     </div>
-    <div id="updateModal" class="modal modal-fixed-footer" style="width: 500px; height: 450px;">
+    <div id="updateModal" class="modal modal-fixed-footer" style="width: 500px;">
         <div class="modal-content">
             <h5>修改配置项</h5>
             <div class="row">
                 <form class="col s12" id="insertForm">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input type="text" class="validate" ng-model="temp.name">
+                            <input type="text" class="validate" ng-model="temp.name" ng-disabled="temp.name.indexOf('HOMEPAGE') >= 0">
                             <label class="active">名称</label>
                         </div>
                         <div class="input-field col s12">

@@ -14,6 +14,15 @@ public class IgMemberDTO {
     private String gender;
     private Integer igOrgId;
     private String password;
+    private String orgName;
+
+    public String getOrgName() {
+        return orgName;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
+    }
 
     public String getPassword() {
         return password;

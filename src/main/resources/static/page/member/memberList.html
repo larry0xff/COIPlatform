@@ -30,7 +30,7 @@
             <tr>
                 <th data-field="name">姓名</th>
                 <th data-field="code">用户名</th>
-                <th data-field="desc">组织id</th>
+                <th data-field="desc">所属组织</th>
                 <th data-field="desc">成员id</th>
                 <th>性别</th>
                 <th>E-mail</th>
@@ -42,7 +42,7 @@
                 <tr ng-repeat="x in memberList">
                     <td>{{x.realname}}</td>
                     <td>{{x.username}}</td>
-                    <td>{{x.igOrgId}}</td>
+                    <td>{{x.orgName}}</td>
                     <td>{{x.igMemberId}}</td>
                     <td>{{x.gender}}</td>
                     <td>{{x.email}}</td>

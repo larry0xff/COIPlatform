@@ -3,6 +3,7 @@ package zhongd.coiplatform.controller.manage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import zhongd.coiplatform.controller.BaseController;
 import zhongd.coiplatform.entity.ReturnObj;
@@ -45,6 +46,20 @@ public class WebsiteManageController extends BaseController{
                 obj.setReturnCode(ReturnCode.FAIL);
                 obj.setMsg("操作开关失败！");
             }
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            obj.setReturnCode(ReturnCode.FAIL);
+            obj.setMsg("操作开关失败！");
+        }
+        return obj;
+    }
+
+    @GetMapping("/switch/check")
+    public ReturnObj check(@RequestParam String name){
+        ReturnObj obj = new ReturnObj();
+        try{
+            obj.setData(igSwitchService.getById(name));
+            obj.setReturnCode(ReturnCode.SUCCESS);
         }catch (Exception e){
             logger.error(e.getMessage(), e);
             obj.setReturnCode(ReturnCode.FAIL);
